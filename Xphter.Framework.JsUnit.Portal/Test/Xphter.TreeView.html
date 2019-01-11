@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="Xphter.js"></script>
+    <script type="text/javascript" src="Xphter.JsUnit.js"></script>
+    <script type="text/javascript" language="javascript">
+        var treeView = null;
+
+        function TestRefresh() {
+            treeView.Refresh(null, [{
+                ID: 100,
+                Name: "水果",
+                Children: [{
+                    ID: 110,
+                    Name: "热带水果",
+                    Children: [{
+                        ID: 111,
+                        Name: "菠萝",
+                        Children: []
+                    }, {
+                        ID: 112,
+                        Name: "芒果",
+                        Children: []
+                    }]
+                }, {
+                    ID: 120,
+                    Name: "温带水果",
+                    Children: [{
+                        ID: 121,
+                        Name: "梨",
+                        Children: []
+                    }, {
+                        ID: 122,
+                        Name: "苹果",
+                        Children: []
+                    }]
+                }]
+            }, {
+                ID: 200,
+                Name: "汽车",
+                Children: [{
+                    ID: 210,
+                    Name: "自主品牌",
+                    Children: [{
+                        ID: 211,
+                        Name: "奇瑞",
+                        Children: []
+                    }, {
+                        ID: 212,
+                        Name: "长城",
+                        Children: []
+                    }]
+                }, {
+                    ID: 220,
+                    Name: "合资品牌",
+                    Children: [{
+                        ID: 221,
+                        Name: "一汽奥迪",
+                        Children: []
+                    }, {
+                        ID: 222,
+                        Name: "上海大众",
+                        Children: []
+                    }]
+                }]
+            }]);
+        }
+
+        function TestExpand() {
+            treeView.Expand({
+                ID: 100
+            });
+            treeView.Expand({
+                ID: 110
+            });
+            treeView.Expand({
+                ID: 120
+            });
+        }
+
+        function TestAppend_Root() {
+            treeView.Append(null, {
+                ID: 300,
+                Name: "笔记本",
+                Children: [{
+                    ID: 310,
+                    Name: "Intel",
+                    Children: [{
+                        ID: 311,
+                        Name: "联想",
+                        Children: []
+                    }, {
+                        ID: 312,
+                        Name: "宏基",
+                        Children: []
+                    }]
+                }, {
+                    ID: 320,
+                    Name: "AMD",
+                    Children: [{
+                        ID: 321,
+                        Name: "惠普",
+                        Children: []
+                    }, {
+                        ID: 322,
+                        Name: "DELL",
+                        Children: []
+                    }]
+                }]
+            });
+        }
+
+        function TestAppend() {
+            treeView.Append({
+                ID: 110
+            }, {
+                ID: 113,
+                Name: "香蕉",
+                Children: []
+            });
+        }
+
+        function TestUpdate() {
+            treeView.Update({
+                ID: 110,
+                Name: "热带水果(好吃)",
+                Children: [{
+                    ID: 111,
+                    Name: "菠萝",
+                    Children: []
+                }, {
+                    ID: 112,
+                    Name: "芒果",
+                    Children: []
+                }]
+            });
+        }
+
+        function TestUpdate_NoChildren() {
+            treeView.Update({
+                ID: 112,
+                Name: "芒果(最爱)",
+                Children: []
+            });
+        }
+
+        function TestSetSelectedValue_Null() {
+            treeView.SetSelectedValue(null);
+        }
+
+        function TestGetSelectedValue_Null() {
+            Assert.IsNull(treeView.GetSelectedValue());
+        }
+
+        function TestSetSelectedValue() {
+            treeView.SetSelectedValue({
+                ID: 122
+            });
+        }
+
+        function TestGetSelectedValue() {
+            Assert.AreEqual(122, treeView.GetSelectedValue().ID);
+        }
+
+        function TestRemove() {
+            treeView.Remove({
+                ID: 122
+            });
+        }
+
+        function TestRemove_Last() {
+            treeView.Remove({
+                ID: 121
+            });
+        }
+
+        Xphter.EventUtility.Register(window, "load", function () {
+            var nodeTemplate = window.$("nodeTemplate");
+            treeView = new Xphter.TreeView();
+            treeView.GetChildrenCreatingEvent().AddListener(function (args) {
+                args.ListParameters = {
+                    Container: window.$("tree"),
+                    Loading: window.$("loading"),
+                    ItemTemplate: nodeTemplate,
+                    PropertyTemplate: "$property$",
+                    PrimaryKey: "ID"
+                };
+            });
+            treeView.GetNodeExpandingEvent().AddListener(function (args) {
+                window.$("flag" + args.Value.ID).innerHTML = "-";
+                if (!args.IsInitialized) {
+                    treeView.PrepareRefresh(args.Value);
+                    treeView.Refresh(args.Value, args.Value.Children);
+                    treeView.FinishRefresh(args.Value);
+                }
+            });
+            treeView.GetNodeCollapsingEvent().AddListener(function (args) {
+                window.$("flag" + args.Value.ID).innerHTML = "+";
+            });
+            treeView.GetSelectedChangedEvent().AddListener(function (args) {
+                args.OtherNodes.ForEach(function (item, index) {
+                    item.style.backgroundColor = String.Empty;
+                });
+                args.Node && (args.Node.style.backgroundColor = "#FF00FF");
+            });
+        }, false);
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">
+        Test Cases for Xphter.TreeView Class
+    </h1>
+    <ul id="tree">
+    </ul>
+    <div style="display: none">
+        <ul>
+            <li id="nodeTemplate">
+                <div style="display: inline-block">
+                    <span id="flag$ID$" style="cursor: pointer;" onclick="treeView.ExpandOrCollapse({ID: $ID$});">
+                        +</span>$ID$ - $Name$
+                </div>
+            </li>
+            <li id="loading">Loading ...</li>
+        </ul>
+    </div>
+</body>
+</html>

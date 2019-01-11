@@ -1,0 +1,35 @@
+﻿@using Xphter.Framework.Alibaba.ChinaAlibaba;
+@model IChinaAlibabaOrderInfo
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>订单详情</title>
+</head>
+<body>
+    <form action='@this.Url.Action("OrderDetail")' method="post" enctype="application/x-www-form-urlencoded">
+        订单ID：<input name="id" type="text" value="@(this.Model != null ? this.Model.ID.ToString() : string.Empty)" />
+        <input type="submit" value="获取订单详情" />
+    </form>
+    @if(this.Model != null) {
+        <fieldset>
+            <label>基本信息</label>
+            <ul>
+                <li>@this.Model.ID</li>
+            </ul>
+        </fieldset>
+        if(this.Model.SellerOrderMemo != null) {
+            <fieldset>
+                <label>卖家备注</label>
+                <ul>
+                    <li>@this.Model.SellerOrderMemo.RemarkText</li>
+                    <li>@this.Model.SellerOrderMemo.RemarkIcon</li>
+                </ul>
+            </fieldset>
+        }
+    }
+</body>
+</html>

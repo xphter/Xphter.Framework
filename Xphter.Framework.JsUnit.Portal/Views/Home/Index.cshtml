@@ -1,0 +1,329 @@
+﻿@using System.IO;
+@using System.Web.Script.Serialization;
+@model IEnumerable<string>
+@{
+    this.ViewBag.Title = "Xphter JavaScript Unit Test";
+}
+@section Head {
+    <style type="text/css">
+        table {
+            border-top: 1px solid #C1DAD7;
+            border-left: 1px solid #C1DAD7;
+        }
+        
+        table th, table td {
+            border-right: 1px solid #C1DAD7;
+            border-bottom: 1px solid #C1DAD7;
+            padding: 6px 12px;
+            text-align: center;
+        }
+        
+        table th {
+            background-color: #CAE8EA;
+        }
+        
+        table tr:hover td {
+            background-color: #98FB98;
+        }
+        
+        .left {
+            width: 39%;
+            margin: 0px;
+            padding: 0px;
+            float: left;
+            overflow: auto;
+        }
+        
+        .right {
+            width: 59%;
+            margin: 0px;
+            padding: 0px;
+            float: right;
+            overflow: auto;
+        }
+        
+        .clear {
+            clear: both;
+            height: 0px;
+            line-height: 0px;
+            font-size: 0px;
+            margin: 0px;
+            padding: 0px;
+            border-style: none;
+            overflow: hidden;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+        var m_functionNames = [];
+        var m_pages = @this.Html.Raw(new JavaScriptSerializer().Serialize(this.Model));
+
+        var m_isRunning = false;
+        var m_hasRequestStop = false;
+        var m_pageIndex = -1;
+        var m_functionIndex = -1;
+        var m_totalCount = 0;
+        var m_successfulCount = 0;
+        var m_failureCount = 0;
+
+        var m_form = null;
+        var m_tablePages = null;
+        var m_tableFunctions = null;
+        var m_framePage;
+
+        function SelectPage(url, checked) {
+            if (m_isRunning) {
+                window.alert("请先停止测试");
+                return;
+            }
+
+            var index = -1;
+            for (var i = 0; i < m_pages.length; i++) {
+                if (m_pages[i] == url) {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (checked) {
+                index < 0 && m_pages.push(url);
+            } else {
+                index >= 0 && m_pages.splice(index, 1);
+            }
+        }
+
+        function SelectAllPages(checked) {
+            if (m_isRunning) {
+                window.alert("请先停止测试");
+                return;
+            }
+
+            var element = null;
+            var elements = window.document.getElementsByName("file");
+
+            m_pages.length = 0;
+            for (var i = 0; i < elements.length; i++) {
+                if ((element = elements[i]).checked = checked) {
+                    m_pages.push(element.getAttribute("file"));
+                }
+            }
+            SwitchPanel(true);
+        }
+
+        function SwitchPanel(isShowList) {
+            if (isShowList) {
+                m_tablePages.style.display = "";
+                m_tableFunctions.style.display = "none";
+            } else {
+                m_tablePages.style.display = "none";
+                m_tableFunctions.style.display = "";
+            }
+        }
+
+        function Start() {
+            if (m_isRunning) {
+                window.alert("测试正在运行");
+                return;
+            }
+
+            m_isRunning = true;
+            m_hasRequestStop = false;
+            m_pageIndex = -1;
+            m_functionIndex = -1;
+            m_totalCount = 0;
+            m_successfulCount = 0;
+            m_failureCount = 0;
+
+            m_form.buttonStart.disabled = true;
+            m_form.buttonStop.disabled = false;
+            m_tablePages.style.display = "none";
+            m_tableFunctions.style.display = "";
+            while (m_tableFunctions.rows.length > 1) {
+                m_tableFunctions.deleteRow(1);
+            }
+
+            RunNextPage();
+        }
+
+        function CheckStop() {
+            if (m_hasRequestStop) {
+                m_isRunning = false;
+
+                m_form.buttonStart.disabled = false;
+                m_form.buttonStop.disabled = true;
+
+                window.alert("测试已停止");
+            }
+
+            return m_hasRequestStop;
+        }
+
+        function RunNextPage() {
+            if (CheckStop()) {
+                return;
+            }
+            if (++m_pageIndex >= m_pages.length) {
+                m_isRunning = false;
+                m_form.buttonStart.disabled = false;
+                m_form.buttonStop.disabled = true;
+
+                window.alert("测试已完成");
+                return;
+            }
+
+            m_framePage.src = m_pages[m_pageIndex] + "?time=" + new Date().getTime();
+        }
+
+        function PrepareFunctions() {
+            if (CheckStop() || m_pageIndex < 0) {
+                return;
+            }
+
+            var global = m_framePage.contentWindow.RuntimeObject === m_framePage.contentWindow.undefined ? m_framePage.contentWindow : m_framePage.contentWindow.RuntimeObject();
+
+            m_functionIndex = -1;
+            m_functionNames.length = 0;
+            for (var name in global) {
+                if (name && /^test/gi.test(name) && typeof global[name] === "function") {
+                    m_functionNames.push(name);
+                }
+            }
+
+            RunNextFunction();
+        }
+
+        function RunNextFunction() {
+            if (CheckStop()) {
+                return;
+            }
+            if (++m_functionIndex >= m_functionNames.length) {
+                RunNextPage();
+                return;
+            }
+
+            var error = null;
+            var global = m_framePage.contentWindow;
+            try {
+                global[m_functionNames[m_functionIndex]].call(global);
+            } catch (ex) {
+                error = ex.message;
+            }
+
+            ProcessFunctionResult(error);
+        }
+
+        function ProcessFunctionResult(error) {
+            ++m_totalCount;
+            if (error) {
+                ++m_failureCount;
+            } else {
+                ++m_successfulCount;
+            }
+
+            m_form.totalCount.value = m_totalCount;
+            m_form.successfulCount.value = m_successfulCount;
+            m_form.failureCount.value = m_failureCount;
+
+            var row = m_tableFunctions.insertRow(m_tableFunctions.rows.length);
+            row.insertCell(row.cells.length).innerHTML = m_pages[m_pageIndex].substring(m_pages[m_pageIndex].lastIndexOf("/") + 1);
+            row.insertCell(row.cells.length).innerHTML = m_functionNames[m_functionIndex];
+            if (!error) {
+                row.insertCell(row.cells.length).innerHTML = "<img alt=\"Right\" src=\"" + '@this.Url.Content("~/Images/Right.gif")' + "\" />";
+                row.insertCell(row.cells.length).innerHTML = "";
+            } else {
+                row.insertCell(row.cells.length).innerHTML = "<img alt=\"Right\" src=\"" + '@this.Url.Content("~/Images/Wrong.png")' + "\" />";
+                row.insertCell(row.cells.length).innerHTML = error;
+            }
+
+            window.setTimeout(RunNextFunction, (window.parseInt(m_form.interval.value) || 1) * 1000);
+        }
+
+        function Stop() {
+            if (!m_isRunning) {
+                window.alert("测试尚未运行");
+            }
+
+            m_hasRequestStop = true;
+        }
+
+        function OnBodyLoad() {
+            m_form = window.document.forms[0];
+            m_tablePages = window.document.getElementById("tablePages");
+            m_tableFunctions = window.document.getElementById("tableFunctions");
+            m_framePage = window.document.getElementById("framePage");
+
+            window.setInterval(function () {
+                var frameDocument = m_framePage.contentWindow.document;
+                var viewportHeight = window.innerHeight !== window.undefined ? window.innerHeight : window.document.documentElement ? window.document.documentElement.clientHeight : window.document.body ? window.document.body.clientHeight : 0;
+                m_framePage.height = Math.max(viewportHeight - m_framePage.offsetTop, (frameDocument.documentElement || frameDocument.body).scrollHeight) + "px";
+            }, 1000);
+        }
+    </script>
+}
+<h1>
+    Xphter JavaScript Unit Test
+</h1>
+@using(this.Html.BeginForm()) {
+    <div>
+        <button onclick="SelectAllPages(true); return false;">
+            全选
+        </button>
+        <button onclick="SelectAllPages(false); return false;">
+            全不选
+        </button>
+        <input type="button" value="查看页面列表" onclick="window.SwitchPanel(true); return false;" />
+        |&nbsp;运行间隔：<input id="interval" type="text" value="1" style="width: 20px;" />&nbsp;秒&nbsp;
+        <input name="buttonStart" type="button" value="开始测试" onclick="window.Start(); return false;" />
+        <input name="buttonStop" type="button" value="停止测试" disabled="disabled" onclick="window.Stop(); return false;" />
+        <input type="button" value="查看测试结果" onclick="window.SwitchPanel(false); return false;" />
+        |&nbsp;全部：<input name="totalCount" type="text" readonly="readonly" value="0" style="width: 50px;
+            border-style: none;" />，通过：<input name="successfulCount" type="text" readonly="readonly"
+                value="0" style="width: 50px; border-style: none;" />，错误：<input name="failureCount"
+                    type="text" readonly="readonly" style="width: 50px; border-style: none; color: #FF0000;"
+                    value="0" />
+    </div>
+}
+<hr />
+<div class="left">
+    <table id="tablePages" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>
+                页面
+            </th>
+            <th>
+                启用
+            </th>
+        </tr>
+        @foreach(string file in this.Model) {
+            <tr>
+                <td>
+                    @Path.GetFileName(file)
+                </td>
+                <td>
+                    <input name="file" type="checkbox" checked="checked" file="@file" onclick="SelectPage('@file', this.checked);" />
+                </td>
+            </tr>
+        }
+    </table>
+    <table id="tableFunctions" cellpadding="0" cellspacing="0" style="display: none;">
+        <tr>
+            <th>
+                页面
+            </th>
+            <th>
+                函数
+            </th>
+            <th>
+                结果
+            </th>
+            <th>
+                信息
+            </th>
+        </tr>
+    </table>
+</div>
+<div class="right">
+    <iframe id="framePage" src="about:blank" frameborder="0" marginwidth="0px" marginheight="0px"
+        width="100%" scrolling="no" onload="window.PrepareFunctions();"></iframe>
+</div>
+<div class="clear">
+</div>

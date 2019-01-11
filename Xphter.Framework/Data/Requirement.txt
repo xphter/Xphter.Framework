@@ -1,0 +1,26 @@
+﻿###########生成SQL语句###########
+1. 使用类来表示SQL语句；
+2. 使用类来生成SQL语句；
+3. 设计通用类来执行SQL语句，自动提取参数；
+
+###########生成SQL实体###########
+0. 查找数据库列表(查找sys.databases)
+1. 查找表/视图列表；(查找sys.tables和sys.views)
+2. 去掉表/视图名称前缀，增加对象名称后缀，生成对象名称；
+3. 查找表/视图字段列表；
+4. 确定字段属性：
+   字段属性：
+   名称(sys.columns.name)
+   类型(sys.systypes.name)
+   描述(sys.extended_properties.value)
+   长度(sys.columns.max_length)
+   默认值(sys.columns.default_object_id)
+   是否可空(sys.columns.is_nullable)   
+   是否标识列(sys.columns.is_identity)
+   是否主键(sys.indexex.is_primary_key sys.indexes.is_disabled = 0 sys.index_columns.column_id)   
+   是否唯一(查找sys.indexes.is_unique_constraint sys.indexes.is_disabled = 0 sys.index_columns.column_id)
+   是否外键
+   引用的表
+   引用的字段
+5. 生成对象代码
+

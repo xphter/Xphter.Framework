@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        ul {
+            margin: 0px;
+            padding: 0px;
+            list-style-type: none;
+            border-bottom: 5px solid #00FF00;
+            overflow: hidden;
+            _height: 1%;
+        }
+        ul li {
+            float: left;
+            width: 91px;
+            height: 23px;
+            padding: 5px 20px;
+            border: 1px solid #B9C4CF;
+            text-align: center;
+            cursor: pointer;
+            color: #6A6A6A;
+        }
+        ul li.current {
+            border-color: #00FF00;
+            color: #FFFFFF;
+            background-color: #00FF00;
+        }
+    </style>
+    <script type="text/javascript" src="Xphter.js"></script>
+    <script type="text/javascript" src="Xphter.JsUnit.js"></script>
+    <script type="text/javascript" language="javascript">
+        var tabControl = null;
+        var tabTemplate = null;
+        var pageTemplate = null;
+
+        function TestAppend() {
+            var tab = tabTemplate.cloneNode(true);
+            tab.innerHTML = tab.innerHTML.replace("$ID$", "4");
+            var page = pageTemplate.cloneNode(true);
+            page.innerHTML = page.innerHTML.replace("$ID$", "4");
+            tabControl.Append({
+                Tab: tab,
+                Page: page
+            });
+            Assert.AreEqual(0, tabControl.GetSelectedIndex(), "selected index error");
+        }
+
+        function TestAppend_Selected() {
+            var tab = tabTemplate.cloneNode(true);
+            tab.innerHTML = tab.innerHTML.replace("$ID$", "5");
+            var page = pageTemplate.cloneNode(true);
+            page.innerHTML = page.innerHTML.replace("$ID$", "5");
+            tabControl.Append({
+                Tab: tab,
+                Page: page,
+                IsSelected: true
+            });
+            Assert.AreEqual(4, tabControl.GetSelectedIndex(), "selected index error");
+        }
+
+        function TestInsert() {
+            var tab = tabTemplate.cloneNode(true);
+            tab.innerHTML = tab.innerHTML.replace("$ID$", "6");
+            var page = pageTemplate.cloneNode(true);
+            page.innerHTML = page.innerHTML.replace("$ID$", "6");
+            tabControl.Insert({
+                Tab: tab,
+                Page: page
+            }, 2);
+            Assert.AreEqual(5, tabControl.GetSelectedIndex(), "selected index error");
+        }
+
+        function TestInsert_Selected() {
+            var tab = tabTemplate.cloneNode(true);
+            tab.innerHTML = tab.innerHTML.replace("$ID$", "7");
+            var page = pageTemplate.cloneNode(true);
+            page.innerHTML = page.innerHTML.replace("$ID$", "7");
+            tabControl.Insert({
+                Tab: tab,
+                Page: page,
+                IsSelected: true
+            }, 2);
+            Assert.AreEqual(2, tabControl.GetSelectedIndex(), "selected index error");
+        }
+
+        function TestRemove() {
+            tabControl.RemoveAt(0);
+            Assert.AreEqual(1, tabControl.GetSelectedIndex(), "selected index error");
+        }
+
+        function TestRemove_Selected() {
+            tabControl.RemoveAt(1);
+            Assert.AreEqual(1, tabControl.GetSelectedIndex(), "selected index error");
+        }
+
+        function TestSetSelectedIndex() {
+            tabControl.SetSelectedIndex(4);
+        }
+
+        function TestRemove_Lastest() {
+            tabControl.RemoveAt(4);
+            Assert.AreEqual(3, tabControl.GetSelectedIndex(), "selected index error");
+        }
+
+        function TestClear() {
+            tabControl.Clear();
+            Assert.AreEqual(-1, tabControl.GetSelectedIndex(), "selected index error");
+        }
+
+        Xphter.EventUtility.Register(window, "load", function () {
+            tabTemplate = window.$("tabTemplate");
+            pageTemplate = window.$("pageTemplate");
+            tabControl = new Xphter.TabControl({
+                TabPages: [{
+                    Tab: window.$("tab1"),
+                    Page: window.$("page1")
+                }, {
+                    Tab: window.$("tab2"),
+                    Page: window.$("page2")
+                }, {
+                    Tab: window.$("tab3"),
+                    Page: window.$("page3")
+                }],
+                TabContainer: window.$("tabContainer"),
+                PageContainer: window.$("pageContainer")
+            });
+            tabControl.GetSelectedTabChangedEvent().AddListener(function (args) {
+                args.SelectedTab && (args.SelectedTab.className = "current");
+                args.UnselectedTab && (args.UnselectedTab.className = String.Empty);
+            });
+            tabControl.SelectDefault();
+        }, false);
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">
+        Test Cases for Xphter.TabControl Class
+    </h1>
+    <ul id="tabContainer">
+        <li id="tab1">选项卡1</li>
+        <li id="tab2">选项卡2</li>
+        <li id="tab3">选项卡3</li>
+    </ul>
+    <div id="pageContainer">
+        <div id="page1">
+            选项页1
+        </div>
+        <div id="page2">
+            选项页2
+        </div>
+        <div id="page3">
+            选项页3
+        </div>
+    </div>
+    <ul style="display: none;">
+        <li id="tabTemplate">选项卡$ID$</li>
+    </ul>
+    <div style="display: none;">
+        <div id="pageTemplate">
+            选项页$ID$
+        </div>
+    </div>
+</body>
+</html>

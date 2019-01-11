@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Xphter.Framework.Reflection.MethodExecutingContext">
+    <Position X="6.75" Y="6.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAQAAAAAAAAAAAAAAAAAQBAABAAIABCAAgAAAA=</HashCode>
+      <FileName>Reflection\AOP.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.MethodFilterAttribute">
+    <Position X="6.75" Y="0.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\AOP.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.MethodFilterProxyTypeFactory">
+    <Position X="11.25" Y="0.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>BEAEAAAAACQBAQAARBUAAACgAAAAAASBAAIICEAAEAA=</HashCode>
+      <FileName>Reflection\AOP.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.FilterIgnoreAttribute">
+    <Position X="6.75" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\AOP.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Xphter.Framework.Reflection.IProxyTypeFactory">
+    <Position X="2.25" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\AOP.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Reflection.IMethodFilter">
+    <Position X="2.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\AOP.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Reflection.IMethodExecutingContext">
+    <Position X="2.25" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAABAAIAACAAgAAAA=</HashCode>
+      <FileName>Reflection\AOP.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Reflection.IPreMethodExecutingContext">
+    <Position X="0.5" Y="8.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Reflection\AOP.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Reflection.IPostMethodExecutingContext">
+    <Position X="3.75" Y="8.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAABAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Reflection\AOP.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

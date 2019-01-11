@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Xphter.Framework.Web.HtmlRangeAnalyzer">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QCCIYAAAAAIAQAAEAAAAAhAAAAAAIEAAAgGEAAAAAQA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlRange">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAkAEEAAACAQAKQEkAEAAAAAAAAAQMgAAEAFAAIAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RangeToNode" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlRangeToDeclaration">
+    <Position X="10" Y="0.5" Width="2" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Web.HtmlRangeToDeclaration.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Web\HtmlAnalyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlRangeToText">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Web.HtmlRangeToText.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Web\HtmlAnalyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlRangeToAttribute">
+    <Position X="17.75" Y="0.5" Width="2" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Web.HtmlRangeToAttribute.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Web\HtmlAnalyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlRangeToComplex">
+    <Position X="15" Y="3" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAACAEAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlRangeToElement">
+    <Position X="13.5" Y="5.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAADEAAAEAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlRangeToDocument">
+    <Position X="17" Y="5.75" Width="2" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Web.HtmlRangeToDocument.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Web\HtmlAnalyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAEAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlNode">
+    <Position X="3.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAEgAUAAAQAgAAAAIACAACAAAAQAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlDeclaration">
+    <Position X="0.5" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABCAAAAAAAAAAAAABAAQAgAAACAAAAAAAAAAAACA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlAttribute">
+    <Position X="6.25" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAACAAAAAAAAAAAAAAAAQAgAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlElement">
+    <Position X="8.75" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAACAAAAAAABQAAAAEAAQQgAAAAAAAAACAAABQAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlDocument">
+    <Position X="11.25" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEEACAAQAAAAAAAAAAAAAQgAAAAAAAAAACAEAAASAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlComment">
+    <Position X="4.5" Y="22" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAEAAAAAAAAAAEAAAQAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlCharacter">
+    <Position X="3" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAgAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlText">
+    <Position X="1.5" Y="22" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlRangeToComment">
+    <Position X="15" Y="0.5" Width="2" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Web.HtmlRangeToComment.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Web\HtmlAnalyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlAnalyzer">
+    <Position X="8" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Web.HtmlExtension">
+    <Position X="8" Y="16" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Xphter.Framework.Web.IHtmlRange">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAEAAAAAAAACAAAAAAAAAAAAAAQEAAAEAEAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Web.IHtmlRangeToNode">
+    <Position X="8.75" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Web.IHtmlNode">
+    <Position X="4.75" Y="8.25" Width="1.5" />
+    <AssociationLine Name="ParentNode" Type="Xphter.Framework.Web.IHtmlNode" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.25" Y="9.092" />
+        <Point X="6.5" Y="9.092" />
+        <Point X="6.5" Y="9.596" />
+        <Point X="6.25" Y="9.596" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAEAAAQAgAAAAAACAACAAAAQAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NodeType" />
+      <Property Name="Document" />
+      <Property Name="ParentNode" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Web.IHtmlDocument">
+    <Position X="0.5" Y="8.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAQAAAAAAAAAAAAAAgAAAAAAAAAAAAEAAASAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Declaration" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Web.IHtmlDeclaration">
+    <Position X="1" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAABAAAAAAAACAAAAAAAAAAAACA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Web.IHtmlText">
+    <Position X="3" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Web.IHtmlAttribute">
+    <Position X="7.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Web.IHtmlElement">
+    <Position X="10" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TagFormat" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Web.IHtmlComment">
+    <Position X="5.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Xphter.Framework.Web.HtmlNodeType">
+    <Position X="8" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEQAACAAAAAAgAAAAAAAAAAAACAAAACAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Xphter.Framework.Web.HtmlElementTagFormat">
+    <Position X="10.25" Y="8.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAQCAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web\HtmlAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

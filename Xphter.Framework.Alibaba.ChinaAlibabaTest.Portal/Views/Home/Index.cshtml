@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        ul li {
+            padding: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li>
+                <a href='@this.Url.Action("MemberDetail")'>会员信息</a>
+            </li>
+            <li>
+                <a href='@this.Url.Action("CurrentSalesOrders")'>当前会员销售订单</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

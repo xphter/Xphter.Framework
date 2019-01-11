@@ -1,0 +1,23 @@
+﻿@using Xphter.Framework.WeChat.OfficialAccounts;
+@{
+    Layout = null;
+}
+@model IOfficialAccountService
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <p><a href='@this.Url.Action("ClearQuota")' target="_blank">API调用频次清零</a></p>
+        <p><a href='@this.Html.Raw(this.Model.GetBaseOAuthUri("http://localhost" + this.Url.Action("Binding"), null))'>OAuth2.0鉴权-基本</a></p>
+        <p><a href='@this.Html.Raw(this.Model.GetUserInfoOAuthUri("http://localhost" + this.Url.Action("Binding"), null))'>OAuth2.0鉴权-用户信息</a></p>
+        <p><a href='@this.Url.Action("GetServerInfo")' target="_blank">获取微信服务器信息</a></p>
+        <p><a href='@this.Url.Action("GetAllUsers")' target="_blank">获取粉丝OpenID列表</a></p>
+        <p><a href='@this.Url.Action("GetMultipleUsersInfo")' target="_blank">多线程测试：获取粉丝信息</a></p>
+        <p><a href='@this.Url.Action("CreateMenu")' target="_blank">创建自定义菜单</a></p>
+    </div>
+</body>
+</html>

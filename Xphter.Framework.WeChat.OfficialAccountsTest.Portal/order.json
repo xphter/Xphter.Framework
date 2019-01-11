@@ -1,0 +1,28 @@
+﻿{
+    "touser": "{openid}",
+    "template_id": "gIaC3lZ4OsJbBx2i_gUsWkluPW5Wo5T0gFo-7EKkwmc",
+    "url": "",
+    "topcolor": "#FF0000",
+    "data": {
+        "first": {
+            "value": "你好，你的订单状态已改变！",
+            "color": "#173177"
+        },
+        "keyword1": {
+            "value": "0000",
+            "color": "#173177"
+        },
+        "keyword2": {
+            "value": "已发货",
+            "color": "#173177"
+        },
+        "keyword3": {
+            "value": "2015年1月1日",
+            "color": "#173177"
+        },
+        "remark": {
+            "value": "如有疑问请拨打电话 15888888888",
+            "color": "#173177"
+        }
+    }
+}

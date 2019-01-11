@@ -1,0 +1,31 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="Xphter.js"></script>
+    <script type="text/javascript" src="Xphter.JsUnit.js"></script>
+    <script type="text/javascript" language="javascript">
+        Xphter.EventUtility.Register(window, "load", function () {
+            new Xphter.Calendar({
+                Target: window.$("calendar1"),
+                IsShowTime: true,
+                IsCloseAfterChoise: true
+            });
+            new Xphter.Calendar({
+                Target: window.$("calendar2"),
+                Time: null,
+                IsShowTime: true,
+                IsCloseAfterChoise: false
+            });
+        }, false);
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">
+        Test Cases for Xphter.Calendar Class
+    </h1>
+    <input id="calendar1" type="text" />
+    <hr />
+    <input id="calendar2" type="text" />
+</body>
+</html>

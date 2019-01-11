@@ -1,0 +1,7 @@
+﻿{
+    "touser": "{openid}",
+    "msgtype": "text",
+    "text": {
+        "content": "这是一个<a href=\"http://www.beianm.com\">测试</a>客服消息"
+    }
+}

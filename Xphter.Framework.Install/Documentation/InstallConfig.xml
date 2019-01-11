@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+The xml file is config file of Windows Suite Installer.
+
+Logic: 
+<installers>
+  <installer name="" description="">
+    <features>
+       <feature key="" displayname="" [required]="" [productcode] = "" [version]="" [upgradebysuite]="" package="" description="">
+         <depends>
+            <depend key="" />
+          <depends>
+          <subfeature key="" displayname="" description=""/>
+       </feature>
+    </features>
+  </installer>
+</installers>  
+
+installer:
+    name: The display name of suite type.
+    description: Description of suite type.
+
+feature:
+    key: Internal key to identify the feature, cannot be changed.
+    displayname: Display name of the feature.
+    required: Determine if this feature is required to be selected.
+    productcode: The product code of the package.
+    version: The product version of the package.
+    upgradebysuite: Determine if the product upgrade by suite installer or by own installer, the default is false.	
+    package: The relative file path to the package to be installed by the feature option.
+    description: Description of the feature.
+
+subfeature:
+    key: Internal key to identify the sub feature.
+    displayname: Display name of the sub feature.
+
+depend:
+    key: Specify the dependence features (by this internal feature key) must be installed if current feature is selected.
+ 
+ -->
+<installers>  
+  <installer name="Helpdesk Administrator" description="The Centrify Suite Helpdesk Administrator Edition includes the AD Users and Computers property page extension and the PuTTY remote terminal application.">   
+    <features>      
+      <feature key="aduc" displayname="AD Users and Computers property page extension" required="" package = "CentrifyDC_ADUC_Extension-4.4.3-win32.exe" description = "Select this option to install the Centrify DirectControl extension for Active Directory Users and Computers.\n\nNote that Active Directory must be configured before you can use the extension. If you have not yet done so, please use the Setup Wizard in the DirectControl Administrator Console to configure Active Directory for use with DirectControl." />
+      <feature key="putty" displayname = "Centrify (Kerberized) PuTTY" productcode = "{2EE130C8-E9AE-4830-A9C3-925DB3C3BF28}" version="1.4.0.0" upgradebysuite = "true" package = "Putty-3.0.7-745.msi" description = "Select this option to install the Centrify (Kerberized) PuTTY.">
+        <depends>
+          <depend key=""/>
+        </depends>
+      </feature>
+    </features>
+  </installer>
+  <installer name="Standard Administrator" description="The Centrify Suite Standard Administrator Edition includes the DirectControl Administrator Console, Web Console, Group Policy management, the Zone Generator and the PuTTY remote terminal application." >
+    <features>
+      <feature key="cdc" displayname="Centrify DirectControl Administrator Console" package ="CentrifyDC_Console-4.4.3-win32.exe" description ="Select this option to install the Centrify DirectControl Administrator Console. \n\nThe DirectControl Administrator Console should be installed on at least one computer in your environment to enable you to manage DirectControl and DirectAuthorize.">
+        <subfeature key="aduc" displayname="AD Users and Computers property page extension" description="Select this option to install the Centrify DirectControl extension for Active Directory Users and Computers.\n\nNote that Active Directory must be configured before you can use the extension. If you have not yet done so, please use the Setup Wizard in the DirectControl Administrator Console to configure Active Directory for use with DirectControl."/>
+        <subfeature key="zonegen" displayname="Centrify Zone Generator" description ="Select this option to install the Centrify Zone Generator." />
+        <subfeature key="gp" displayname="Group Policy Editor extension" description ="Select this option to install Group Policy Editor extension."/>
+      </feature>      
+      <feature key="cdcweb" displayname="Centrify DirectControl Web Console" package = "CentrifyDC_WebConsole-4.4.3-win32.exe" description ="Select this option to install the Centrify DirectControl Web Console. \n\nThe DirectControl Web Console uses Microsoft IIS to provide an administration console for DirectControl and DirectAuthorize that can be accessed from computers within your organization just using a Web browser."/>
+      <feature key="putty" displayname="Centrify (Kerberized) PuTTY" productcode = "{2EE130C8-E9AE-4830-A9C3-925DB3C3BF28}" version="1.4.0.0" upgradebysuite = "true" package = "Putty-3.0.7-745.msi" description ="Select this option to install the Centrify (Kerberized) PuTTY."/>
+    </features>
+  </installer>
+  <installer name="Enterprise Administrator" description="The Centrify Suite Enterprise Administrator Edition includes the DirectControl Administrator Console, Web Console, DirectAudit Administrator Console, Group Policy management, the Zone Generator and the PuTTY remote terminal application.">
+    <features>
+      <feature key="cdc" displayname="Centrify DirectControl Administrator Console" package="CentrifyDC_Console-4.4.3-win32.exe" description="Select this option to install the Centrify DirectControl Administrator Console. \n\nThe DirectControl Administrator Console should be installed on at least one computer in your environment to enable you to manage DirectControl and DirectAuthorize.">
+        <subfeature key="aduc" displayname="AD Users and Computers property page extension" description="Select this option to install the Centrify DirectControl extension for Active Directory Users and Computers.\n\nNote that Active Directory must be configured before you can use the extension. If you have not yet done so, please use the Setup Wizard in the DirectControl Administrator Console to configure Active Directory for use with DirectControl."/>
+        <subfeature key="zonegen" displayname="Centrify Zone Generator" description ="Select this option to install the Centrify Zone Generator."/>
+        <subfeature key="gp" displayname="Group Policy Editor extension"  description ="Select this option to install Group Policy Editor extension."/>
+      </feature>      
+      <feature key="cdcweb" displayname="Centrify DirectControl Web Console" package = "CentrifyDC_WebConsole-4.4.3-win32.exe" description ="Select this option to install the Centrify DirectControl Web Console. \n\nThe DirectControl Web Console uses Microsoft IIS to provide an administration console for DirectControl and DirectAuthorize that can be accessed from computers within your organization just using a Web browser."/>      
+      <feature key="putty" displayname="Centrify (Kerberized) PuTTY" productcode = "{2EE130C8-E9AE-4830-A9C3-925DB3C3BF28}" version="1.4.0.0" upgradebysuite = "true" package = "Putty-3.0.7-745.msi" description ="Select this option to install the Centrify (Kerberized) PuTTY."/>
+      <feature key="cda" displayname="Centrify DirectAudit" package = "CentrifyDA-1.3.0.win.zip" description ="Select this option to install the Centrify DirectAudit Windows package. \n\nThe DirectAudit Windows package includes components for the Collector computer, the administrator and the session viewer."/>
+    </features>
+  </installer>
+  <installer name = "Developer Edition" description="The Centrify Suite Developer Edition includes the DirectControl Administrator Console, Web Console, DirectAudit Administrator Console, DirectControl Extension for MIIS, Group Policy management, Centrify SDK, the Zone Generator and the PuTTY remote terminal application.">
+    <features>      
+      <feature key="cdc" displayname="Centrify DirectControl Administrator Console" package = "CentrifyDC_Console-4.4.3-win32.exe" description ="Select this option to install the Centrify DirectControl Administrator Console. \n\nThe DirectControl Administrator Console should be installed on at least one computer in your environment to enable you to manage DirectControl and DirectAuthorize.">
+        <subfeature key="aduc" displayname="AD Users and Computers property page extension" description="Select this option to install the Centrify DirectControl extension for Active Directory Users and Computers.\n\nNote that Active Directory must be configured before you can use the extension. If you have not yet done so, please use the Setup Wizard in the DirectControl Administrator Console to configure Active Directory for use with DirectControl."/>
+        <subfeature key="zonegen" displayname="Centrify Zone Generator" description ="Select this option to install the Centrify Zone Generator."/>
+        <subfeature key="gp" displayname="Group Policy Editor extension"  description ="Select this option to install Group Policy Editor extension."/>
+      </feature>      
+      <feature key="cdcweb" displayname="Centrify DirectControl Web Console" package = "CentrifyDC_WebConsole-4.4.3-win32.exe" description ="Select this option to install the Centrify DirectControl Web Console. \n\nThe DirectControl Web Console uses Microsoft IIS to provide an administration console for DirectControl and DirectAuthorize that can be accessed from computers within your organization just using a Web browser."/>      
+      <feature key="miis" displayname="DirectControl Extension for MIIS" version="4.1.1.327" upgradebysuite = "true" package = "CentrifyDC_MIIS_Extension-4.1.1-win32.zip" description ="Select this option to install the Centrify extension for Microsoft Identity Integration Server (MIIS)."/>
+      <feature key="putty" displayname="Centrify (Kerberized) PuTTY" productcode = "{2EE130C8-E9AE-4830-A9C3-925DB3C3BF28}" version="1.4.0.0" upgradebysuite = "true" package = "Putty-3.0.7-745.msi" description ="Select this option to install the Centrify (Kerberized) PuTTY."/>
+      <feature key="sdk" displayname="Centrify SDK" package = "CentrifyDC_SDK-4.1.0-win32.exe" description ="Select this option to install the Centrify SDK package."/>
+      <feature key="cda" displayname="Centrify DirectAudit" package = "CentrifyDA-1.3.0.win.zip" description ="Select this option to install the Centrify DirectAudit Windows package. \n\nThe DirectAudit Windows package includes components for the Collector computer, the administrator and the session viewer."/>
+    </features>
+  </installer>
+</installers>

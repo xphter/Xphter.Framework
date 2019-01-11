@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="Xphter.js"></script>
+    <script type="text/javascript" src="Xphter.JsUnit.js"></script>
+    <script type="text/javascript" language="javascript">
+        var listView1 = null;
+        var listView2 = null;
+
+        function TestRefresh() {
+            listView1.Refresh([{
+                ID: 1,
+                Name: "蘑菇",
+                Price: 2.58,
+                Amount: 13
+            }, {
+                ID: 2,
+                Name: "西红柿",
+                Price: 3.98,
+                Amount: 367
+            }]);
+        }
+
+        function TestIndexOf() {
+            Assert.AreEqual(0, listView1.IndexOf({ ID: 1 }));
+            Assert.AreEqual(1, listView1.IndexOf({ ID: 2 }));
+            Assert.AreEqual(-1, listView1.IndexOf({ ID: 3 }));
+        }
+
+        function TestAppend() {
+            listView1.Append({
+                ID: 3,
+                Name: "茄子",
+                Price: 2.38,
+                Amount: 36
+            });
+            Assert.AreEqual(listView1.GetItemsCount() - 1, listView1.GetSelectedIndex());
+        }
+
+        function TestInsert() {
+            listView1.Insert({
+                ID: 4,
+                Name: "西瓜",
+                Price: 7.68,
+                Amount: 3
+            }, 1);
+        }
+
+        function TestInsert_Existing() {
+            listView1.Insert({
+                ID: 3,
+                Name: "茄子",
+                Price: 2.38,
+                Amount: 36
+            }, listView1.GetItemsCount() - 1);
+        }
+
+        function TestUpdate() {
+            listView1.Update({
+                ID: 3,
+                Name: "茄子",
+                Price: 2.38,
+                Amount: 38
+            });
+            Assert.AreEqual(38, listView1.GetValue(listView1.IndexOf({ ID: 3 })).Amount);
+        }
+
+        function TestUpdateAt() {
+            listView1.UpdateAt({
+                ID: 5,
+                Name: "西瓜",
+                Price: 7.68,
+                Amount: 31
+            }, 1);
+            Assert.AreEqual(5, listView1.GetValue(1).ID);
+        }
+
+        function TestRemove() {
+            listView1.Append({
+                ID: 6,
+                Name: "垃圾",
+                Price: 2.38,
+                Amount: 36
+            });
+            listView1.Remove({ ID: 6 });
+        }
+
+        function TestRemoveAt_UpSelected() {
+            listView1.Insert({
+                ID: 6,
+                Name: "垃圾",
+                Price: 2.38,
+                Amount: 36
+            }, 2);
+            listView1.SetSelectedIndex(listView1.GetItemsCount() - 1);
+            listView1.RemoveAt(2);
+            Assert.AreEqual(listView1.GetItemsCount() - 1, listView1.GetSelectedIndex());
+        }
+
+        function TestRemoveAt_OnSelected() {
+            listView1.Insert({
+                ID: 6,
+                Name: "垃圾",
+                Price: 2.38,
+                Amount: 36
+            }, 2);
+            listView1.SetSelectedIndex(2);
+            listView1.RemoveAt(2);
+            Assert.AreEqual(2, listView1.GetSelectedIndex());
+        }
+
+        function TestRemoveAt_DownSelected() {
+            listView1.Insert({
+                ID: 6,
+                Name: "垃圾",
+                Price: 2.38,
+                Amount: 36
+            }, 2);
+            listView1.SetSelectedIndex(0);
+            listView1.RemoveAt(2);
+            Assert.AreEqual(0, listView1.GetSelectedIndex());
+        }
+
+        function TestMoveUp() {
+            var id0 = listView1.GetValue(0).ID;
+            var id1 = listView1.GetValue(1).ID;
+            var id2 = listView1.GetValue(2).ID;
+            listView1.MoveUp(2, 2);
+            Assert.AreEqual(id2, listView1.GetValue(0).ID);
+            Assert.AreEqual(id0, listView1.GetValue(1).ID);
+            Assert.AreEqual(id1, listView1.GetValue(2).ID);
+        }
+
+        function TestHide() {
+            listView1.Hide();
+        }
+
+        function TestShow() {
+            listView1.Show();
+        }
+
+        function TestMoveDown() {
+            var id0 = listView1.GetValue(0).ID;
+            var id1 = listView1.GetValue(1).ID;
+            var id2 = listView1.GetValue(2).ID;
+            listView1.MoveDown(0, 2);
+            Assert.AreEqual(id1, listView1.GetValue(0).ID);
+            Assert.AreEqual(id2, listView1.GetValue(1).ID);
+            Assert.AreEqual(id0, listView1.GetValue(2).ID);
+        }
+
+        function TestSetSelectedIndex_SelectNone() {
+            listView1.SetSelectedIndex(-2);
+            Assert.AreEqual(-1, listView1.GetSelectedIndex());
+        }
+
+        function TestSetSelectedValue_SelectNone() {
+            listView1.SetSelectedValue(null);
+            Assert.IsNull(listView1.GetSelectedValue());
+        }
+
+        function TestRefresh_Footer() {
+            listView2.Refresh([{
+                ID: 1,
+                Name: "蘑菇",
+                Price: 2.58,
+                Amount: 13
+            }, {
+                ID: 2,
+                Name: "西红柿",
+                Price: 3.98,
+                Amount: 367
+            }]);
+        }
+
+        function TestIndexOf_Footer() {
+            Assert.AreEqual(0, listView2.IndexOf({ ID: 1 }));
+            Assert.AreEqual(1, listView2.IndexOf({ ID: 2 }));
+            Assert.AreEqual(-1, listView2.IndexOf({ ID: 3 }));
+        }
+
+        function TestAppend_Footer() {
+            listView2.Append({
+                ID: 3,
+                Name: "茄子",
+                Price: 2.38,
+                Amount: 36
+            });
+            Assert.AreEqual(listView2.GetItemsCount() - 1, listView2.GetSelectedIndex());
+        }
+
+        function TestInsert_Footer() {
+            listView2.Insert({
+                ID: 4,
+                Name: "西瓜",
+                Price: 7.68,
+                Amount: 3
+            }, 1);
+        }
+
+        function TestInsert_Footer_Existing() {
+            listView2.Insert({
+                ID: 3,
+                Name: "茄子",
+                Price: 2.38,
+                Amount: 36
+            }, listView2.GetItemsCount() - 1);
+        }
+
+        function TestUpdate_Footer() {
+            listView2.Update({
+                ID: 3,
+                Name: "茄子",
+                Price: 2.38,
+                Amount: 38
+            });
+            Assert.AreEqual(38, listView2.GetValue(listView2.IndexOf({ ID: 3 })).Amount);
+        }
+
+        function TestUpdateAt_Footer() {
+            listView2.UpdateAt({
+                ID: 5,
+                Name: "西瓜",
+                Price: 7.68,
+                Amount: 31
+            }, 1);
+            Assert.AreEqual(5, listView2.GetValue(1).ID);
+        }
+
+        function TestRemove_Footer() {
+            listView2.Append({
+                ID: 6,
+                Name: "垃圾",
+                Price: 2.38,
+                Amount: 36
+            });
+            listView2.Remove({ ID: 6 });
+        }
+
+        function TestRemoveAt_Footer_UpSelected() {
+            listView2.Insert({
+                ID: 6,
+                Name: "垃圾",
+                Price: 2.38,
+                Amount: 36
+            }, 2);
+            listView2.SetSelectedIndex(listView2.GetItemsCount() - 1);
+            listView2.RemoveAt(2);
+            Assert.AreEqual(listView2.GetItemsCount() - 1, listView2.GetSelectedIndex());
+        }
+
+        function TestRemoveAt_Footer_OnSelected() {
+            listView2.Insert({
+                ID: 6,
+                Name: "垃圾",
+                Price: 2.38,
+                Amount: 36
+            }, 2);
+            listView2.SetSelectedIndex(2);
+            listView2.RemoveAt(2);
+            Assert.AreEqual(2, listView2.GetSelectedIndex());
+        }
+
+        function TestRemoveAt_Footer_DownSelected() {
+            listView2.Insert({
+                ID: 6,
+                Name: "垃圾",
+                Price: 2.38,
+                Amount: 36
+            }, 2);
+            listView2.SetSelectedIndex(0);
+            listView2.RemoveAt(2);
+            Assert.AreEqual(0, listView2.GetSelectedIndex());
+        }
+
+        function TestMoveUp_Footer() {
+            var id0 = listView2.GetValue(0).ID;
+            var id1 = listView2.GetValue(1).ID;
+            var id2 = listView2.GetValue(2).ID;
+            listView2.MoveUp(2, 2);
+            Assert.AreEqual(id2, listView2.GetValue(0).ID);
+            Assert.AreEqual(id0, listView2.GetValue(1).ID);
+            Assert.AreEqual(id1, listView2.GetValue(2).ID);
+        }
+
+        function TestMoveDown_Footer() {
+            var id0 = listView2.GetValue(0).ID;
+            var id1 = listView2.GetValue(1).ID;
+            var id2 = listView2.GetValue(2).ID;
+            listView2.MoveDown(0, 2);
+            Assert.AreEqual(id1, listView2.GetValue(0).ID);
+            Assert.AreEqual(id2, listView2.GetValue(1).ID);
+            Assert.AreEqual(id0, listView2.GetValue(2).ID);
+        }
+
+        function TestSetSelectedIndex_Footer_SelectNone() {
+            listView2.SetSelectedIndex(-2);
+            Assert.AreEqual(-1, listView2.GetSelectedIndex());
+        }
+
+        function TestSetSelectedValue_Footer_SelectNone() {
+            listView2.SetSelectedValue(null);
+            Assert.IsNull(listView2.GetSelectedValue());
+        }
+
+        Xphter.EventUtility.Register(window, "load", function () {
+            listView1 = new Xphter.ListView({
+                Container: window.$("list1"),
+                ItemTemplate: window.$("itemTemplate"),
+                PropertyTemplate: "$property$",
+                PrimaryKey: "ID"
+            });
+            listView1.GetSelectedChangedEvent().AddListener(function (args) {
+                args.OtherNodes.ForEach(function (item, index) {
+                    item.style.backgroundColor = String.Empty;
+                });
+                args.Node && (args.Node.style.backgroundColor = "#FF0000");
+            });
+
+            listView2 = new Xphter.ListView({
+                Container: window.$("list2"),
+                Footer: window.$("footerTemplate"),
+                ItemTemplate: window.$("itemTemplate"),
+                PropertyTemplate: "$property$",
+                PrimaryKey: "ID"
+            });
+            listView2.GetSelectedChangedEvent().AddListener(function (args) {
+                args.OtherNodes.ForEach(function (item, index) {
+                    item.style.backgroundColor = String.Empty;
+                });
+                args.Node && (args.Node.style.backgroundColor = "#FF0000");
+            });
+        }, false);
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">
+        Test Cases for Xphter.ListView Class
+    </h1>
+    <table border="1">
+        <tbody id="list1">
+        </tbody>
+    </table>
+    <table border="1">
+        <tbody id="list2">
+        </tbody>
+    </table>
+    <table border="1" style="display: none;">
+        <tr id="itemTemplate">
+            <td>
+                $ID$
+            </td>
+            <td>
+                $Name$
+            </td>
+            <td>
+                $Price$
+            </td>
+            <td>
+                $Amount$
+            </td>
+        </tr>
+        <tr id="footerTemplate">
+            <td>
+                合计：
+            </td>
+            <td colspan="3">
+                ￥
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

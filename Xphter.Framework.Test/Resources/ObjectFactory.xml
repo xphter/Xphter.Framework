@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <object type="Xphter.Framework.Reflection.Tests.IClassA" class="Xphter.Framework.Reflection.Tests.ClassA1" />
+    <object type="Xphter.Framework.Reflection.Tests.ClassA1">
+        <argument type="System.Boolean" value="True" />
+        <argument type="System.Char" />
+        <argument type="System.String" value="嘿嘿哈嘿" />
+        <argument type="System.Int32" value="13" />
+        <argument type="System.Single" value="" />
+        <argument type="System.Double" />
+        <argument type="System.Decimal" value="13.13" />
+        <argument type="System.DateTime" value="2011-1-11 11:11:11" />
+        <argument type="Xphter.Framework.Reflection.Tests.IClassB" value="Xphter.Framework.Reflection.Tests.ClassB2" />
+        <argument type="Xphter.Framework.Reflection.Tests.IClassC" />
+        <!-- null -->
+        <argument type="Xphter.Framework.Reflection.Tests.IClassD" value="" />
+        <argument type="System.Object" />
+        <argument type="System.Collections.Generic.IEnumerable`1" item="System.Object" />
+        <argument type="System.Byte" />
+        <argument type="System.Int16" />
+        <argument type="System.Int64" />
+        <argument type="Xphter.Framework.Reflection.Tests.EnumForA" value="Value2" />
+    </object>
+    <object id="A2" type="Xphter.Framework.Reflection.Tests.ClassA1">
+    </object>
+    <object type="Xphter.Framework.Reflection.Tests.IClassB" class="Xphter.Framework.Reflection.Tests.ClassB1" />
+    <object type="Xphter.Framework.Reflection.Tests.ClassB1">
+        <argument type="System.Boolean" value="False" />
+    </object>
+    <object type="Xphter.Framework.Reflection.Tests.ClassB2">
+        <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Reflection.Tests.IClassD">
+            <argument type="Xphter.Framework.Reflection.Tests.IClassD" ref="D2" />
+            <argument type="Xphter.Framework.Reflection.Tests.IClassD" value="Xphter.Framework.Reflection.Tests.ClassD2" ref="D2" />
+            <argument type="Xphter.Framework.Reflection.Tests.ClassD3" />
+            <argument type="Xphter.Framework.Reflection.Tests.ClassD4">
+                <argument type="System.Int32" value="1313" />
+                <argument type="System.String" value="小螺号" />
+            </argument>
+        </argument>
+    </object>
+    <object type="Xphter.Framework.Reflection.Tests.IClassC" class="Xphter.Framework.Reflection.Tests.ClassC1" singleton="true" />
+    <object type="Xphter.Framework.Reflection.Tests.ClassC1" class="Xphter.Framework.Reflection.Tests.ClassC2" ref="C2" />
+    <object type="Xphter.Framework.Reflection.Tests.ClassC2">
+        <argument type="System.Byte" value="13" />
+    </object>
+    <object id="C2" type="Xphter.Framework.Reflection.Tests.ClassC2" class="Xphter.Framework.Reflection.Tests.ClassC3" ref="C3">
+        <argument type="System.Byte" value="18" />
+    </object>
+    <object id="C3" type="Xphter.Framework.Reflection.Tests.ClassC3">
+        <argument type="System.Byte" value="18" />
+        <argument type="System.UInt64" value="518" />
+    </object>
+    <object type="Xphter.Framework.Reflection.Tests.IClassD" class="Xphter.Framework.Reflection.Tests.ClassD1" />
+    <object id="D2" type="Xphter.Framework.Reflection.Tests.IClassD" class="Xphter.Framework.Reflection.Tests.ClassD2" />
+    <object type="Xphter.Framework.Reflection.Tests.ClassD1" singleton="true" />
+    <object type="Xphter.Framework.Reflection.Tests.ClassD2" singleton="true" />
+    <object id="D2" type="Xphter.Framework.Reflection.Tests.ClassD2" singleton="true" />
+
+
+    <object type="Xphter.Framework.Reflection.Tests.ClassD5">
+        <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Reflection.Tests.IClassC">
+            <argument type="Xphter.Framework.Reflection.Tests.IClassC" />
+            <argument type="Xphter.Framework.Reflection.Tests.IClassC" />
+            <argument type="Xphter.Framework.Reflection.Tests.IClassC" />
+            <argument type="Xphter.Framework.Reflection.Tests.ClassC1" />
+            <argument type="Xphter.Framework.Reflection.Tests.ClassC1" />
+            <argument type="Xphter.Framework.Reflection.Tests.ClassC2" />
+            <argument type="Xphter.Framework.Reflection.Tests.ClassC2" />
+            <argument type="Xphter.Framework.Reflection.Tests.ClassC2" ref="C2" />
+            <argument type="Xphter.Framework.Reflection.Tests.ClassC2" ref="C2" />
+            <argument type="Xphter.Framework.Reflection.Tests.ClassD5" />
+        </argument>
+    </object>
+</configuration>

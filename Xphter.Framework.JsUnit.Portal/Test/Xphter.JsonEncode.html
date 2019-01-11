@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        
+    </style>
+    <script type="text/javascript" src="Xphter.js"></script>
+    <script type="text/javascript" src="Xphter.JsUnit.js"></script>
+    <script type="text/javascript" language="javascript">
+        function TestPrimitive() {
+            Assert.AreSame("13", window.JsonEncode(13));
+            Assert.AreSame("\"a\\\"b\\\'c\\\\d\"", window.JsonEncode("a\"b\'c\\d"));
+            Assert.AreSame("true", window.JsonEncode(true));
+        }
+
+        function TestPrimitiveWithName() {
+            Assert.AreSame("\"ID\":13", window.JsonEncode(13, "ID"));
+            Assert.AreSame("\"Name\":\"a\\\"b\\\'c\\\\d\"", window.JsonEncode("a\"b\'c\\d", "Name"));
+            Assert.AreSame("\"Sex\":true", window.JsonEncode(true, "Sex"));
+        }
+
+        function TestObject() {
+            Assert.AreSame("{\"ID\":13,\"Name\":\"Test\",\"Sex\":false}", window.JsonEncode({
+                ID: 13,
+                Name: "Test",
+                Address: null,
+                Sex: false
+            }));
+            Assert.AreSame("{}", window.JsonEncode({
+                ID: null,
+                Name: undefined
+            }));
+        }
+
+        function TestArray() {
+            Assert.AreSame("[13,\"Test\",true]", window.JsonEncode([13, "Test", null, undefined, true]));
+            Assert.AreSame("[]", window.JsonEncode([null, undefined]));
+        }
+
+        function TestObjectAndArray() {
+            Assert.AreSame("{\"ID\":13,\"Name\":\"Test\",\"Address\":[{\"Country\":\"China\",\"City\":\"NanYang\"},{\"Country\":\"China\",\"City\":\"ZhengZhou\"}],\"Sex\":true,\"Role\":{\"ID\":14,\"Name\":\"Admin\"}}", window.JsonEncode({
+                ID: 13,
+                Name: "Test",
+                Address: [{
+                    Country: "China",
+                    City: "NanYang"
+                }, {
+                    Country: "China",
+                    City: "ZhengZhou"
+                }],
+                Sex: true,
+                Role: {
+                    ID: 14,
+                    Name: "Admin"
+                }
+            }));
+        }
+
+        Xphter.EventUtility.Register(window, "load", function () {
+        }, false);
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">
+        Test Cases for window.JsonEncode Method
+    </h1>
+</body>
+</html>

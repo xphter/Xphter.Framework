@@ -1,0 +1,31 @@
+﻿@using Xphter.Framework.Alibaba.ChinaAlibaba;
+@model IChinaAlibabaMemberInfo
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>会员信息</title>
+</head>
+<body>
+    <form action='@this.Url.Action("MemberDetail")' method="post" enctype="application/x-www-form-urlencoded">
+        会员ID：<input name="id" type="text" value="@(this.Model != null ? this.Model.MemberID : string.Empty)" />
+        <input type="submit" value="获取会员详情" />
+    </form>
+    @if(this.Model != null) {
+        <ul>
+            <li>@this.Model.MemberID</li>
+            <li>@this.Model.CompanyName</li>
+            <li>@this.Model.CompanyIndustry</li>
+            <li>@this.Model.CompanyProduct</li>
+            <li>@this.Model.ContactsName</li>
+            <li>@this.Model.ContactsTelephone</li>
+            <li>@this.Model.ContactsMobilePhone</li>
+            <li>@this.Model.ContactsAddress</li>
+            <li>@this.Model.CompanyUrl</li>
+        </ul>
+    }
+</body>
+</html>

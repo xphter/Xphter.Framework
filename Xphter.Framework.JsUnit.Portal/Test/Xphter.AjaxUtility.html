@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="Xphter.js"></script>
+    <script type="text/javascript" src="Xphter.JsUnit.js"></script>
+    <script type="text/javascript" language="javascript">
+        function TestUpload_Text() {
+            Xphter.AjaxUtility.Upload({
+                Form: window.$("uploadText"),
+                OnSuccess: function (response) {
+                    window.Assert.AreEqual("abcdefg", response);
+                }
+            });
+        }
+
+        function TestUpload_Json() {
+            Xphter.AjaxUtility.Upload({
+                Form: window.$("uploadJson"),
+                OnSuccess: function (response) {
+                    window.Assert.IsTrue(Xphter.DataTypeIdentity.IsObject(response));
+                    window.Assert.AreEqual("dupeng", response.name);
+                }
+            });
+        }
+
+        function TestPostback_Normal() {
+            Xphter.AjaxUtility.Postback({
+                Form: window.$("postbackNormal"),
+                OnSuccess: function (response) {
+                    window.Assert.AreEqual("abcdefg", response);
+                }
+            });
+        }
+
+        function TestPostback_Upload() {
+            Xphter.AjaxUtility.Postback({
+                Form: window.$("postbackUpload"),
+                OnSuccess: function (response) {
+                    window.Assert.AreEqual("abcdefg", response);
+                }
+            });
+        }
+
+        Xphter.EventUtility.Register(window, "load", function () {
+        }, false);
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">
+        Test Cases for Xphter.AjaxUtility Class
+    </h1>
+    <form id="uploadText" action="HelperPages/Xphter.AjaxUtility.UploadText.html" method="get"
+    enctype="multipart/form-data">
+    <p>
+        <input type="file" />
+    </p>
+    </form>
+    <form id="uploadJson" action="HelperPages/Xphter.AjaxUtility.UploadJson.html" method="get"
+    enctype="multipart/form-data">
+    <p>
+        <input type="file" />
+    </p>
+    </form>
+    <form id="postbackNormal" action="HelperPages/Xphter.AjaxUtility.PostbackNormal.html"
+    method="get" enctype="application/x-www-form-urlencoded">
+    </form>
+    <form id="postbackUpload" action="HelperPages/Xphter.AjaxUtility.PostbackUpload.html"
+    method="get" enctype="multipart/form-data">
+    <p>
+        <input type="file" />
+    </p>
+    </form>
+</body>
+</html>

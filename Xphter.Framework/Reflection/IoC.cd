@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Xphter.Framework.Reflection.XmlConfigurationObjectFactory">
+    <Position X="4.75" Y="0.5" Width="4.25" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Reflection.XmlConfigurationObjectFactory.ObjectFactoryContext" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Reflection\IoC.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>BAAABAAAgACAAQAAAAHAAAABAAAQAQDAAAgABAAgAAM=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.ObjectsConfiguration">
+    <Position X="4.75" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.ObjectDefination">
+    <Position X="4.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEQAAAAQAAAAAAAAAIIIAAgAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.ObjectArgumentDefination">
+    <Position X="7.25" Y="9.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEQAAACAAAAAAQAAAAIAAAAAAAAgA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.AssembliesObjectTypeResolver">
+    <Position X="10.25" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAIAACAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.ObjectFacgoryException">
+    <Position X="0.75" Y="2.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.ByteObjectArgumentResolver">
+    <Position X="17.5" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.SByteObjectArgumentResolver">
+    <Position X="20.75" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.Int16ObjectArgumentResolver">
+    <Position X="24.25" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.SingleObjectArgumentResolver">
+    <Position X="27.75" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.DoubleObjectArgumentResolver">
+    <Position X="31.25" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.DecimalObjectArgumentResolver">
+    <Position X="14" Y="8" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.CharObjectArgumentResolver">
+    <Position X="20.75" Y="8" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.StringObjectArgumentResolver">
+    <Position X="24" Y="8" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.DateTimeObjectArgumentResolver">
+    <Position X="17.5" Y="8" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.BooleanObjectArgumentResolver">
+    <Position X="14" Y="2.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.ObjectObjectArgumentResolver">
+    <Position X="27.75" Y="8" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAIAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.EnumerableObjectArgumentResolver">
+    <Position X="31.25" Y="8" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAYAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.UInt16ObjectArgumentResolver">
+    <Position X="27.75" Y="2.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.Int32ObjectArgumentResolver">
+    <Position X="14" Y="5.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.UInt32ObjectArgumentResolver">
+    <Position X="17.5" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.Int64ObjectArgumentResolver">
+    <Position X="20.75" Y="5.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Reflection.UInt64ObjectArgumentResolver">
+    <Position X="24.25" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Xphter.Framework.Reflection.IObjectFactory">
+    <Position X="0.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Reflection.IObjectTypeResolver">
+    <Position X="10.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Reflection.IObjectArgumentResolver">
+    <Position X="14" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Reflection.IObjectFactoryContext">
+    <Position X="10.25" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAgAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflection\IoC.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

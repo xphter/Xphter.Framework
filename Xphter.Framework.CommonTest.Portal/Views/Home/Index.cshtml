@@ -1,0 +1,29 @@
+﻿@model string
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <p>
+            <a href='@this.Url.Action("CreateFile")' target="_blank">CreateFile</a>
+        </p>
+        <p>
+            <a href='@this.Url.Action("DeleteFile")' target="_blank">DeleteFile</a>
+        </p>
+        <p>
+            <a href='@this.Url.Action("CreateCache")' target="_blank">CreateCache</a>
+        </p>
+        <p>
+            <a href='@this.Url.Action("DeleteCache")' target="_blank">DeleteCache</a>
+        </p>
+    </div>
+</body>
+</html>

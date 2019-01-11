@@ -1,0 +1,22 @@
+﻿@using Xphter.Framework.Alibaba.ChinaAlibaba;
+@model IChinaAlibabaOrderList
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>销售订单列表</title>
+</head>
+<body>
+    <p>
+        总数量：@this.Model.TotalCount，数量：@this.Model.OrderlList.Count()
+    </p>
+    <ul>
+        @foreach(IChinaAlibabaOrderInfo order in this.Model.OrderlList) {
+            <li><a href='@this.Url.Action("OrderDetail", new { id = order.ID })'>@order.ToString()</a></li>
+        }
+    </ul>
+</body>
+</html>

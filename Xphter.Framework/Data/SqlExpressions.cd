@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Xphter.Framework.Data.SqlExpressionExtension">
+    <Position X="23" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ISYAAKQBAYBgEAAEgQADQgQQACJIAQAqAEAAAACBiCA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlStringExpression">
+    <Position X="6.25" Y="14.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlOperator">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEAAAAAAAAAAAAAEgIAAAAQAACAAAIAAAAAAAABAAQA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ResultSqlStringProvider" />
+      <Property Name="ResultParametersProvider" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlObject">
+    <Position X="13" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAIABACAAAAAAEAIAIAAAARAAAAAAASQAIAAAADAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FullnameProvider" />
+      <Property Name="SqlStringProvider" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlObjectFullnameSqlStringProvider">
+    <Position X="18.75" Y="17.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlKeywordsOperatorResultSqlStringProvider">
+    <Position X="18.75" Y="3.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlKeywordsOperatorResultParametersProvider">
+    <Position X="18.75" Y="5.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlInOperatorResultSqlStringProvider">
+    <Position X="15.5" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlOperatorResultAllParametersProvider">
+    <Position X="15.5" Y="6" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlFunction">
+    <Position X="19" Y="26.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAgAAAEAAAAAAAAAAQAAUAAAAAAIAAAAAAAAgA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlCombinedExpression&lt;T&gt;">
+    <Position X="18.75" Y="21" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAECAAAQEAAAAACAAAgA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlExpression">
+    <Position X="9.75" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAACAAAAEgAAAAAAAABAAAIQAAIgAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlGroupClause">
+    <Position X="16.75" Y="26.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIACAAAAAAAAAAAAAAAAAAAEAAAQAAAAAAAogAEhA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlOrderClause">
+    <Position X="14.75" Y="26.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAACAQCAAAEAAAQAAAAAAAoAAAhA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlWhereClause">
+    <Position X="14.5" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAACAAAAAAAAAAAAAAAAAAQQAIAAAAIAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlFromClause">
+    <Position X="12.5" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABIBCAAAgAAAAAAAAQAAAAAAAAAAQQAAAEAgIAAAAI=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlSelectClause">
+    <Position X="12.75" Y="26.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAKAAAAAAAAAAAAAAAAAAAAAEAAAQAAAAAAAoAAEhA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlDeleteStatement">
+    <Position X="10.25" Y="26.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAQAAAIgAAAAAAAAEAQAAAAAAAAAAAAg=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlStatement">
+    <Position X="6.75" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAgAAAAAAEAAAQQAAIAAgAAgAEA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlUpdateStatement">
+    <Position X="8" Y="26.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAQAAAIgAAAACAAAEAQQAAAAAAAAAAAg=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlFieldValueClause">
+    <Position X="21.25" Y="26.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>gABIAAAEIgABAAAAAIAAACBAAEAAAQAAAAAAAIAAggA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlUpdateFieldValueClauseSqlStringProvider">
+    <Position X="23.5" Y="26.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlInsertFieldValueClauseSqlStringProvider">
+    <Position X="23.5" Y="28" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlAssignOperatorResultSqlStringProvider">
+    <Position X="15.5" Y="8" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlInsertStatement">
+    <Position X="5.75" Y="26.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAgAAAACAAAAAQQAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlSelectStatement">
+    <Position X="3.5" Y="26.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAUAAAAAAAAgQAACIgAAAQAIAAEAwIAAAAAAAAAAEg=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlAllField">
+    <Position X="16" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlAllFieldFullnameProvider">
+    <Position X="18.75" Y="14.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlObjectExpressionSqlStringFullnameProvider">
+    <Position X="18.75" Y="15.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlAliasObject">
+    <Position X="6.25" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAJEAACAAAIAAAAoAAAAAARAAAAAAASwAIAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SqlStringProvider" />
+      <Property Name="FullnameProvider" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlObjectExpressionSqlStringSqlStringProvider">
+    <Position X="18.75" Y="18.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlAliasObjectFullnameProvider">
+    <Position X="2" Y="15" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlObjectValue">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAkgAAAAAAAAAAAAIAAAQAgAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlIsNullOperatorResultSqlStringProvider">
+    <Position X="19" Y="8" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlHavingClause">
+    <Position X="16.5" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAACAAAAAAAAAAAAAAAAAAQQAIAAAAIAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlStringStatement">
+    <Position X="0.75" Y="26.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAgAAAAAAEAAAQAAAAAAgAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Data.SqlExpressionOrder">
+    <Position X="3" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAEgAAAAAAAAAAAAIAQAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Xphter.Framework.Data.ISqlExpression">
+    <Position X="0.5" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAIAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlSelectClause">
+    <Position X="8.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAEBA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlFromClause">
+    <Position X="10.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIBCAAAgAAAAAAAAQAAAAAAAAAAAAAAAEAAAAAAAI=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlWhereClause">
+    <Position X="12.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlOrderClause">
+    <Position X="14.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAACAQAAAAAAAAAAAAAAAAgAAABA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlGroupClause">
+    <Position X="16.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAEBA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlSelectStatement">
+    <Position X="0.5" Y="10.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAQAIAAAAgIAAAAAAAAAAEg=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlInsertStatement">
+    <Position X="2.5" Y="10.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlUpdateStatement">
+    <Position X="4.5" Y="10.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAACAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlDeleteStatement">
+    <Position X="6.5" Y="10.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlFunction">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAEAAAAAAAAAAQAAQAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IConstantSqlExpressionsFactory">
+    <Position X="9.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAQAAgAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlOperator">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlObject">
+    <Position X="3.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAACAAAAAAAAAAAAAAAQAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Owner" />
+      <Property Name="Expression" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlObjectFullnameProvider">
+    <Position X="16" Y="14.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlObjectSqlStringProvider">
+    <Position X="16" Y="15.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlOperatorResultSqlStringProvider">
+    <Position X="18.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlOperatorResultParametersProvider">
+    <Position X="18.75" Y="1.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlExpressionFactory">
+    <Position X="7.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACCAAAoAAQAAgAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlClause">
+    <Position X="12.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAIAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlStatement">
+    <Position X="3.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAEA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlFieldValueClause">
+    <Position X="21" Y="10.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>gAAIAAAEIgABAAAAAAAAAABAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SqlStringProvider" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlFieldValueClauseSqlStringProvider">
+    <Position X="24.25" Y="11.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlAliasObjectSqlStringProvider">
+    <Position X="2" Y="18.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlAliasObjectFullnameProvider">
+    <Position X="2" Y="16.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlAliasObject">
+    <Position X="6.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Object" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.ISqlHavingClause">
+    <Position X="18.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Xphter.Framework.Data.SqlOrder">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Data\SqlExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

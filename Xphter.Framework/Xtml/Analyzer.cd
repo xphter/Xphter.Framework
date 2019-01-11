@@ -1,0 +1,695 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Xphter.Framework.Xtml.XtmlRange">
+    <Position X="8.5" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAkAEEAAACAQAKQEkAEAAAAAAAAAQIhAAAAFAAIAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RangeToNode" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlDocumentOption">
+    <Position X="1" Y="6.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAEgAAAAAAAAAAAAMAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Context" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlEntity">
+    <Position X="4.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAUgQAAAAQAAAAAAIAAAAAgCAAAABA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlRangeAnalyzer">
+    <Position X="1" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>gAAAABABBAYQAAgCAAAIAAAAAQIQAAgAAAEAAAAAARA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DocumentOption" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlNode">
+    <Position X="4.25" Y="16.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAMACCAAAAAAGAAEgAAAAACKAAABAIACABCAAAIQAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NodeRenderer" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlDeclaration">
+    <Position X="0.5" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAICEAAAIAAIAEAAEAAIAIoAABAAAAARAAAAAIAAE=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlText">
+    <Position X="4.5" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAgAEAAEAAACAAAABAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlAttribute">
+    <Position X="2.5" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAACAAIAAAAgAEAAAIAAAIAAAAAAAAEBAAAABAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlElement">
+    <Position X="6.5" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAiCAAAAAAAAAAAAAEAACQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlDocument">
+    <Position X="8.5" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgCAARAAABAAAAAEAAAGAAAABAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlRangeToComplex">
+    <Position X="14.75" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAACAEAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlRangeToText">
+    <Position X="17.25" Y="2" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Xtml.XtmlRangeToText.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Xtml\Analyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlRangeToDeclaration">
+    <Position X="12" Y="2" Width="2" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Xtml.XtmlRangeToDeclaration.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Xtml\Analyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlRangeToAttribute">
+    <Position X="14.75" Y="2" Width="1.75" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Xtml.XtmlRangeToAttribute.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Xtml\Analyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlRangeToElement">
+    <Position X="12.25" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACEAAAEAAAAGAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlRangeToDocument">
+    <Position X="17" Y="7" Width="2" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Xtml.XtmlRangeToDocument.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Xtml\Analyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAEAAAEAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.DefaultXtmlTextRenderer">
+    <Position X="12.25" Y="10" Width="2" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Xtml.DefaultXtmlTextRenderer.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Xtml\Analyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQBAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlException">
+    <Position X="9.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.DefaultXtmlComplexNodeRenderer">
+    <Position X="15.25" Y="10" Width="2.5" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Xtml.DefaultXtmlComplexNodeRenderer.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Xtml\Analyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQBAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlNodeRendererWrapper">
+    <Position X="12.25" Y="12.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAgkAAEkAAAAASAAAAAAIAAABAAEAAACAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NodeRenderer" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.SubTemplateXtmlElementRenderer&lt;T&gt;">
+    <Position X="24.75" Y="18.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlElementIterationTag&lt;T&gt;">
+    <Position X="30" Y="23" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAiAABAAAAABAgAAAUAAAAAEQAAArAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlElementIterationRenderer&lt;T&gt;">
+    <Position X="21.25" Y="18.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAgAABAAAAABAgAAAUCAAAAERAAErAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.SubTemplateXtmlElementTag&lt;T&gt;">
+    <Position X="33.25" Y="23" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.TemplateTagPool">
+    <Position X="10.75" Y="24.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAQAAAAQAAAAAAAAAAAAABAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.TemplateTag">
+    <Position X="20.75" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgEAAEkAAAAAQAAAAAAIAAABAAEAAACAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.TagSystem">
+    <Position X="10.75" Y="27.75" Width="1.75" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Xtml.TagSystem.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Xtml\Analyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAQAAAAAAAAAAAACAAACAAAAAAYAABIQQAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.TemplateEngine">
+    <Position X="11.25" Y="32" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TemplateSystem" />
+      <Property Name="TagSystem" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.TemplateSystem">
+    <Position X="13.75" Y="27.75" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Xtml.TemplateSystem.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Xtml\Analyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAABAEAAAgAAAAAQBAAAABAAQA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlNodeRenderer">
+    <Position X="16" Y="18.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlElementRenderer&lt;T&gt;">
+    <Position X="18.5" Y="18.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQACAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlElementTag&lt;T&gt;">
+    <Position X="25.75" Y="23" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAACAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.AssembliesTemplateTagFactory">
+    <Position X="13" Y="23" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAQAAAAQAAAAgAAAAAAABAAAAAEAAAACAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.DataSourcePropertyTag&lt;TSource&gt;">
+    <Position X="26.25" Y="27.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AACACAAAABACAAABQAAAAAAAAABAAAQAAAEAAAAAAQA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlNodePrefix">
+    <Position X="6.75" Y="10.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACgAAAEgAAAAAQAIAAIAIAACAAgAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlMarkupContext">
+    <Position X="5.5" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABGAAAAEkEEAAAAAAAAAAIAAAAEARgUAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.DataSourcePropertyXtmlElementRenderer&lt;TSource, TValue&gt;">
+    <Position X="30" Y="9.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.MvcActionUriXtmlElementRenderer&lt;TController, TSource&gt;">
+    <Position X="30" Y="15.25" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAQAAAAAAgYA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.MvcActionUriXtmlElementRenderer&lt;TController&gt;">
+    <Position X="30" Y="11.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAABAAAAAARAAAAAAgAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.HtmlEncodedStringFormater&lt;TSource, TValue&gt;">
+    <Position X="35.25" Y="13.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.DataSourcePropertyXtmlElementRenderer&lt;TSource&gt;">
+    <Position X="23.5" Y="8.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAABAAAAABQAAAAAEAAABKCAQAABAAAAAAAYA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlExtension">
+    <Position X="8" Y="19.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAABAAAABAAQAAAAAQAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlElementAttachedObjectTag&lt;T&gt;">
+    <Position X="30" Y="27.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.DataSourceMultipartPropertyXtmlElementRenderer&lt;TSource&gt;">
+    <Position X="22.75" Y="14.75" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AUAACAAAABAAAAAAAAAAAgAAAAAIAAAAAAQAAAAAAIA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.DataSourceMultipartPropertyXtmlElementRenderer&lt;TSource, TValue&gt;">
+    <Position X="22.5" Y="13" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.DataSourceMultipartPropertyValuesItem&lt;TSource&gt;">
+    <Position X="18" Y="14" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.DataSourcePropertyTag&lt;TSource, TValue&gt;">
+    <Position X="26" Y="31.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlNodeTag&lt;T&gt;">
+    <Position X="23.25" Y="27" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAACAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlElementAggregationTag">
+    <Position X="34" Y="27.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAEACIIABEAAAAgEAAABAAAQgAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlSumAggregateFunction">
+    <Position X="34.25" Y="33.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlAverageAggregateFunction">
+    <Position X="37.5" Y="33.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlNumericalAggregateFunction">
+    <Position X="37.5" Y="30" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAQAAAAQgAAAAAAAAAAQAAAAIAAAIAAAAAAAAAgA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlMaxAggregateFunction">
+    <Position X="40.75" Y="33.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlMinAggregateFunction">
+    <Position X="43.75" Y="33.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlCountAggregateFunction">
+    <Position X="41" Y="30" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAiAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.DataSourceAttribute">
+    <Position X="31.5" Y="18.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.DataSourceFinder">
+    <Position X="28.5" Y="18.25" Width="2" />
+    <NestedTypes>
+      <Class Name="Xphter.Framework.Xtml.DataSourceFinder.SingletonContainer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Xtml\Analyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Xphter.Framework.Xtml.DataSourceFinder.CacheKey" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Xtml\Analyzer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAABIAAAAAAAAAAAAAgAACAAIAAAAQAAAAABAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlElementStringTag">
+    <Position X="23" Y="29.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAEAAAAAQAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlElementItemOrdinalTag">
+    <Position X="30" Y="29.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAiAAgAEAAAAAQAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.ConditionalTemplateTag">
+    <Position X="19.25" Y="27" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgIAAAEAAAAAQAAAMgAAAAABAAEAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.LengthTemplateTag">
+    <Position X="16.5" Y="27" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAEAAAAAQAAEAAAAAAABAAEAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlElementListTag">
+    <Position X="33.25" Y="25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAEAAAAAQAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Xphter.Framework.Xtml.IXtmlRange">
+    <Position X="8.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgAEAAAAAAAACAAAAAAAAAAAAAAQABAAAAEAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IXtmlNode">
+    <Position X="3.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAACAAAAAAAAAAAAAAAAAKAAABAAACABCAAAAQAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Document" />
+      <Property Name="Prefix" />
+      <Property Name="ParentNode" />
+      <Property Name="NodeType" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IXtmlDeclaration">
+    <Position X="1.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IXtmlDocument">
+    <Position X="1.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Declaration" />
+      <Property Name="DocumentOption" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IXtmlNodeRenderer">
+    <Position X="8.5" Y="16.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IXtmlAttribute">
+    <Position X="7.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IXtmlElement">
+    <Position X="3.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IXtmlRangeToNode">
+    <Position X="12" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IXtmlText">
+    <Position X="5.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.ITemplateTag">
+    <Position X="12.75" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgEAAAEAAAAAQAAAAAAAAAAAAAEAAACAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.ITemplateTagFactory">
+    <Position X="10.75" Y="23" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IDataSourceProvider&lt;T&gt;">
+    <Position X="35.25" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IDataSourcePropertyValueFormater&lt;TSource, TValue&gt;">
+    <Position X="35.25" Y="11.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IDataSourceMultipartPropertyValuesItem&lt;TSource&gt;">
+    <Position X="18" Y="12" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IDataSourceMultipartPropertyValuesProvider&lt;T&gt;">
+    <Position X="18" Y="16.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IXtmlRenderingContext">
+    <Position X="6" Y="8.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IXtmlAggregateFunction">
+    <Position X="37.5" Y="27.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Xtml.IXtmlAggregateValueFormater">
+    <Position X="40.25" Y="27.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Xphter.Framework.Xtml.XtmlNodeType">
+    <Position X="3.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAACAAAAAAgAAAAAAAAAAAACAAAACAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

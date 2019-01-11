@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        
+    </style>
+    <script type="text/javascript" src="Xphter.js"></script>
+    <script type="text/javascript" src="Xphter.JsUnit.js"></script>
+    <script type="text/javascript" language="javascript">
+        function TestFunction() {
+            new Xphter.RestrictedTextBox(function (text) {
+                return text.IsNumber();
+            }, window.$("text0"));
+        }
+
+        function TestRegularExpression() {
+            new Xphter.RestrictedTextBox(/^\d+$/gi, window.$("text1"));
+        }
+
+        function TestString() {
+            new Xphter.RestrictedTextBox("^\\d+$", window.$("text2"));
+        }
+
+        function TestIllegal() {
+            new Xphter.RestrictedTextBox(123, window.$("text3"));
+        }
+
+        function TestAsInteger() {
+            Xphter.RestrictedTextBox.AsInteger(window.$("text4"));
+        }
+
+        function TestAsNumber() {
+            Xphter.RestrictedTextBox.AsNumber(window.$("text5"));
+        }
+
+        Xphter.EventUtility.Register(window, "load", function () {
+        }, false);
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">
+        Test Cases for Xphter.RestrictedTextBox Class
+    </h1>
+    <p>
+        Function Predicate: <input id="text0" type="text" />
+    </p>
+    <p>
+        Regular Expression Predicate: <input id="text1" type="text" />
+    </p>
+    <p>
+        String Predicate: <input id="text2" type="text" />
+    </p>
+    <p>
+        Illegal Predicate: <input id="text3" type="text" />
+    </p>
+    <p>
+        As Integer: <input id="text4" type="text" />
+    </p>
+    <p>
+        As Number: <input id="text5" type="text" />
+    </p>
+</body>
+</html>

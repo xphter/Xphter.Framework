@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{32124DF5-82EC-4979-84FD-2D4EBE7F34B0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xphter.Framework.Test</RootNamespace>
+    <AssemblyName>Xphter.Framework.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>XphteR.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Alibaba\AlibabaHelperTests.cs" />
+    <Compile Include="Collections\LockFreeQueueTests.cs" />
+    <Compile Include="IO\FileUtilityTests.cs" />
+    <Compile Include="MemcacheDistributedLockTests.cs" />
+    <Compile Include="Net\IPAddressExntensionTests.cs" />
+    <Compile Include="Net\NetworkRequestAsyncTimeoutTests.cs" />
+    <Compile Include="OperationExpressionCalculatorTests.cs" />
+    <Compile Include="Collections\DirectedGraphTests.cs" />
+    <Compile Include="Collections\NullableKeyDictionaryTests.cs" />
+    <Compile Include="DataGridViewReadOnlyControllerTest.cs" />
+    <Compile Include="DateTimeUtilityTest.cs" />
+    <Compile Include="DbCodeGeneratorTest.cs" />
+    <Compile Include="DecimalUtilityTest.cs" />
+    <Compile Include="DomainNameTests.cs" />
+    <Compile Include="EncodingUtilityTest.cs" />
+    <Compile Include="FormValuesSerializerTest.cs" />
+    <Compile Include="FtpFileInfoTest.cs" />
+    <Compile Include="HashEncryptorTest.cs" />
+    <Compile Include="EnumUtilityTests.cs" />
+    <Compile Include="FormDataGridViewReadOnlyControllerTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDataGridViewReadOnlyControllerTest.Designer.cs">
+      <DependentUpon>FormDataGridViewReadOnlyControllerTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HtmlAnalyzerTest.cs" />
+    <Compile Include="HtmlRangeAnalyzerTest.cs" />
+    <Compile Include="HttpHelperTest.cs" />
+    <Compile Include="IcpNumberTests.cs" />
+    <Compile Include="IO\DirectoryUtilityTests.cs" />
+    <Compile Include="MethodUtilityTests.cs" />
+    <Compile Include="Net\IpHelperTests.cs" />
+    <Compile Include="RandomUtilityTests.cs" />
+    <Compile Include="Reflection\MethodFilterProxyTypeFactoryTests.cs" />
+    <Compile Include="Reflection\TypeUtilityTests.cs" />
+    <Compile Include="Reflection\XmlConfigurationObjectFactoryTests.cs" />
+    <Compile Include="Security\IdentityImpersonationScopeTests.cs" />
+    <Compile Include="StringUtilityTests.cs" />
+    <Compile Include="Text\ChineseUtilityTests.cs" />
+    <Compile Include="ImageUtilityTest.cs" />
+    <Compile Include="IntegerUtilityTest.cs" />
+    <Compile Include="JsonSerializerTest.cs" />
+    <Compile Include="KeywordsRankingQuerierTest.cs" />
+    <Compile Include="MySqlAliasObjectSqlStringProviderTest.cs" />
+    <Compile Include="MySqlFieldTest.cs" />
+    <Compile Include="MySqlLimitClauseTest.cs" />
+    <Compile Include="MySqlObjectFullnameProviderTest.cs" />
+    <Compile Include="MySqlSelectStatementTest.cs" />
+    <Compile Include="MySqlSourceTest.cs" />
+    <Compile Include="NamedSqlObjectSqlStringProviderTest.cs" />
+    <Compile Include="NumericTextBoxTest.cs" />
+    <Compile Include="ObjectPoolTest.cs" />
+    <Compile Include="OracleAliasObjectSqlStringProviderTest.cs" />
+    <Compile Include="OracleFieldTest.cs" />
+    <Compile Include="OracleObjectFullnameProviderTest.cs" />
+    <Compile Include="OracleSelectStatementTest.cs" />
+    <Compile Include="OracleSourceTest.cs" />
+    <Compile Include="OrderingRangeTest.cs" />
+    <Compile Include="PathUtilityTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RandomImageVerificationCodeGeneratorTest.cs" />
+    <Compile Include="RangeTest.cs" />
+    <Compile Include="ReadOnlyDictionaryTest.cs" />
+    <Compile Include="Web\BaiduUtilityTests.cs" />
+    <Compile Include="Web\HaosouUtilityTests.cs" />
+    <Compile Include="Web\RandomCharacterImageVerificationCodeValueProviderTests.cs" />
+    <Compile Include="Web\RssInfoTests.cs" />
+    <Compile Include="Web\SougouUtilityTests.cs" />
+    <Compile Include="Web\WebHelperTests.cs" />
+    <Compile Include="WeChat\OfficialAccounts\DefaultWeChatMessageFactoryTests.cs" />
+    <Compile Include="WeChat\OfficialAccounts\WeChatNewsReplyTests.cs" />
+    <Compile Include="WeChat\OfficialAccounts\WeChatTextReplyTests.cs" />
+    <Compile Include="XmlSerializableDictionaryTest.cs" />
+    <Compile Include="XmlSerializableKeyValuePairTest.cs" />
+    <Compile Include="SqlAllFieldTest.cs" />
+    <Compile Include="SqlAssignOperatorResultSqlStringProviderTest.cs" />
+    <Compile Include="SqlDeleteStatementTest.cs" />
+    <Compile Include="SqlExpressionExtensionTest.cs" />
+    <Compile Include="SqlFieldValueClauseTest.cs" />
+    <Compile Include="SqlFromClauseTest.cs" />
+    <Compile Include="SqlGroupClauseTest.cs" />
+    <Compile Include="SqlHelperTest.cs" />
+    <Compile Include="SqlInOperatorResultSqlStringProviderTest.cs" />
+    <Compile Include="SqlInsertFieldValueClauseSqlStringProviderTest.cs" />
+    <Compile Include="SqlInsertStatementTest.cs" />
+    <Compile Include="SqlKeywordsOperatorResultParametersProviderTest.cs" />
+    <Compile Include="SqlKeywordsOperatorResultSqlStringProviderTest.cs" />
+    <Compile Include="SqlObjectTest.cs" />
+    <Compile Include="SqlOperatorResultAllParametersProviderTest.cs" />
+    <Compile Include="SqlOrderClauseTest.cs" />
+    <Compile Include="SqlSelectClauseTest.cs" />
+    <Compile Include="SqlServerAliasObjectSqlStringProviderTest.cs" />
+    <Compile Include="SqlServerDatabaseEntityProviderTest.cs" />
+    <Compile Include="SqlServerDataEntityProviderTest.cs" />
+    <Compile Include="SqlServerFieldTest.cs" />
+    <Compile Include="SqlServerMoverTest.cs" />
+    <Compile Include="SqlServerSelectClauseTest.cs" />
+    <Compile Include="SqlServerSelectStatementTest.cs" />
+    <Compile Include="SqlServerSourceTest.cs" />
+    <Compile Include="SqlServerTableFieldProviderTest.cs" />
+    <Compile Include="SqlServerUtilityTest.cs" />
+    <Compile Include="SqlServerViewFieldProviderTest.cs" />
+    <Compile Include="SqlStringExpressionTest.cs" />
+    <Compile Include="SqlFunctionTest.cs" />
+    <Compile Include="SqlServerObjectFullnameProviderTest.cs" />
+    <Compile Include="SqlUpdateFieldValueClauseSqlStringProviderTest.cs" />
+    <Compile Include="SqlUpdateStatementTest.cs" />
+    <Compile Include="SqlWhereClauseTest.cs" />
+    <Compile Include="DataSourcePropertyXtmlElementRendererTest.cs" />
+    <Compile Include="TemplateSystemTest.cs" />
+    <Compile Include="TypeUtilityTest.cs" />
+    <Compile Include="WatermarkTest.cs" />
+    <Compile Include="XhtmlUrlResolverTest.cs" />
+    <Compile Include="XtmlMarkupContextTest.cs" />
+    <Compile Include="XtmlRangeAnalyzerTest.cs" />
+    <Compile Include="Xtml\DataSourceFinderTests.cs" />
+    <Compile Include="Xtml\XtmlNumericalAggregateFunctionTests.cs" />
+    <Compile Include="ZipArchiveTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xphter.Framework\Xphter.Framework.csproj">
+      <Project>{3F97A5CF-5662-4AB5-AF92-86BC49280A52}</Project>
+      <Name>Xphter.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormDataGridViewReadOnlyControllerTest.resx">
+      <DependentUpon>FormDataGridViewReadOnlyControllerTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\Deramon.jpg" />
+    <None Include="Resources\ZipArchiveTest.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="XphteR.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Car.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database\Xphter.Framework.Test.ldf">
+      <DependentUpon>Xphter.Framework.Test.mdf</DependentUpon>
+    </Content>
+    <Content Include="Resources\AsyncFileStream.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\DirectedGraphTest.jpg" />
+    <None Include="Resources\HtmlAnalyzer_OnlyJavaScript.txt" />
+    <Content Include="Resources\ObjectFactory.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\WeChatTextMessage.txt" />
+    <None Include="Database\Xphter.Framework.Test.mdf" />
+    <Content Include="Resources\ANSI.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\CityWeekly.jpg" />
+    <None Include="Resources\Arrow.jpg" />
+    <None Include="Resources\Template.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Resources\UTF-16-Big.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\UTF-16-Little.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\UTF-32-Big.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\UTF-32-Little.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\UTF-8.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Test References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        
+    </style>
+    <script type="text/javascript" src="Xphter.js"></script>
+    <script type="text/javascript" src="Xphter.JsUnit.js"></script>
+    <script type="text/javascript" language="javascript">
+        var progressBar = null;
+
+        function Test0() {
+            progressBar.SetProgressValue(0);
+        }
+
+        function Test20() {
+            progressBar.SetProgressValue(20);
+        }
+
+        function Test50() {
+            progressBar.SetProgressValue(50, "10/20");
+        }
+
+        function Test100() {
+            progressBar.SetProgressValue(100, "Completed");
+        }
+
+        Xphter.EventUtility.Register(window, "load", function () {
+            progressBar = new Xphter.ProgressBar({
+                OnCreateBar: function (bar) {
+                    bar.style.width = "200px";
+                    bar.style.height = "20px";
+                    bar.style.margin = "5px 10px";
+                },
+                OnCreateTip: function (tip) {
+                    tip.style.lineHeight = "20px";
+                }
+            });
+            progressBar.Place(window.$("progressBar"));
+        }, false);
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">
+        Test Cases for Xphter.ProgressBar Class
+    </h1>
+    <table>
+        <tr>
+            <th>
+                进度
+            </th>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                <div id="progressBar">
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

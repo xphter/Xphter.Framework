@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Xphter.Framework.Data.DbEntity">
+    <Position X="5.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAEgAAAAAQAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.DbDatabaseEntity">
+    <Position X="3.75" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgBAAAAAAgAAAAAEgAAAQABAAAAIAIAAACAIAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DataProvider" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.DbViewEntity">
+    <Position X="9" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAEIAAACEgAABQAAEAAAAAIAMAAAAAAAAoAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FieldProvider" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.DbCredential">
+    <Position X="2.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQEAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Data.DbSourceEntity">
+    <Position X="1" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAEABAAAAQAAAAAIAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DatabaseProvider" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.DbFieldEntity">
+    <Position X="13.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAEgAAAAAAAAAAAALAAAQEQAAAAIAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.DbTableFieldEntity">
+    <Position X="12" Y="24" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QACAEAAAAgAiAAAQAAAAQAAAACIAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.DbViewFieldEntity">
+    <Position X="14.75" Y="24" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAQAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.DbTableEntity">
+    <Position X="6.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAEAAEIAABCEgAAAAAAEAKAAAIAMAAGAAAAAoAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FieldProvider" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.DbCodeGenerator">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>Zt/+2//Kp4cwXfYsqy1bnfDao1/WTcz/x10Rhjx11vs=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Xphter.Framework.Data.DbConstraintEntity">
+    <Position X="16" Y="18.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAACEgAAIQAAAAAAAAIAAAQAAAAAAgAE=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Xphter.Framework.Data.IDbEntity">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbDataEntity">
+    <Position X="8" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Database" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbFieldEntity">
+    <Position X="11.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAADAAAQEQAAAAIAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Data" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbDatabaseEntity">
+    <Position X="5" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Source" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbTableEntity">
+    <Position X="5.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAEAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbTableFieldEntity">
+    <Position X="11.25" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAAEAAAAAAgAAAQAAAAQAAAACIAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Table" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbViewFieldEntity">
+    <Position X="8.25" Y="8" Width="1.75" />
+    <AssociationLine Name="TableField" Type="Xphter.Framework.Data.IDbTableFieldEntity" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10" Y="8.499" />
+        <Point X="11.875" Y="8.499" />
+        <Point X="11.875" Y="9.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAQAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="View" />
+      <Property Name="Table" />
+      <Property Name="TableField" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbViewEntity">
+    <Position X="8" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbEntityFactory">
+    <Position X="15.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbSourceEntity">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DbCredential" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbDatabaseEntityProvider">
+    <Position X="0.75" Y="24.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbDataEntityProvider">
+    <Position X="3.75" Y="24.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbTableFieldProvider">
+    <Position X="6.5" Y="24.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbViewFieldProvider">
+    <Position X="9.25" Y="24.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbCodeGenerator">
+    <Position X="15.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbCodeDbInfoProvider">
+    <Position X="21.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>CACEgCAIAIAgQEAAIhAgAgQEAACICAIAKQCAAAgAABA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbConstraintEntity">
+    <Position X="0.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAIQAAAAAAAAAAAAQAAAAAAgAE=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Table" />
+      <Property Name="Type" />
+      <Property Name="ReferenceTable" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbEntityReader&lt;T&gt;">
+    <Position X="15.75" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAgAAAAAAAAAAAAAAhAAAAAAAAAAAQIAAAAAAAAIA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbEntityWriter&lt;T&gt;">
+    <Position X="15.75" Y="7.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEgAAAAAIAAgCAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Xphter.Framework.Data.IDbCodeMembersProvider">
+    <Position X="25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAACAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Xphter.Framework.Data.DbConstraintType">
+    <Position X="0.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAIAAAAAAAAAAAEAgAA=</HashCode>
+      <FileName>Data\Generation.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

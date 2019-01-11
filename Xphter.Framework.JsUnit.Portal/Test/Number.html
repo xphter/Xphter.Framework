@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        
+    </style>
+    <script type="text/javascript" src="Xphter.js"></script>
+    <script type="text/javascript" src="Xphter.JsUnit.js"></script>
+    <script type="text/javascript" language="javascript">
+        function Test_MoveDecimalPoint() {
+            Assert.AreSame(123450, Number._MoveDecimalPoint(12.345, 4));
+            Assert.AreSame(12345, Number._MoveDecimalPoint(12.345, 3));
+            Assert.AreSame(123.45, Number._MoveDecimalPoint(12.345, 1));
+
+            Assert.AreSame(0.0012345, Number._MoveDecimalPoint(12.345, -4));
+            Assert.AreSame(0.12345, Number._MoveDecimalPoint(12.345, -2));
+            Assert.AreSame(1.2345, Number._MoveDecimalPoint(12.345, -1));
+        }
+
+        function Test_Add() {
+            Assert.AreSame(12.345, Number.Add(12.345, 0));
+            Assert.AreSame(25, Number.Add(12, 13));
+            Assert.AreSame(26.0239, Number.Add(12.345, 13.6789));
+        }
+
+        function Test_Subtract() {
+            Assert.AreSame(12.345, Number.Subtract(12.345, 0));
+            Assert.AreSame(-1, Number.Subtract(12, 13));
+            Assert.AreSame(-1.3339, Number.Subtract(12.345, 13.6789));
+        }
+
+        function Test_Multiply() {
+            Assert.AreSame(0, Number.Multiply(4, 0));
+            Assert.AreSame(97.54, Number.Multiply(97.54, 1));
+            Assert.AreSame(97.54, Number.Multiply(1, 97.54));
+            Assert.AreSame(-97.54, Number.Multiply(97.54, -1));
+            Assert.AreSame(-97.54, Number.Multiply(-1, 97.54));
+
+            Assert.AreSame(1324.3748069, Number.Multiply(13.579, 97.5311));
+            Assert.AreSame(-1324.3748069, Number.Multiply(-13.579, 97.5311));
+            Assert.AreSame(-1324.3748069, Number.Multiply(13.579, -97.5311));
+            Assert.AreSame(1324.3748069, Number.Multiply(-13.579, -97.5311));
+
+            Assert.AreSame(3.37995, Number.Multiply(0.37, 9.135));
+            Assert.AreSame(-3.37995, Number.Multiply(-0.37, 9.135));
+            Assert.AreSame(3.37995, Number.Multiply(-0.37, -9.135));
+
+            Assert.AreSame(41.5, Number.Multiply(10, 4.15));
+            Assert.AreSame(280, Number.Multiply(1000, 0.28));
+            Assert.AreSame(174.9, Number.Multiply(10, 17.49));
+            Assert.AreSame(1992, Number.Multiply(10000, 0.1992));
+        }
+
+        Xphter.EventUtility.Register(window, "load", function () {
+        }, false);
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">
+        Test Cases for Number Methods
+    </h1>
+</body>
+</html>
