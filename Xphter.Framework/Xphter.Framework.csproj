@@ -402,6 +402,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Requirement.txt" />
+    <None Include="Web\JavaScript\Xphter.common.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Xtml\Requirement.txt" />
     <None Include="Web\JavaScript\Xphter.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
