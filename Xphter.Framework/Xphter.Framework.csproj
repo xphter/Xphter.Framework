@@ -127,6 +127,7 @@
     <Compile Include="Data\SqlServer\SqlServerTableHints.cs" />
     <Compile Include="Data\SqlServer\SqlServerViewEntity.cs" />
     <Compile Include="Data\SqlServer\SqlServerTableEntity.cs" />
+    <Compile Include="Diagnostics\Logging.cs" />
     <Compile Include="Func.cs" />
     <Compile Include="IDistributedLock.cs" />
     <Compile Include="MemcacheDistributedLock.cs" />
