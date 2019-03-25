@@ -20,6 +20,12 @@
         <argument type="System.Int16" />
         <argument type="System.Int64" />
         <argument type="Xphter.Framework.Reflection.Tests.EnumForA" value="Value2" />
+        <argument type="System.Boolean?" value="" />
+        <argument type="System.Boolean?" value="True" />
+        <argument type="System.Int32?" value="" />
+        <argument type="System.Int32?" value="13" />
+        <argument type="System.Decimal?" value="" />
+        <argument type="System.Decimal?" value="13.13" />
     </object>
     <object id="A2" type="Xphter.Framework.Reflection.Tests.ClassA1">
     </object>
@@ -35,6 +41,13 @@
             <argument type="Xphter.Framework.Reflection.Tests.ClassD4">
                 <argument type="System.Int32" value="1313" />
                 <argument type="System.String" value="小螺号" />
+                <argument type="System.Single?" value="" />
+                <argument type="System.Double?" value="13.13" />
+                <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="System.Int32?">
+                    <argument type="System.Int32" value="13" />
+                    <argument type="System.Int32?" value="" />
+                    <argument type="System.Int32?" value="33" />
+                </argument>
             </argument>
         </argument>
     </object>

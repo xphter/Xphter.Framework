@@ -71,7 +71,8 @@ namespace Xphter.Framework.Reflection.Tests {
     public class ClassA1 : IClassA {
         public ClassA1(bool p1, char p2, string p3, int p4, float p5, double p6,
             decimal p7, DateTime p8, IClassB p9, IClassC p10, IClassD p11, object p12,
-            IEnumerable<object> p13, byte p14, short p15, long p16, EnumForA p17) {
+            IEnumerable<object> p13, byte p14, short p15, long p16, EnumForA p17,
+            bool? p18, bool? p19, int? p20, int? p21, decimal? p22, decimal? p23) {
             this.P1 = p1;
             this.P2 = p2;
             this.P3 = p3;
@@ -89,6 +90,12 @@ namespace Xphter.Framework.Reflection.Tests {
             this.P15 = p15;
             this.P16 = p16;
             this.P17 = p17;
+            this.P18 = p18;
+            this.P19 = p19;
+            this.P20 = p20;
+            this.P21 = p21;
+            this.P22 = p22;
+            this.P23 = p23;
         }
 
         public bool P1 {
@@ -172,6 +179,36 @@ namespace Xphter.Framework.Reflection.Tests {
         }
 
         public EnumForA P17 {
+            get;
+            set;
+        }
+
+        public bool? P18 {
+            get;
+            set;
+        }
+
+        public bool? P19 {
+            get;
+            set;
+        }
+
+        public int? P20 {
+            get;
+            set;
+        }
+
+        public int? P21 {
+            get;
+            set;
+        }
+
+        public decimal? P22 {
+            get;
+            set;
+        }
+
+        public decimal? P23 {
             get;
             set;
         }
@@ -268,9 +305,12 @@ namespace Xphter.Framework.Reflection.Tests {
     }
 
     public class ClassD4 : IClassD {
-        internal ClassD4(int p1, string p2) {
+        internal ClassD4(int p1, string p2, float? p3, double? p4, IEnumerable<int?> p5) {
             this.P1 = p1;
             this.P2 = p2;
+            this.P3 = p3;
+            this.P4 = p4;
+            this.P5 = p5;
         }
 
         public int P1 {
@@ -279,6 +319,21 @@ namespace Xphter.Framework.Reflection.Tests {
         }
 
         public string P2 {
+            get;
+            set;
+        }
+
+        public float? P3 {
+            get;
+            set;
+        }
+
+        public double? P4 {
+            get;
+            set;
+        }
+
+        public IEnumerable<int?> P5 {
             get;
             set;
         }

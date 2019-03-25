@@ -110,6 +110,7 @@ namespace Xphter.Framework.Reflection {
 
         private readonly Type m_objectType = typeof(object);
         private readonly Type m_enumerableType = typeof(IEnumerable<>);
+        private readonly Type m_nullableType = typeof(Nullable<>);
 
         protected string m_configFilePath;
         protected IDictionary<string, ObjectDefination> m_definations;
@@ -281,6 +282,14 @@ namespace Xphter.Framework.Reflection {
         /// <param name="context"></param>
         /// <returns></returns>
         private object GetArgumentValue(ObjectArgumentDefination argument, Type argumentType, IObjectFactoryContext context) {
+            if(argumentType.IsGenericType && argumentType.GetGenericTypeDefinition().Equals(this.m_nullableType)) {
+                if(string.IsNullOrWhiteSpace(argument.ArgumentValue)) {
+                    return null;
+                }
+
+                argumentType = argumentType.GetGenericArguments()[0];
+            }
+
             IObjectArgumentResolver argumentResolver = this.m_argumentValueResolvers.Where((item) => item.Check(argumentType)).FirstOrDefault();
             if(argumentResolver == null) {
                 throw new ObjectFacgoryException(string.Format("Can not find the resolver to get argument value of {0}", argumentType.FullName));
@@ -882,8 +891,12 @@ namespace Xphter.Framework.Reflection {
             this.m_cache = new ConcurrentGrowOnlyDictionary<string, Type>();
         }
 
+        private const string NULLABLE_TYPE_MARK = "?";
+
         protected IEnumerable<Assembly> m_assemblies;
         protected ConcurrentGrowOnlyDictionary<string, Type> m_cache;
+
+        protected readonly Type m_nullableType = typeof(Nullable<>);
 
         /// <summary>
         /// Finds type from assemblies and mscorlib.dll.
@@ -892,6 +905,11 @@ namespace Xphter.Framework.Reflection {
         /// <returns></returns>
         protected Type InternalGetType(string fullName) {
             Type type = null;
+            bool isNullable = fullName.EndsWith(NULLABLE_TYPE_MARK);
+
+            if(isNullable) {
+                fullName = fullName.Remove(fullName.Length - 1);
+            }
 
             foreach(Assembly item in this.m_assemblies) {
                 if((type = item.GetType(fullName, false, false)) != null) {
@@ -902,7 +920,11 @@ namespace Xphter.Framework.Reflection {
                 type = Type.GetType(fullName, false, false);
             }
 
-            return type;
+            if(isNullable && !type.IsValueType) {
+                throw new ObjectFacgoryException(string.Format("{0} is not a value type.", fullName));
+            }
+
+            return isNullable ? this.m_nullableType.MakeGenericType(type) : type;
         }
 
         #region IObjectTypeResolver Members
