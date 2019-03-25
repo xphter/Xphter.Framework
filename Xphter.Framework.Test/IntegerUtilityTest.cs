@@ -12,7 +12,6 @@ namespace Xphter.Framework.Test {
     [TestClass()]
     public class IntegerUtilityTest {
 
-
         private TestContext testContextInstance;
 
         /// <summary>
@@ -168,6 +167,28 @@ namespace Xphter.Framework.Test {
             Assert.AreEqual("叁仟零贰拾", IntegerUtility.ToUppercaseChineseNumber(3020));
             Assert.AreEqual("叁佰万叁仟零贰拾", IntegerUtility.ToUppercaseChineseNumber(3003020));
             Assert.AreEqual("叁佰亿叁仟零贰拾", IntegerUtility.ToUppercaseChineseNumber(30000003020));
+        }
+
+        [TestMethod()]
+        public void GetIntegerPlacesTest() {
+            Assert.AreEqual(1, (0).GetIntegerPlaces());
+            Assert.AreEqual(1, (1).GetIntegerPlaces());
+            Assert.AreEqual(1, (9).GetIntegerPlaces());
+            Assert.AreEqual(2, (10).GetIntegerPlaces());
+            Assert.AreEqual(2, (99).GetIntegerPlaces());
+            Assert.AreEqual(3, (100).GetIntegerPlaces());
+            Assert.AreEqual(3, (999).GetIntegerPlaces());
+            Assert.AreEqual(4, (1000).GetIntegerPlaces());
+            Assert.AreEqual(4, (9999).GetIntegerPlaces());
+            Assert.AreEqual(5, (10000).GetIntegerPlaces());
+            Assert.AreEqual(5, (99999).GetIntegerPlaces());
+            Assert.AreEqual(6, (100000).GetIntegerPlaces());
+            Assert.AreEqual(6, (999999).GetIntegerPlaces());
+            Assert.AreEqual(7, (1000000).GetIntegerPlaces());
+
+            Assert.AreEqual(9, (420000000).GetIntegerPlaces());
+            Assert.AreEqual(10, (4200000000L).GetIntegerPlaces());
+            Assert.AreEqual(11, (42000000001L).GetIntegerPlaces());
         }
     }
 }

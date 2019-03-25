@@ -402,5 +402,31 @@ namespace Xphter.Framework {
         public static string ToUppercaseChineseNumber(this long value) {
             return ToUppercaseChinese(value.ToString());
         }
+
+        /// <summary>
+        /// Gets the number of integer places of the speicifed Int32 value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static int GetIntegerPlaces(this int value) {
+            if(value == 0) {
+                return 1;
+            }
+
+            return (int) Math.Floor(Math.Log10(Math.Abs(value)) + 1);
+        }
+
+        /// <summary>
+        /// Gets the number of integer places of the speicifed Int64 value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static int GetIntegerPlaces(this long value) {
+            if(value == 0L) {
+                return 1;
+            }
+
+            return (int) Math.Floor(Math.Log10(Math.Abs(value)) + 1);
+        }
     }
 }
