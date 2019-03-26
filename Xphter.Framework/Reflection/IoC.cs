@@ -920,11 +920,11 @@ namespace Xphter.Framework.Reflection {
                 type = Type.GetType(fullName, false, false);
             }
 
-            if(isNullable && !type.IsValueType) {
+            if(type != null && isNullable && !type.IsValueType) {
                 throw new ObjectFacgoryException(string.Format("{0} is not a value type.", fullName));
             }
 
-            return isNullable ? this.m_nullableType.MakeGenericType(type) : type;
+            return isNullable && type != null ? this.m_nullableType.MakeGenericType(type) : type;
         }
 
         #region IObjectTypeResolver Members
