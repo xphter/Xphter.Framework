@@ -12,7 +12,7 @@ namespace Xphter.Framework.Collections {
     /// </summary>
     /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
-    public class NullableKeyDictionary<TKey, TValue> : IDictionary<TKey, TValue> where TKey : class {
+    public class NullableKeyDictionary<TKey, TValue> : IDictionary<TKey, TValue> {
         /// <summary>
         /// Initialize a instance of NullableKeyDictionary class.
         /// </summary>
