@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <object type="Xphter.Framework.Diagnostics.ILogger" class="Xphter.Framework.Diagnostics.DefaultLogger" ref="" />
+    <object type="Xphter.Framework.Diagnostics.ILogInfoRenderer" class="Xphter.Framework.Diagnostics.SeparatedByCharLogInfoRenderer" />
+    <object type="Xphter.Framework.Diagnostics.IFileLogStorageCapability" class="Xphter.Framework.Diagnostics.SingleFileLogStorageCapability" />
+
+    <object type="Xphter.Framework.Diagnostics.SeparatedByCharLogInfoRenderer">
+        <argument type="System.Char" value="[" />
+        <argument type="System.Char" value="]" />
+        <argument type="Xphter.Framework.Diagnostics.ILogStateObjectRenderer" value="Xphter.Framework.Diagnostics.ToStringLogStateObjectRenderer" />
+    </object>
+
+    <object type="Xphter.Framework.Diagnostics.SingleFileLogStorageCapability">
+        <argument type="System.Int32?" value="10485760" />
+        <argument type="System.Int32?" value="" />
+    </object>
+    
+    <!-- console log -->
+    <object id="console" type="Xphter.Framework.Diagnostics.DefaultLogger">
+        <argument type="System.String" value="控制台日志" />
+        
+        <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Diagnostics.DefaultLoggerStorageOption">
+            <argument type="Xphter.Framework.Diagnostics.DefaultLoggerStorageOption">
+                <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Diagnostics.ILogStorage">
+                    <argument type="Xphter.Framework.Diagnostics.ConsoleLogStorage">
+                        <argument type="Xphter.Framework.Diagnostics.ILogInfoRenderer" />
+                        
+                        <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Diagnostics.ConsoleLogTypeColorOption">
+                            <argument type="Xphter.Framework.Diagnostics.ConsoleLogTypeColorOption">
+                                <argument type="Xphter.Framework.Diagnostics.LogInfoType" value="Warning" />
+                                <argument type="System.Int32?" value="" />
+                                <argument type="System.ConsoleColor" value="Yellow" />
+                            </argument>
+                            <argument type="Xphter.Framework.Diagnostics.ConsoleLogTypeColorOption">
+                                <argument type="Xphter.Framework.Diagnostics.LogInfoType" value="Error" />
+                                <argument type="System.Int32?" value="" />
+                                <argument type="System.ConsoleColor" value="Red" />
+                            </argument>
+                            <argument type="Xphter.Framework.Diagnostics.ConsoleLogTypeColorOption">
+                                <argument type="Xphter.Framework.Diagnostics.LogInfoType" value="Error" />
+                                <argument type="System.Int32?" value="2" />
+                                <argument type="System.ConsoleColor" value="DarkRed" />
+                            </argument>
+                        </argument>
+                    </argument>
+                </argument>
+            </argument>
+        </argument>
+    </object>
+
+    <!-- single file log -->
+    <object id="single" type="Xphter.Framework.Diagnostics.DefaultLogger">
+        <argument type="System.String" value="单文件日志" />
+        
+        <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Diagnostics.DefaultLoggerStorageOption">
+            <argument type="Xphter.Framework.Diagnostics.DefaultLoggerStorageOption">
+                <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Diagnostics.ILogStorage">
+                    <argument type="Xphter.Framework.Diagnostics.SingleFileLogStorage">
+                        <argument type="System.String" value="single.log" />
+                        <argument type="System.Boolean" value="False" />
+                        <argument type="Xphter.Framework.Diagnostics.ILogInfoRenderer" />
+                    </argument>
+                </argument>
+            </argument>
+        </argument>
+    </object>
+
+    <!-- centralized mutiple files log -->
+    <object id="centralized" type="Xphter.Framework.Diagnostics.DefaultLogger">
+        <argument type="System.String" value="多文件日志" />
+
+        <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Diagnostics.DefaultLoggerStorageOption">
+            <argument type="Xphter.Framework.Diagnostics.DefaultLoggerStorageOption">
+                <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Diagnostics.DefaultLoggerFilterRule">
+                    <argument type="Xphter.Framework.Diagnostics.DefaultLoggerFilterRule">
+                        <argument type="Xphter.Framework.Diagnostics.LogInfoType?" value="Warning" />
+                        <argument type="System.Int32?" value="" />
+                        <argument type="System.Int32?" value="" />
+                    </argument>
+                </argument>
+                
+                <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Diagnostics.ILogStorage">
+                    <argument type="Xphter.Framework.Diagnostics.MultipleFileLogStorage">
+                        <argument type="System.String" value="Log" />
+                        <argument type="Xphter.Framework.Diagnostics.IFileLogStorageFactory" value="Xphter.Framework.Diagnostics.CentralizedFileLogStorageFactory">
+                            <argument type="System.String" value="warning" />
+                            <argument type="System.String" value="" />
+                            <argument type="System.String" value=".log" />
+                            <argument type="System.Int32?" value="" />
+                            <argument type="Xphter.Framework.Diagnostics.ILogInfoRenderer" />
+                        </argument>
+                        <argument type="Xphter.Framework.Diagnostics.IFileLogStorageCapability" />
+                    </argument>
+                </argument>
+            </argument>
+
+            <argument type="Xphter.Framework.Diagnostics.DefaultLoggerStorageOption">
+                <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Diagnostics.DefaultLoggerFilterRule">
+                    <argument type="Xphter.Framework.Diagnostics.DefaultLoggerFilterRule">
+                        <argument type="Xphter.Framework.Diagnostics.LogInfoType?" value="Error" />
+                        <argument type="System.Int32?" value="" />
+                        <argument type="System.Int32?" value="" />
+                    </argument>
+                </argument>
+
+                <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Diagnostics.ILogStorage">
+                    <argument type="Xphter.Framework.Diagnostics.MultipleFileLogStorage">
+                        <argument type="System.String" value="Log" />
+                        <argument type="Xphter.Framework.Diagnostics.IFileLogStorageFactory" value="Xphter.Framework.Diagnostics.CentralizedFileLogStorageFactory">
+                            <argument type="System.String" value="error" />
+                            <argument type="System.String" value="" />
+                            <argument type="System.String" value=".log" />
+                            <argument type="System.Int32?" value="4" />
+                            <argument type="Xphter.Framework.Diagnostics.ILogInfoRenderer" />
+                        </argument>
+                        <argument type="Xphter.Framework.Diagnostics.IFileLogStorageCapability" />
+                    </argument>
+                </argument>
+            </argument>
+        </argument>
+    </object>
+</configuration>

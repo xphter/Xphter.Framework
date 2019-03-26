@@ -132,6 +132,24 @@ namespace Xphter.Framework.Test.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;configuration&gt;
+        ///    &lt;object type=&quot;Xphter.Framework.Reflection.Tests.IClassA&quot; class=&quot;Xphter.Framework.Reflection.Tests.ClassA1&quot; /&gt;
+        ///    &lt;object type=&quot;Xphter.Framework.Reflection.Tests.ClassA1&quot;&gt;
+        ///        &lt;argument type=&quot;System.Boolean&quot; value=&quot;True&quot; /&gt;
+        ///        &lt;argument type=&quot;System.Char&quot; /&gt;
+        ///        &lt;argument type=&quot;System.String&quot; value=&quot;嘿嘿哈嘿&quot; /&gt;
+        ///        &lt;argument type=&quot;System.Int32&quot; value=&quot;13&quot; /&gt;
+        ///        &lt;argument type=&quot;System.Single&quot; value=&quot;&quot; /&gt;
+        ///        &lt;argument  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LogConfig {
+            get {
+                return ResourceManager.GetString("LogConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Logo {
@@ -144,16 +162,14 @@ namespace Xphter.Framework.Test.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;configuration&gt;
-        ///	&lt;object type=&quot;Test.IClassA&quot; class=&quot;Test.ClassA1&quot; /&gt;
-        ///	&lt;object type=&quot;Test.ClassA1&quot;&gt;
-        ///        &lt;argument type=&quot;System.Bool&quot; value=&quot;True&quot; /&gt;
+        ///    &lt;object type=&quot;Xphter.Framework.Reflection.Tests.IClassA&quot; class=&quot;Xphter.Framework.Reflection.Tests.ClassA1&quot; /&gt;
+        ///    &lt;object type=&quot;Xphter.Framework.Reflection.Tests.ClassA1&quot;&gt;
+        ///        &lt;argument type=&quot;System.Boolean&quot; value=&quot;True&quot; /&gt;
         ///        &lt;argument type=&quot;System.Char&quot; /&gt;
-        ///		&lt;argument type=&quot;System.String&quot; value=&quot;嘿嘿哈嘿&quot; /&gt;
-        ///		&lt;argument type=&quot;System.Int32&quot; value=&quot;13&quot; /&gt;
-        ///		&lt;argument type=&quot;System.Float&quot; /&gt;
-        ///		&lt;argument type=&quot;System.Double&quot; /&gt;
-        ///		&lt;argument type=&quot;System.Decimal&quot; value=&quot;13.13&quot; /&gt;
-        ///        &lt;argument type=&quot;System.DateTime&quot; value=&quot;2011- [rest of string was truncated]&quot;;.
+        ///        &lt;argument type=&quot;System.String&quot; value=&quot;嘿嘿哈嘿&quot; /&gt;
+        ///        &lt;argument type=&quot;System.Int32&quot; value=&quot;13&quot; /&gt;
+        ///        &lt;argument type=&quot;System.Single&quot; value=&quot;&quot; /&gt;
+        ///        &lt;argument  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectFactory {
             get {

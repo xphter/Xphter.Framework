@@ -2,13 +2,16 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
+using System.Web.Hosting;
 using Xphter.Framework.Collections;
+using Xphter.Framework.IO;
 
 namespace Xphter.Framework.Diagnostics {
     /// <summary>
@@ -18,19 +21,19 @@ namespace Xphter.Framework.Diagnostics {
         [Description("无")]
         None = 0x00,
 
-        [Description("普通信息")]
+        [Description("信息")]
         Info = 0x10,
 
-        [Description("调试信息")]
+        [Description("调试")]
         Debug = 0x20,
 
-        [Description("警告信息")]
+        [Description("警告")]
         Warning = 0x30,
 
-        [Description("错误信息")]
+        [Description("错误")]
         Error = 0x40,
 
-        [Description("故障信息")]
+        [Description("故障")]
         Fault = 0x80,
     }
 
@@ -138,27 +141,42 @@ namespace Xphter.Framework.Diagnostics {
     }
 
     /// <summary>
-    /// Converts log data to text.
+    /// Renders log data to a text writer.
     /// </summary>
-    public interface ILogInfoFormatter {
+    public interface ILogInfoRenderer {
         /// <summary>
-        /// Gets text representation of the specified log info.
+        /// Renders the text representation of the specified log data to a text writer.
         /// </summary>
         /// <param name="info"></param>
-        /// <returns></returns>
-        string Format(ILogInfo info);
+        /// <param name="writer"></param>
+        void Render(ILogInfo info, TextWriter writer);
     }
 
     /// <summary>
-    /// Converts log state obejct to text.
+    /// Renders log state object to a text writer.
     /// </summary>
-    public interface ILogStateObjetFormatter {
+    public interface ILogStateObjectRenderer {
         /// <summary>
-        /// Gets text representation of the specified object.
+        /// Renders the text representation of the specified state object to a text writer.
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        string Format(object obj);
+        /// <param name="info"></param>
+        /// <param name="stateObj"></param>
+        /// <param name="writer"></param>
+        void Render(ILogInfo info, object stateObj, TextWriter writer);
+    }
+
+    /// <summary>
+    /// Renders log state object to a text writer.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface ILogStateObjectRenderer<T> {
+        /// <summary>
+        /// Renders the text representation of the specified state object to a text writer.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="stateObj"></param>
+        /// <param name="writer"></param>
+        void Render(ILogInfo info, T stateObj, TextWriter writer);
     }
 
     /// <summary>
@@ -208,7 +226,7 @@ namespace Xphter.Framework.Diagnostics {
         void RecordAsync(ILogInfo info);
 
         /// <summary>
-        /// Closes this logger. A closed logger can not records any logs.
+        /// Closes this logger. A closed logger can not records any log data.
         /// </summary>
         void Close();
     }
@@ -220,7 +238,7 @@ namespace Xphter.Framework.Diagnostics {
         static LogInfo() {
             IPAddress[] addresses = Dns.GetHostAddresses(string.Empty).Where((item) => item.AddressFamily == AddressFamily.InterNetwork || item.AddressFamily == AddressFamily.InterNetworkV6).ToArray();
 
-            g_hostAddress = addresses.Length > 0 ? (addresses.FirstOrDefault((item) => item.AddressFamily == AddressFamily.InterNetwork) ?? addresses.FirstOrDefault((item) => item.AddressFamily == AddressFamily.InterNetworkV6)).ToString() : null;
+            g_hostAddress = addresses.Length > 0 ? (addresses.FirstOrDefault((item) => item.AddressFamily == AddressFamily.InterNetwork) ?? addresses.FirstOrDefault((item) => item.AddressFamily == AddressFamily.InterNetworkV6)).ToString() : "unknown";
             g_hostName = Environment.MachineName;
         }
 
@@ -293,7 +311,13 @@ namespace Xphter.Framework.Diagnostics {
         }
 
         #endregion
+
+        public override string ToString() {
+            return this.StateObject + string.Empty;
+        }
     }
+
+    #region Loggers
 
     /// <summary>
     /// Provides a base class that implements ILogger interface.
@@ -441,72 +465,8 @@ namespace Xphter.Framework.Diagnostics {
     }
 
     /// <summary>
-    /// Provides a chain of log storages.
+    /// Provides a default implementation of Logger class.
     /// </summary>
-    public class AggregateLogStorage : ILogStorage {
-        public AggregateLogStorage(IEnumerable<ILogStorage> storages) {
-            if(storages == null) {
-                throw new ArgumentNullException("storages");
-            }
-            if(!storages.Any((item) => item != null)) {
-                throw new ArgumentNullException("storages is empty.", "storages");
-            }
-
-            this.m_storages = storages.Where((item) => item != null).ToArray();
-        }
-
-        protected IEnumerable<ILogStorage> m_storages;
-
-        protected void ThrowIfDisposed() {
-            if(this.m_disposed) {
-                throw new ObjectDisposedException(this.GetType().Name);
-            }
-        }
-
-        #region ILogStorage Members
-
-        public void Save(ILogInfo info) {
-            this.ThrowIfDisposed();
-
-            foreach(ILogStorage storage in this.m_storages) {
-                storage.Save(info);
-            }
-        }
-
-        #endregion
-
-        #region IDisposable Members
-
-        protected volatile bool m_disposed;
-
-        protected virtual void Disposing(bool disposing) {
-            if(this.m_disposed) {
-                return;
-            }
-            this.m_disposed = true;
-
-            if(this.m_storages != null) {
-                foreach(ILogStorage storage in this.m_storages) {
-                    storage.Dispose();
-                }
-            }
-
-            if(disposing) {
-                GC.SuppressFinalize(this);
-            }
-        }
-
-        ~AggregateLogStorage() {
-            this.Disposing(false);
-        }
-
-        public void Dispose() {
-            this.Disposing(true);
-        }
-
-        #endregion
-    }
-
     public class DefaultLogger : Logger, ILogInfoFilter, ILogStorageSelector {
         public DefaultLogger(string name, IEnumerable<DefaultLoggerStorageOption> config)
             : base(name) {
@@ -529,20 +489,20 @@ namespace Xphter.Framework.Diagnostics {
 
         #region Logger Members
 
-        protected override void DisposingCore() {
-            if(this.m_storages != null) {
-                foreach(ILogStorage storage in this.m_storages) {
-                    storage.Dispose();
-                }
-            }
-        }
-
         protected override ILogInfoFilter GetLogFilter(ILogInfo info) {
             return this;
         }
 
         protected override ILogStorageSelector GetStorageSelector(ILogInfo info) {
             return this;
+        }
+
+        protected override void DisposingCore() {
+            if(this.m_storages != null) {
+                foreach(ILogStorage storage in this.m_storages) {
+                    storage.Dispose();
+                }
+            }
         }
 
         #endregion
@@ -639,6 +599,10 @@ namespace Xphter.Framework.Diagnostics {
     }
 
     public class DefaultLoggerStorageOption {
+        public DefaultLoggerStorageOption(IEnumerable<ILogStorage> storages)
+            : this(null, storages) {
+        }
+
         public DefaultLoggerStorageOption(IEnumerable<DefaultLoggerFilterRule> rules, IEnumerable<ILogStorage> storages) {
             this.m_rules = rules ?? Enumerable.Empty<DefaultLoggerFilterRule>();
             this.m_storages = storages ?? Enumerable.Empty<ILogStorage>();
@@ -657,4 +621,737 @@ namespace Xphter.Framework.Diagnostics {
             return this.m_storages.Any() && (!this.m_rules.Any() || this.m_rules.Any((item) => item.IsMatch(info)));
         }
     }
+
+    #endregion
+
+    #region Log Info Renderers
+
+    /// <summary>
+    /// Ignores the log state object and writes nothing to the text stream.
+    /// </summary>
+    public class IgnoredLogStateObjectRenderer : ILogStateObjectRenderer {
+        #region ILogStateObjectRenderer Members
+
+        /// <inheritdoc />
+        public void Render(ILogInfo info, object stateObj, TextWriter writer) {
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Writes the text representation of an object to the text stream by calling ToString on that object.
+    /// </summary>
+    public class ToStringLogStateObjectRenderer : ILogStateObjectRenderer {
+        #region ILogStateObjectRenderer Members
+
+        /// <inheritdoc />
+        public void Render(ILogInfo info, object stateObj, TextWriter writer) {
+            if(stateObj != null) {
+                writer.Write(stateObj);
+            }
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Provides a configurable class that implements ILogStateObjectRenderer interface.
+    /// 
+    /// There are two renderer categories:
+    /// 
+    /// 1. renderer implements ILogStateObjectRenderer interface is the default renderer for all objects.
+    /// 2. renderers implements ILogStateObjectRenderer`1 interface used to render objects of specified type.
+    /// </summary>
+    public class AggregateLogStateObjectRenderer : ILogStateObjectRenderer {
+        public AggregateLogStateObjectRenderer(IEnumerable<ILogStateObjectRenderer> renderers) {
+            if(renderers == null) {
+                throw new ArgumentNullException("renderers");
+            }
+
+            Type baseType = typeof(ILogStateObjectRenderer<>), rendererType = null;
+            this.m_objectRenderers = new Dictionary<Type, ILogStateObjectRenderer>();
+
+            foreach(ILogStateObjectRenderer renderer in renderers) {
+                if((rendererType = renderer.GetType().GetInterfaces().FirstOrDefault((item) => item.IsGenericType && item.GetGenericTypeDefinition().Equals(baseType))) != null) {
+                    this.m_objectRenderers[rendererType.GetGenericArguments()[0]] = renderer;
+                } else {
+                    this.m_defaultObjectRenderer = renderer;
+                }
+            }
+
+            this.m_defaultObjectRenderer = this.m_defaultObjectRenderer ?? new IgnoredLogStateObjectRenderer();
+        }
+
+        protected ILogStateObjectRenderer m_defaultObjectRenderer;
+        protected IDictionary<Type, ILogStateObjectRenderer> m_objectRenderers;
+
+        #region ILogStateObjectRenderer Members
+
+        /// <inheritdoc />
+        public virtual void Render(ILogInfo info, object stateObj, TextWriter writer) {
+            if(stateObj == null) {
+                return;
+            }
+
+            Type stateType = stateObj.GetType();
+
+            if(this.m_objectRenderers.ContainsKey(stateType)) {
+                this.m_objectRenderers[stateType].Render(info, stateObj, writer);
+            } else {
+                this.m_defaultObjectRenderer.Render(info, stateObj, writer);
+            }
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Provides a base class that implements ILogInfoRenderer interface.
+    /// </summary>
+    public abstract class LogInfoRenderer : ILogInfoRenderer {
+        public LogInfoRenderer()
+            : this(null) {
+        }
+
+        public LogInfoRenderer(ILogStateObjectRenderer objectRenderer) {
+            this.m_objectRenderer = objectRenderer ?? new IgnoredLogStateObjectRenderer();
+        }
+
+        protected ILogStateObjectRenderer m_objectRenderer;
+
+        protected abstract void PreRenderStateObject(ILogInfo info, TextWriter writer);
+
+        protected virtual void OnRenderStateObject(ILogInfo info, TextWriter writer) {
+            this.m_objectRenderer.Render(info, info.StateObject, writer);
+        }
+
+        protected abstract void PostRenderStateObject(ILogInfo info, TextWriter writer);
+
+        #region ILogInfoRenderer Members
+
+        /// <inheritdoc />
+        public virtual void Render(ILogInfo info, TextWriter writer) {
+            this.PreRenderStateObject(info, writer);
+            this.OnRenderStateObject(info, writer);
+            this.PostRenderStateObject(info, writer);
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Separates all parts of log data by a specified character.
+    /// </summary>
+    public class SeparatedByCharLogInfoRenderer : LogInfoRenderer {
+        public SeparatedByCharLogInfoRenderer(char startSeparator, char endSeparator)
+            : this(startSeparator, endSeparator, null) {
+        }
+
+        public SeparatedByCharLogInfoRenderer(char startSeparator, char endSeparator, ILogStateObjectRenderer objectRenderer)
+            : base(objectRenderer) {
+            this.m_startSeparator = startSeparator;
+            this.m_endSeparator = endSeparator;
+            this.m_logTypeNames = new Dictionary<LogInfoType, string>();
+
+            foreach(LogInfoType type in Enum.GetValues(typeof(LogInfoType))) {
+                this.m_logTypeNames[type] = EnumUtility.GetDescription(type);
+            }
+        }
+
+        protected char m_startSeparator;
+        protected char m_endSeparator;
+        protected IDictionary<LogInfoType, string> m_logTypeNames;
+
+        protected override void PreRenderStateObject(ILogInfo info, TextWriter writer) {
+            writer.Write("{0}{2:yyyy-MM-dd HH:mm:ss}{1}{0}{3}{1}{0}{4}{1}", this.m_startSeparator, this.m_endSeparator, info.CreateTime, info.HostAddress, info.HostName);
+
+            if(!string.IsNullOrWhiteSpace(info.OperationSource)) {
+                writer.Write("{0}{2}{1}", this.m_startSeparator, this.m_endSeparator, info.OperationSource);
+            }
+            if(!string.IsNullOrWhiteSpace(info.OperationName)) {
+                writer.Write("{0}{2}{1}", this.m_startSeparator, this.m_endSeparator, info.OperationName);
+            }
+
+            writer.Write("{0}{2}{1}{0}{3}{1}", this.m_startSeparator, this.m_endSeparator, this.m_logTypeNames[info.LogType], info.LogLevel);
+
+            if(info.StateObject != null) {
+                writer.Write(this.m_startSeparator);
+            }
+        }
+
+        protected override void PostRenderStateObject(ILogInfo info, TextWriter writer) {
+            if(info.StateObject != null) {
+                writer.Write(this.m_endSeparator);
+            }
+
+            if(info.ExceptionObject != null) {
+                writer.Write("{0}{2}{1}{0}\r\n{3}{1}", this.m_startSeparator, this.m_endSeparator, info.ExceptionObject.Message, (info.ExceptionObject.InnerException ?? info.ExceptionObject).StackTrace);
+            }
+            writer.WriteLine();
+        }
+    }
+
+    #endregion
+
+    /// <summary>
+    /// Provides a chain of log storages.
+    /// </summary>
+    public class AggregateLogStorage : ILogStorage {
+        public AggregateLogStorage(IEnumerable<ILogStorage> storages) {
+            if(storages == null) {
+                throw new ArgumentNullException("storages");
+            }
+            if(!storages.Any((item) => item != null)) {
+                throw new ArgumentNullException("storages is empty.", "storages");
+            }
+
+            this.m_storages = storages.Where((item) => item != null).ToArray();
+        }
+
+        protected IEnumerable<ILogStorage> m_storages;
+
+        protected void ThrowIfDisposed() {
+            if(this.m_disposed) {
+                throw new ObjectDisposedException(this.GetType().Name);
+            }
+        }
+
+        #region ILogStorage Members
+
+        public void Save(ILogInfo info) {
+            this.ThrowIfDisposed();
+
+            foreach(ILogStorage storage in this.m_storages) {
+                storage.Save(info);
+            }
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        protected volatile bool m_disposed;
+
+        protected virtual void Disposing(bool disposing) {
+            if(this.m_disposed) {
+                return;
+            }
+            this.m_disposed = true;
+
+            if(this.m_storages != null) {
+                foreach(ILogStorage storage in this.m_storages) {
+                    storage.Dispose();
+                }
+            }
+
+            if(disposing) {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        ~AggregateLogStorage() {
+            this.Disposing(false);
+        }
+
+        public void Dispose() {
+            this.Disposing(true);
+        }
+
+        #endregion
+    }
+
+    #region File Storages
+
+    /// <summary>
+    /// Represents a file log storage.
+    /// </summary>
+    public interface IFileLogStorage : ILogStorage {
+        /// <summary>
+        /// Gets the length in bytes of this file storage.
+        /// </summary>
+        long FileSize {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the number of saved log data after creating this file storage.
+        /// </summary>
+        long LogCount {
+            get;
+        }
+    }
+
+    /// <summary>
+    /// Gets a existing file storage or create a new.
+    /// </summary>
+    public interface IFileLogStorageFactory : IDisposable {
+        /// <summary>
+        /// Gets a existing file storage to record the specified log data. If not existing, return null.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        IFileLogStorage GetStorage(ILogInfo info);
+
+        /// <summary>
+        /// Creates a new file storage to record the specified log data.
+        /// </summary>
+        /// <param name="rootFolderPath"></param>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        IFileLogStorage CreateStorage(string rootFolderPath, ILogInfo info);
+    }
+
+    /// <summary>
+    /// Represents the capability of a file storage.
+    /// </summary>
+    public interface IFileLogStorageCapability {
+        /// <summary>
+        /// Checks whether the limits has exceed.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="storage"></param>
+        /// <returns></returns>
+        bool IsExceed(ILogInfo info, IFileLogStorage storage);
+    }
+
+    /// <summary>
+    /// Saves all log data to a single file.
+    /// </summary>
+    public class SingleFileLogStorage : IFileLogStorage {
+        public SingleFileLogStorage(string filePath, bool append, ILogInfoRenderer renderer) {
+            if(string.IsNullOrWhiteSpace(filePath)) {
+                throw new ArgumentException("filePath is null or empty.", "filePath");
+            }
+            if(renderer == null) {
+                throw new ArgumentNullException("renderer");
+            }
+
+            FileUtility.CreateFolder(this.m_filePath = filePath);
+
+            this.m_renderer = renderer;
+            this.m_writer = new StreamWriter(new FileStream(this.m_filePath, append ? FileMode.Append : FileMode.Create, FileAccess.Write, FileShare.Read), Encoding.UTF8);
+        }
+
+        protected string m_filePath;
+        protected StreamWriter m_writer;
+        protected ILogInfoRenderer m_renderer;
+        protected long m_count;
+
+        protected void ThrowIfDisposed() {
+            if(this.m_disposed) {
+                throw new ObjectDisposedException(this.GetType().Name + ": " + this.m_filePath);
+            }
+        }
+
+        #region IFileLogStorage Members
+
+        /// <inheritdoc />
+        public virtual long FileSize {
+            get {
+                this.ThrowIfDisposed();
+
+                return this.m_writer.BaseStream.Length;
+            }
+        }
+
+        /// <inheritdoc />
+        public virtual long LogCount {
+            get {
+                return this.m_count;
+            }
+        }
+
+        #endregion
+
+        #region ILogStorage Members
+
+        /// <inheritdoc />
+        public virtual void Save(ILogInfo info) {
+            this.ThrowIfDisposed();
+
+            this.m_renderer.Render(info, this.m_writer);
+
+            Interlocked.Increment(ref this.m_count);
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        protected volatile bool m_disposed;
+
+        protected virtual void Disposing(bool disposing) {
+            if(this.m_disposed) {
+                return;
+            }
+            this.m_disposed = true;
+
+            if(this.m_writer != null) {
+                this.m_writer.Close();
+            }
+
+            if(disposing) {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        ~SingleFileLogStorage() {
+            this.Disposing(false);
+        }
+
+        public void Dispose() {
+            this.Disposing(true);
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Saves log data to mutiple files. These files can be classified by machine or operation source or other conditions.
+    /// </summary>
+    public class MultipleFileLogStorage : IFileLogStorage {
+        public MultipleFileLogStorage(string folderName, IFileLogStorageFactory storageFactory, IFileLogStorageCapability storageCapability) {
+            if(string.IsNullOrWhiteSpace(folderName)) {
+                throw new ArgumentException("folderName is null or empty.", "folderName");
+            }
+            if(storageFactory == null) {
+                throw new ArgumentNullException("storageFactory");
+            }
+            if(storageCapability == null) {
+                throw new ArgumentNullException("storageCapability");
+            }
+
+            this.m_storageFactory = storageFactory;
+            this.m_storageCapability = storageCapability;
+            this.m_rootFolderPath = Path.Combine(HostingEnvironment.IsHosted ? HostingEnvironment.ApplicationPhysicalPath : Environment.CurrentDirectory, folderName);
+        }
+
+        protected string m_rootFolderPath;
+        protected IFileLogStorageFactory m_storageFactory;
+        protected IFileLogStorageCapability m_storageCapability;
+
+        protected void ThrowIfDisposed() {
+            if(this.m_disposed) {
+                throw new ObjectDisposedException(this.GetType().Name + ": " + this.m_rootFolderPath);
+            }
+        }
+
+        #region IFileLogStorage Members
+
+        /// <inheritdoc />
+        public virtual long FileSize {
+            get {
+                throw new NotSupportedException();
+            }
+        }
+
+        /// <inheritdoc />
+        public virtual long LogCount {
+            get {
+                throw new NotSupportedException();
+            }
+        }
+
+        #endregion
+
+        #region ILogStorage Members
+
+        /// <inheritdoc />
+        public void Save(ILogInfo info) {
+            IFileLogStorage storage = this.m_storageFactory.GetStorage(info);
+
+            if(storage == null || this.m_storageCapability.IsExceed(info, storage)) {
+                storage = this.m_storageFactory.CreateStorage(this.m_rootFolderPath, info);
+            }
+
+            storage.Save(info);
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        protected volatile bool m_disposed;
+
+        protected virtual void Disposing(bool disposing) {
+            if(this.m_disposed) {
+                return;
+            }
+            this.m_disposed = true;
+
+            if(this.m_storageFactory != null) {
+                this.m_storageFactory.Dispose();
+            }
+
+            if(disposing) {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        ~MultipleFileLogStorage() {
+            this.Disposing(false);
+        }
+
+        public void Dispose() {
+            this.Disposing(true);
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Provides the capability of a single file log storage.
+    /// </summary>
+    public class SingleFileLogStorageCapability : IFileLogStorageCapability {
+        public SingleFileLogStorageCapability(int? maxSize, int? maxCount) {
+            this.m_maxSize = maxSize;
+            this.m_maxCount = maxCount;
+        }
+
+        protected int? m_maxSize;
+        protected int? m_maxCount;
+
+        #region IFileLogStorageCapability Members
+
+        /// <inheritdoc />
+        public virtual bool IsExceed(ILogInfo info, IFileLogStorage storage) {
+            if(storage == null) {
+                throw new ArgumentNullException("storage");
+            }
+
+            if(this.m_maxSize.HasValue && storage.FileSize >= this.m_maxSize.Value) {
+                return true;
+            }
+
+            if(this.m_maxCount.HasValue && storage.LogCount >= this.m_maxCount.Value) {
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Records log data from all machines and all sources to "one" file storage.
+    /// "one" file storage not means a single file, it may be mutiple files with similar names.
+    /// </summary>
+    public class CentralizedFileLogStorageFactory : IFileLogStorageFactory {
+        public CentralizedFileLogStorageFactory(string fileName, string fileNameFormat, string fileExtension, int? maxReservedFilesCount, ILogInfoRenderer logRenderer) {
+            if(string.IsNullOrWhiteSpace(fileName)) {
+                throw new ArgumentException("fileName is null or empty.", "fileName");
+            }
+            if(string.IsNullOrWhiteSpace(fileExtension)) {
+                throw new ArgumentException("fileExtension is null or empty.", "fileExtension");
+            }
+            if(maxReservedFilesCount.HasValue && maxReservedFilesCount < 0) {
+                throw new ArgumentOutOfRangeException("maxReservedFilesCount", "maxReservedFilesCount is less than zero.");
+            }
+            if(logRenderer == null) {
+                throw new ArgumentNullException("logRenderer");
+            }
+
+            if(!string.IsNullOrWhiteSpace(fileNameFormat)) {
+                this.m_fileName = string.Format(fileNameFormat, fileName, DateTime.Now);
+            } else {
+                this.m_fileName = fileName;
+            }
+            this.m_fileExtension = fileExtension;
+            this.m_maxReservedFilesCount = maxReservedFilesCount;
+            this.m_renderer = logRenderer;
+        }
+
+        protected string m_fileName;
+        protected string m_fileExtension;
+
+        protected int m_reservedFilesCount;
+        protected int? m_maxReservedFilesCount;
+
+        protected IFileLogStorage m_storage;
+        protected ILogInfoRenderer m_renderer;
+
+        protected virtual string GetFilePath(string rootFolderPath, int index, int integerPlaces) {
+            return Path.Combine(rootFolderPath, string.Format("{0}{1}{2}", this.m_fileName, index == 0 ? string.Empty : "_" + index.ToString("D" + integerPlaces), this.m_fileExtension));
+        }
+
+        protected virtual void LoopCover(string rootFolderPath) {
+            string filePath = null;
+            int integerPlaces = this.m_maxReservedFilesCount.HasValue ? this.m_maxReservedFilesCount.Value.GetIntegerPlaces() : 1;
+
+            for(int i = this.m_maxReservedFilesCount.HasValue ? Math.Min(this.m_maxReservedFilesCount.Value - 1, this.m_reservedFilesCount) : this.m_reservedFilesCount; i >= 0; i--) {
+                if(!File.Exists(filePath = this.GetFilePath(rootFolderPath, i, integerPlaces))) {
+                    continue;
+                }
+
+                File.Move(filePath, this.GetFilePath(rootFolderPath, i + 1, integerPlaces));
+            }
+        }
+
+        #region IFileLogStorageFactory Members
+
+        public virtual IFileLogStorage GetStorage(ILogInfo info) {
+            return this.m_storage;
+        }
+
+        public virtual IFileLogStorage CreateStorage(string rootFolderPath, ILogInfo info) {
+            if(this.m_storage != null) {
+                this.m_storage.Dispose();
+                this.m_storage = null;
+
+                this.LoopCover(rootFolderPath);
+
+                ++this.m_reservedFilesCount;
+            }
+
+            return this.m_storage = new SingleFileLogStorage(this.GetFilePath(rootFolderPath, 0, 0), false, this.m_renderer);
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        protected volatile bool m_disposed;
+
+        protected virtual void Disposing(bool disposing) {
+            if(this.m_disposed) {
+                return;
+            }
+            this.m_disposed = true;
+
+            if(this.m_storage != null) {
+                this.m_storage.Dispose();
+            }
+
+            if(disposing) {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        ~CentralizedFileLogStorageFactory() {
+            this.Disposing(false);
+        }
+
+        public void Dispose() {
+            this.Disposing(true);
+        }
+
+        #endregion
+    }
+
+    #endregion
+
+    #region Console Storage
+
+    /// <summary>
+    /// Prints log data to console.
+    /// </summary>
+    public class ConsoleLogStorage : ILogStorage {
+        public ConsoleLogStorage(ILogInfoRenderer renderer)
+            : this(renderer, null) {
+        }
+
+        public ConsoleLogStorage(ILogInfoRenderer renderer, IEnumerable<ConsoleLogTypeColorOption> config) {
+            if(renderer == null) {
+                throw new ArgumentNullException("renderer");
+            }
+
+            this.m_renderer = renderer;
+            this.m_config = new Dictionary<LogInfoType, IDictionary<int?, ConsoleColor>>();
+
+            if(config != null) {
+                NullableKeyDictionary<int?, ConsoleColor> map = null;
+
+                foreach(IGrouping<LogInfoType, ConsoleLogTypeColorOption> group in config.GroupBy((item) => item.Type)) {
+                    this.m_config[group.Key] = map = new NullableKeyDictionary<int?, ConsoleColor>();
+
+                    foreach(ConsoleLogTypeColorOption option in group) {
+                        map[option.Level] = option.Color;
+                    }
+                }
+            }
+
+            GC.SuppressFinalize(this);
+        }
+
+        protected ILogInfoRenderer m_renderer;
+        protected IDictionary<LogInfoType, IDictionary<int?, ConsoleColor>> m_config;
+
+        #region ILogStorage Members
+
+        public virtual void Save(ILogInfo info) {
+            ConsoleColor? color = null;
+
+            if(this.m_config.ContainsKey(info.LogType)) {
+                IDictionary<int?, ConsoleColor> colors = this.m_config[info.LogType];
+
+                if(colors.ContainsKey(info.LogLevel)) {
+                    color = colors[info.LogLevel];
+                } else if(colors.ContainsKey(null)) {
+                    color = colors[null];
+                }
+
+                if(color.HasValue) {
+                    Console.ForegroundColor = color.Value;
+                }
+            }
+
+            try {
+                this.m_renderer.Render(info, Console.Out);
+            } finally {
+                if(color.HasValue) {
+                    Console.ResetColor();
+                }
+            }
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        public void Dispose() {
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Represents the color of specified log type and level.
+    /// </summary>
+    public class ConsoleLogTypeColorOption {
+        public ConsoleLogTypeColorOption(LogInfoType type, int? level, ConsoleColor color) {
+            this.m_type = type;
+            this.m_level = level;
+            this.m_color = color;
+        }
+
+        private LogInfoType m_type;
+        private int? m_level;
+        private ConsoleColor m_color;
+
+        internal LogInfoType Type {
+            get {
+                return this.m_type;
+            }
+        }
+
+        internal int? Level {
+            get {
+                return this.m_level;
+            }
+        }
+
+        internal ConsoleColor Color {
+            get {
+                return this.m_color;
+            }
+        }
+
+        public override string ToString() {
+            return string.Format("{0} {1}: {2}", this.m_type, this.m_level.HasValue ? this.m_level.Value.ToString() : "all", this.m_color);
+        }
+    }
+
+    #endregion
 }
