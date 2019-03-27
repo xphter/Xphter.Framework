@@ -201,6 +201,12 @@ namespace Xphter.Framework.Diagnostics {
     }
 
     /// <summary>
+    /// Represents the method that will handle an event when an log error occurs.
+    /// </summary>
+    /// <param name="exception"></param>
+    public delegate void LogErrorEventHandler(LogException exception);
+
+    /// <summary>
     /// Represents a logger.
     /// </summary>
     public interface ILogger : IDisposable {
@@ -210,6 +216,11 @@ namespace Xphter.Framework.Diagnostics {
         string Name {
             get;
         }
+
+        /// <summary>
+        /// Raised when an error occurs.
+        /// </summary>
+        event LogErrorEventHandler Error;
 
         /// <summary>
         /// Records the specified log.
@@ -372,6 +383,18 @@ namespace Xphter.Framework.Diagnostics {
             storage.Save(info);
         }
 
+        protected virtual void OnError(Exception ex) {
+            if(this.Error == null) {
+                return;
+            }
+
+            try {
+                this.Error(new LogException(ex.Message, ex));
+            } catch {
+                // ignore all exceptions
+            }
+        }
+
         private void ScanQueue() {
             while(true) {
                 try {
@@ -392,7 +415,8 @@ namespace Xphter.Framework.Diagnostics {
             while(this.m_logQueue.TryDequeue(out info)) {
                 try {
                     this.InternalRecord(info);
-                } catch {
+                } catch(Exception ex) {
+                    this.OnError(ex);
                 }
             }
         }
@@ -407,18 +431,29 @@ namespace Xphter.Framework.Diagnostics {
         }
 
         /// <inheritdoc />
+        public event LogErrorEventHandler Error;
+
+        /// <inheritdoc />
         public virtual void Record(ILogInfo info) {
             this.ThrowIfNullOrDisposed(info);
 
-            this.InternalRecord(info);
+            try {
+                this.InternalRecord(info);
+            } catch(Exception ex) {
+                this.OnError(ex);
+            }
         }
 
         /// <inheritdoc />
         public virtual void RecordAsync(ILogInfo info) {
             this.ThrowIfNullOrDisposed(info);
 
-            this.m_logQueue.Enqueue(info);
-            this.m_signal.Set();
+            try {
+                this.m_logQueue.Enqueue(info);
+                this.m_signal.Set();
+            } catch(Exception ex) {
+                this.OnError(ex);
+            }
         }
 
         /// <inheritdoc />
@@ -468,6 +503,10 @@ namespace Xphter.Framework.Diagnostics {
     /// Provides a default implementation of Logger class.
     /// </summary>
     public class DefaultLogger : Logger, ILogInfoFilter, ILogStorageSelector {
+        public DefaultLogger(string name, DefaultLoggerStorageOption option)
+            : this(name, option != null ? new DefaultLoggerStorageOption[] { option } : null) {
+        }
+
         public DefaultLogger(string name, IEnumerable<DefaultLoggerStorageOption> config)
             : base(name) {
             this.m_storages = new List<ILogStorage>();
@@ -599,6 +638,14 @@ namespace Xphter.Framework.Diagnostics {
     }
 
     public class DefaultLoggerStorageOption {
+        public DefaultLoggerStorageOption(ILogStorage storage)
+            : this(null, storage) {
+        }
+
+        public DefaultLoggerStorageOption(DefaultLoggerFilterRule rule, ILogStorage storage)
+            : this(rule != null ? new DefaultLoggerFilterRule[] { rule } : null, storage != null ? new ILogStorage[] { storage } : null) {
+        }
+
         public DefaultLoggerStorageOption(IEnumerable<ILogStorage> storages)
             : this(null, storages) {
         }
@@ -1177,15 +1224,19 @@ namespace Xphter.Framework.Diagnostics {
         }
 
         protected virtual void LoopCover(string rootFolderPath) {
-            string filePath = null;
+            string sourcePath = null, destinationPath = null;
             int integerPlaces = this.m_maxReservedFilesCount.HasValue ? this.m_maxReservedFilesCount.Value.GetIntegerPlaces() : 1;
 
             for(int i = this.m_maxReservedFilesCount.HasValue ? Math.Min(this.m_maxReservedFilesCount.Value - 1, this.m_reservedFilesCount) : this.m_reservedFilesCount; i >= 0; i--) {
-                if(!File.Exists(filePath = this.GetFilePath(rootFolderPath, i, integerPlaces))) {
+                if(!File.Exists(sourcePath = this.GetFilePath(rootFolderPath, i, integerPlaces))) {
                     continue;
                 }
 
-                File.Move(filePath, this.GetFilePath(rootFolderPath, i + 1, integerPlaces));
+                if(File.Exists(destinationPath = this.GetFilePath(rootFolderPath, i + 1, integerPlaces))) {
+                    File.Delete(destinationPath);
+                }
+
+                File.Move(sourcePath, destinationPath);
             }
         }
 
@@ -1249,7 +1300,11 @@ namespace Xphter.Framework.Diagnostics {
     /// </summary>
     public class ConsoleLogStorage : ILogStorage {
         public ConsoleLogStorage(ILogInfoRenderer renderer)
-            : this(renderer, null) {
+            : this(renderer, (IEnumerable<ConsoleLogTypeColorOption>) null) {
+        }
+
+        public ConsoleLogStorage(ILogInfoRenderer renderer, ConsoleLogTypeColorOption option)
+            : this(renderer, option != null ? new ConsoleLogTypeColorOption[] { option } : null) {
         }
 
         public ConsoleLogStorage(ILogInfoRenderer renderer, IEnumerable<ConsoleLogTypeColorOption> config) {
@@ -1352,6 +1407,38 @@ namespace Xphter.Framework.Diagnostics {
             return string.Format("{0} {1}: {2}", this.m_type, this.m_level.HasValue ? this.m_level.Value.ToString() : "all", this.m_color);
         }
     }
+
+    #endregion
+
+    #region Test Storages
+
+#if DEBUG
+
+    /// <summary>
+    /// Always throw a exception for test.
+    /// </summary>
+    public class ErrorLogStorage : ILogStorage {
+        public ErrorLogStorage() {
+            GC.SuppressFinalize(this);
+        }
+
+        #region ILogStorage Members
+
+        public void Save(ILogInfo info) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        public void Dispose() {
+        }
+
+        #endregion
+    }
+
+#endif
 
     #endregion
 }

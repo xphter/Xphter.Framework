@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Alibaba\AlibabaHelperTests.cs" />
     <Compile Include="Collections\LockFreeQueueTests.cs" />
+    <Compile Include="Diagnostics\ErrorLogStorageTests.cs" />
     <Compile Include="Diagnostics\MultipleFileLogStorageTests.cs" />
     <Compile Include="Diagnostics\SingleFileLogStorageTests.cs" />
     <Compile Include="Diagnostics\ConsoleLogStorageTests.cs" />
@@ -238,7 +239,9 @@
     </Content>
     <Content Include="Resources\DirectedGraphTest.jpg" />
     <None Include="Resources\HtmlAnalyzer_OnlyJavaScript.txt" />
-    <None Include="Resources\LogConfig.xml" />
+    <None Include="Resources\LogConfig.xml">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Resources\ObjectFactory.xml">
       <SubType>Designer</SubType>
     </Content>
