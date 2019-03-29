@@ -119,7 +119,7 @@
         </argument>
     </object>
 
-    <!-- centralized mutiple files log -->
+    <!-- distributed mutiple files log -->
     <object id="distributed" type="Xphter.Framework.Diagnostics.DefaultLogger">
         <argument type="System.String" value="分布式多文件日志" />
 
