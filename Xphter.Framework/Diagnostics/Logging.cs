@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
@@ -1140,7 +1141,7 @@ namespace Xphter.Framework.Diagnostics {
 
             this.m_storageFactory = storageFactory;
             this.m_storageCapability = storageCapability;
-            this.m_rootFolderPath = Path.Combine(HostingEnvironment.IsHosted ? HostingEnvironment.ApplicationPhysicalPath : Environment.CurrentDirectory, folderName);
+            this.m_rootFolderPath = Path.Combine(HostingEnvironment.IsHosted ? HostingEnvironment.ApplicationPhysicalPath : Path.GetDirectoryName((Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).Location), folderName);
         }
 
         protected string m_rootFolderPath;
