@@ -59,7 +59,7 @@ namespace Xphter.Framework.Diagnostics.Tests {
                     });
                 }
 
-                Thread.Sleep(30000);
+                Thread.Sleep(20000);
             }
         }
     }

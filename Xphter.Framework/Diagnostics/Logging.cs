@@ -1108,7 +1108,11 @@ namespace Xphter.Framework.Diagnostics {
         public void Save(ILogInfo info) {
             IFileLogStorage storage = this.m_storageFactory.GetStorage(info);
 
-            if(storage == null || this.m_storageCapability.IsExceed(info, storage)) {
+            if(storage == null) {
+                storage = this.m_storageFactory.CreateStorage(this.m_rootFolderPath, info);
+            }
+
+            while(this.m_storageCapability.IsExceed(info, storage)) {
                 storage = this.m_storageFactory.CreateStorage(this.m_rootFolderPath, info);
             }
 
@@ -1186,7 +1190,11 @@ namespace Xphter.Framework.Diagnostics {
     /// "one" file storage not means a single file, it may be mutiple files with similar names.
     /// </summary>
     public class CentralizedFileLogStorageFactory : IFileLogStorageFactory {
-        public CentralizedFileLogStorageFactory(string fileName, string fileNameFormat, string fileExtension, int? maxReservedFilesCount, ILogInfoRenderer logRenderer) {
+        public CentralizedFileLogStorageFactory(string fileName, string fileNameFormat, string fileExtension, int? maxReservedFilesCount, ILogInfoRenderer logRenderer)
+            : this(fileName, fileNameFormat, fileExtension, false, maxReservedFilesCount, logRenderer) {
+        }
+
+        public CentralizedFileLogStorageFactory(string fileName, string fileNameFormat, string fileExtension, bool isAppendFirstFile, int? maxReservedFilesCount, ILogInfoRenderer logRenderer) {
             if(string.IsNullOrWhiteSpace(fileName)) {
                 throw new ArgumentException("fileName is null or empty.", "fileName");
             }
@@ -1206,12 +1214,14 @@ namespace Xphter.Framework.Diagnostics {
                 this.m_fileName = fileName;
             }
             this.m_fileExtension = fileExtension;
+            this.m_isAppendFirstFile = isAppendFirstFile;
             this.m_maxReservedFilesCount = maxReservedFilesCount;
             this.m_renderer = logRenderer;
         }
 
         protected string m_fileName;
         protected string m_fileExtension;
+        protected bool m_isAppendFirstFile;
 
         protected int m_reservedFilesCount;
         protected int? m_maxReservedFilesCount;
@@ -1256,7 +1266,7 @@ namespace Xphter.Framework.Diagnostics {
                 ++this.m_reservedFilesCount;
             }
 
-            return this.m_storage = new SingleFileLogStorage(this.GetFilePath(rootFolderPath, 0, 0), false, this.m_renderer);
+            return this.m_storage = new SingleFileLogStorage(this.GetFilePath(rootFolderPath, 0, 0), this.m_reservedFilesCount == 0 ? this.m_isAppendFirstFile : false, this.m_renderer);
         }
 
         #endregion

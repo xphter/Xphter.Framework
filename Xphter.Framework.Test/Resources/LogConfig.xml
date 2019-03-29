@@ -75,6 +75,7 @@
                         <argument type="System.String" value="warning" />
                         <argument type="System.String" value="" />
                         <argument type="System.String" value=".log" />
+                        <argument type="System.Boolean" value="true" />
                         <argument type="System.Int32?" value="" />
                         <argument type="Xphter.Framework.Diagnostics.ILogInfoRenderer" />
                     </argument>

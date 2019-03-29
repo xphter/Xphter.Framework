@@ -380,7 +380,9 @@
   <ItemGroup>
     <None Include="Data\Generation.cd" />
     <None Include="Data\SqlExpressions.cd" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Reflection\AOP.cd" />
     <None Include="Reflection\IoC.cd" />
     <None Include="Web\HtmlAnalyzer.cd" />
