@@ -963,6 +963,31 @@ namespace Xphter.Framework.Diagnostics {
     }
 
     /// <summary>
+    /// Represents how to classify a log data.
+    /// </summary>
+    public interface IFileLogInfoClassifier {
+        /// <summary>
+        /// Gets path of the file to save the specified log info.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        string GetFilePath(ILogInfo info, DateTime time);
+    }
+
+    /// <summary>
+    /// Defines how to create a file log storage factory.
+    /// </summary>
+    public interface IFileLogStorageFactoryResolver {
+        /// <summary>
+        /// Creates a new IFileLogStorageFactory object of the specified file.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        IFileLogStorageFactory CreateFactory(string filePath, ILogInfo info);
+    }
+
+    /// <summary>
     /// Saves all log data to a single file.
     /// </summary>
     public class SingleFileLogStorage : IFileLogStorage {
@@ -1291,6 +1316,182 @@ namespace Xphter.Framework.Diagnostics {
         }
 
         ~CentralizedFileLogStorageFactory() {
+            this.Disposing(false);
+        }
+
+        public void Dispose() {
+            this.Disposing(true);
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Classifies log data by operation source.
+    /// </summary>
+    public class OperationSourceFileLogInfoClassifier : IFileLogInfoClassifier {
+        public OperationSourceFileLogInfoClassifier(bool isClassifyByHost, string fileNameFormat, string fileExtension, string defaultSourceName) {
+            if(string.IsNullOrWhiteSpace(fileExtension)) {
+                throw new ArgumentException("fileExtension is null or empty.", "fileExtension");
+            }
+            if(string.IsNullOrWhiteSpace(defaultSourceName)) {
+                throw new ArgumentException("defaultSourceName is null or empty.", "defaultSourceName");
+            }
+
+            this.m_isClassifyByHost = isClassifyByHost;
+            this.m_fileNameFormat = fileNameFormat;
+            this.m_fileExtension = fileExtension;
+            this.m_defaultSourceName = defaultSourceName;
+            this.m_cache = new ConcurrentDictionary<string, string>();
+        }
+
+        protected bool m_isClassifyByHost;
+        protected string m_fileNameFormat;
+        protected string m_fileExtension;
+        protected string m_defaultSourceName;
+        protected ConcurrentDictionary<string, string> m_cache;
+
+        protected virtual string GetCacheKey(ILogInfo info) {
+            return string.Format("{0}:{1}:{2}", info.HostAddress, info.OperationSource, info.LogType);
+        }
+
+        #region IFileLogInfoClassifier Members
+
+        /// <inheritdoc />
+        public string GetFilePath(ILogInfo info, DateTime time) {
+            string filePath = null;
+            string key = this.GetCacheKey(info);
+            if(this.m_cache.TryGetValue(key, out filePath)) {
+                return filePath;
+            }
+
+            string sourceName = info.OperationSource != null ? info.OperationSource : this.m_defaultSourceName;
+            string fileName = !string.IsNullOrWhiteSpace(this.m_fileNameFormat) ? string.Format(this.m_fileNameFormat, sourceName, EnumUtility.GetDescription(info.LogType), time) : sourceName;
+
+            this.m_cache.TryAdd(key, filePath = (this.m_isClassifyByHost ? Path.Combine(string.Format("{1}({0})", info.HostAddress, info.HostName), fileName) : fileName) + this.m_fileExtension);
+
+            return filePath;
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Always creates a CentralizedFileLogStorageFactory object for each file path.
+    /// </summary>
+    public class CentralizedFileLogStorageFactoryResolver : IFileLogStorageFactoryResolver {
+        public CentralizedFileLogStorageFactoryResolver(int? maxReservedFilesCount, ILogInfoRenderer logRenderer)
+            : this(false, maxReservedFilesCount, logRenderer) {
+        }
+
+        public CentralizedFileLogStorageFactoryResolver(bool isAppendFirstFile, int? maxReservedFilesCount, ILogInfoRenderer logRenderer) {
+            if(maxReservedFilesCount.HasValue && maxReservedFilesCount < 0) {
+                throw new ArgumentOutOfRangeException("maxReservedFilesCount", "maxReservedFilesCount is less than zero.");
+            }
+            if(logRenderer == null) {
+                throw new ArgumentNullException("logRenderer");
+            }
+
+            this.m_isAppendFirstFile = isAppendFirstFile;
+            this.m_maxReservedFilesCount = maxReservedFilesCount;
+            this.m_logRenderer = logRenderer;
+        }
+
+        protected bool m_isAppendFirstFile;
+        protected int? m_maxReservedFilesCount;
+        protected ILogInfoRenderer m_logRenderer;
+
+        #region IFileLogStorageFactoryResolver Members
+
+        /// <inheritdoc />
+        public IFileLogStorageFactory CreateFactory(string filePath, ILogInfo info) {
+            return new CentralizedFileLogStorageFactory(Path.GetFileNameWithoutExtension(filePath), null, Path.GetExtension(filePath), this.m_maxReservedFilesCount, this.m_logRenderer);
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Classified storage log data to mutiple files.
+    /// </summary>
+    public class DistributedFileLogStorageFactory : IFileLogStorageFactory {
+        public DistributedFileLogStorageFactory(IFileLogInfoClassifier logClassifier, IFileLogStorageFactoryResolver factoryResolver) {
+            if(logClassifier == null) {
+                throw new ArgumentNullException("logClassifier");
+            }
+            if(factoryResolver == null) {
+                throw new ArgumentNullException("factoryResolver");
+            }
+
+            this.m_createTime = DateTime.Now;
+            this.m_logClassifier = logClassifier;
+            this.m_factoryResolver = factoryResolver;
+            this.m_factories = new Dictionary<string, IFileLogStorageFactory>();
+        }
+
+        protected DateTime m_createTime;
+        protected IFileLogInfoClassifier m_logClassifier;
+        protected IFileLogStorageFactoryResolver m_factoryResolver;
+        protected IDictionary<string, IFileLogStorageFactory> m_factories;
+
+        #region IFileLogStorageFactory Members
+
+        public virtual IFileLogStorage GetStorage(ILogInfo info) {
+            string filePath = this.m_logClassifier.GetFilePath(info, this.m_createTime);
+            if(!this.m_factories.ContainsKey(filePath)) {
+                return null;
+            }
+
+            return this.m_factories[filePath].GetStorage(info);
+        }
+
+        public virtual IFileLogStorage CreateStorage(string rootFolderPath, ILogInfo info) {
+            IFileLogStorageFactory factory = null;
+            string filePath = this.m_logClassifier.GetFilePath(info, this.m_createTime);
+            
+            if(!this.m_factories.ContainsKey(filePath)) {
+                if((factory = this.m_factoryResolver.CreateFactory(filePath, info)) == null) {
+                    throw new LogException(string.Format("Can not find a file storage factory of path: {0}.", filePath));
+                }
+
+                this.m_factories[filePath] = factory;
+            } else {
+                factory = this.m_factories[filePath];
+            }
+
+            if(Path.IsPathRooted(filePath)) {
+                rootFolderPath = Path.GetDirectoryName(filePath);
+            } else {
+                rootFolderPath = Path.GetDirectoryName(Path.Combine(rootFolderPath, filePath));
+            }
+
+            return factory.CreateStorage(rootFolderPath, info);
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        protected volatile bool m_disposed;
+
+        protected virtual void Disposing(bool disposing) {
+            if(this.m_disposed) {
+                return;
+            }
+            this.m_disposed = true;
+
+            if(this.m_factories != null) {
+                foreach(IFileLogStorageFactory factory in this.m_factories.Values) {
+                    factory.Dispose();
+                }
+            }
+
+            if(disposing) {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        ~DistributedFileLogStorageFactory() {
             this.Disposing(false);
         }
 

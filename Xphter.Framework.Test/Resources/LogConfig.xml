@@ -3,6 +3,8 @@
     <object type="Xphter.Framework.Diagnostics.ILogger" class="Xphter.Framework.Diagnostics.DefaultLogger" ref="" />
     <object type="Xphter.Framework.Diagnostics.ILogInfoRenderer" class="Xphter.Framework.Diagnostics.SeparatedByCharLogInfoRenderer" />
     <object type="Xphter.Framework.Diagnostics.IFileLogStorageCapability" class="Xphter.Framework.Diagnostics.SingleFileLogStorageCapability" />
+    <object type="Xphter.Framework.Diagnostics.IFileLogInfoClassifier" class="Xphter.Framework.Diagnostics.OperationSourceFileLogInfoClassifier" />
+    <object type="Xphter.Framework.Diagnostics.IFileLogStorageFactoryResolver" class="Xphter.Framework.Diagnostics.CentralizedFileLogStorageFactoryResolver" />
 
     <object type="Xphter.Framework.Diagnostics.SeparatedByCharLogInfoRenderer">
         <argument type="System.Char" value="[" />
@@ -13,6 +15,18 @@
     <object type="Xphter.Framework.Diagnostics.SingleFileLogStorageCapability">
         <argument type="System.Int32?" value="10485760" />
         <argument type="System.Int32?" value="" />
+    </object>
+
+    <object type="Xphter.Framework.Diagnostics.OperationSourceFileLogInfoClassifier">
+        <argument type="System.Boolean" value="true" />
+        <argument type="System.String" value="{0}_{1}" />
+        <argument type="System.String" value=".log" />
+        <argument type="System.String" value="default" />
+    </object>
+
+    <object type="Xphter.Framework.Diagnostics.CentralizedFileLogStorageFactoryResolver">
+        <argument type="System.Int32?" value="5" />
+        <argument type="Xphter.Framework.Diagnostics.ILogInfoRenderer" />
     </object>
 
     <!-- console log -->
@@ -59,7 +73,7 @@
 
     <!-- centralized mutiple files log -->
     <object id="centralized" type="Xphter.Framework.Diagnostics.DefaultLogger">
-        <argument type="System.String" value="多文件日志" />
+        <argument type="System.String" value="集中式多文件日志" />
 
         <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Diagnostics.DefaultLoggerStorageOption">
             <argument type="Xphter.Framework.Diagnostics.DefaultLoggerStorageOption">
@@ -98,6 +112,47 @@
                         <argument type="System.String" value=".log" />
                         <argument type="System.Int32?" value="5" />
                         <argument type="Xphter.Framework.Diagnostics.ILogInfoRenderer" />
+                    </argument>
+                    <argument type="Xphter.Framework.Diagnostics.IFileLogStorageCapability" />
+                </argument>
+            </argument>
+        </argument>
+    </object>
+
+    <!-- centralized mutiple files log -->
+    <object id="distributed" type="Xphter.Framework.Diagnostics.DefaultLogger">
+        <argument type="System.String" value="分布式多文件日志" />
+
+        <argument type="System.Collections.Generic.IEnumerable`1" value="System.Collections.Generic.List`1" item="Xphter.Framework.Diagnostics.DefaultLoggerStorageOption">
+            <argument type="Xphter.Framework.Diagnostics.DefaultLoggerStorageOption">
+                <argument type="Xphter.Framework.Diagnostics.DefaultLoggerFilterRule">
+                    <argument type="Xphter.Framework.Diagnostics.LogInfoType?" value="Warning" />
+                    <argument type="System.Int32?" value="" />
+                    <argument type="System.Int32?" value="" />
+                </argument>
+
+                <argument type="Xphter.Framework.Diagnostics.MultipleFileLogStorage">
+                    <argument type="System.String" value="Log" />
+                    <argument type="Xphter.Framework.Diagnostics.IFileLogStorageFactory" value="Xphter.Framework.Diagnostics.DistributedFileLogStorageFactory">
+                        <argument type="Xphter.Framework.Diagnostics.IFileLogInfoClassifier" />
+                        <argument type="Xphter.Framework.Diagnostics.IFileLogStorageFactoryResolver" />
+                    </argument>
+                    <argument type="Xphter.Framework.Diagnostics.IFileLogStorageCapability" />
+                </argument>
+            </argument>
+
+            <argument type="Xphter.Framework.Diagnostics.DefaultLoggerStorageOption">
+                <argument type="Xphter.Framework.Diagnostics.DefaultLoggerFilterRule">
+                    <argument type="Xphter.Framework.Diagnostics.LogInfoType?" value="Error" />
+                    <argument type="System.Int32?" value="" />
+                    <argument type="System.Int32?" value="" />
+                </argument>
+
+                <argument type="Xphter.Framework.Diagnostics.MultipleFileLogStorage">
+                    <argument type="System.String" value="Log" />
+                    <argument type="Xphter.Framework.Diagnostics.IFileLogStorageFactory" value="Xphter.Framework.Diagnostics.DistributedFileLogStorageFactory">
+                        <argument type="Xphter.Framework.Diagnostics.IFileLogInfoClassifier" />
+                        <argument type="Xphter.Framework.Diagnostics.IFileLogStorageFactoryResolver" />
                     </argument>
                     <argument type="Xphter.Framework.Diagnostics.IFileLogStorageCapability" />
                 </argument>
