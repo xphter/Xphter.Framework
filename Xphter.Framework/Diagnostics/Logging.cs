@@ -500,6 +500,46 @@ namespace Xphter.Framework.Diagnostics {
     }
 
     /// <summary>
+    /// Ignores all log data.
+    /// </summary>
+    public class EmptyLogger : Logger, ILogInfoFilter, ILogStorageSelector {
+        public EmptyLogger(string name)
+            : base(name) {
+        }
+
+        #region Logger Members
+
+        protected override ILogInfoFilter GetLogFilter(ILogInfo info) {
+            return this;
+        }
+
+        protected override ILogStorageSelector GetStorageSelector(ILogInfo info) {
+            return this;
+        }
+
+        protected override void DisposingCore() {
+        }
+
+        #endregion
+
+        #region ILogInfoFilter Members
+
+        public bool Filter(ILogInfo info) {
+            return false;
+        }
+
+        #endregion
+
+        #region ILogStorageSelector Members
+
+        public ILogStorage SelectStorage(ILogInfo info) {
+            return null;
+        }
+
+        #endregion
+    }
+
+    /// <summary>
     /// Provides a default implementation of Logger class.
     /// </summary>
     public class DefaultLogger : Logger, ILogInfoFilter, ILogStorageSelector {
@@ -835,7 +875,7 @@ namespace Xphter.Framework.Diagnostics {
             if(info.ExceptionObject != null) {
                 writer.Write("{0}{2}{1}{0}\r\n{3}{1}", this.m_startSeparator, this.m_endSeparator, info.ExceptionObject.Message, (info.ExceptionObject.InnerException ?? info.ExceptionObject).StackTrace);
             }
-            writer.WriteLine();
+            writer.WriteLine("\r\n");
         }
     }
 
@@ -1043,6 +1083,10 @@ namespace Xphter.Framework.Diagnostics {
             this.ThrowIfDisposed();
 
             this.m_renderer.Render(info, this.m_writer);
+
+#if DEBUG
+            this.m_writer.Flush();
+#endif
 
             Interlocked.Increment(ref this.m_count);
         }
@@ -1405,7 +1449,7 @@ namespace Xphter.Framework.Diagnostics {
 
         /// <inheritdoc />
         public IFileLogStorageFactory CreateFactory(string filePath, ILogInfo info) {
-            return new CentralizedFileLogStorageFactory(Path.GetFileNameWithoutExtension(filePath), null, Path.GetExtension(filePath), this.m_maxReservedFilesCount, this.m_logRenderer);
+            return new CentralizedFileLogStorageFactory(Path.GetFileNameWithoutExtension(filePath), null, Path.GetExtension(filePath), this.m_isAppendFirstFile, this.m_maxReservedFilesCount, this.m_logRenderer);
         }
 
         #endregion
@@ -1448,7 +1492,7 @@ namespace Xphter.Framework.Diagnostics {
         public virtual IFileLogStorage CreateStorage(string rootFolderPath, ILogInfo info) {
             IFileLogStorageFactory factory = null;
             string filePath = this.m_logClassifier.GetFilePath(info, this.m_createTime);
-            
+
             if(!this.m_factories.ContainsKey(filePath)) {
                 if((factory = this.m_factoryResolver.CreateFactory(filePath, info)) == null) {
                     throw new LogException(string.Format("Can not find a file storage factory of path: {0}.", filePath));
