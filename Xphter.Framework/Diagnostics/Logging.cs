@@ -1032,7 +1032,11 @@ namespace Xphter.Framework.Diagnostics {
     /// Saves all log data to a single file.
     /// </summary>
     public class SingleFileLogStorage : IFileLogStorage {
-        public SingleFileLogStorage(string filePath, bool append, ILogInfoRenderer renderer) {
+        public SingleFileLogStorage(string filePath, bool append, ILogInfoRenderer renderer)
+            : this(filePath, append, renderer, null) {
+        }
+
+        public SingleFileLogStorage(string filePath, bool append, ILogInfoRenderer renderer, int? flushInterval) {
             if(string.IsNullOrWhiteSpace(filePath)) {
                 throw new ArgumentException("filePath is null or empty.", "filePath");
             }
@@ -1044,16 +1048,34 @@ namespace Xphter.Framework.Diagnostics {
 
             this.m_renderer = renderer;
             this.m_writer = new StreamWriter(new FileStream(this.m_filePath, append ? FileMode.Append : FileMode.Create, FileAccess.Write, FileShare.Read), Encoding.UTF8);
+#if !DEBUG
+            if((this.m_flushInterval = flushInterval ?? DEFAULT_FLUSH_INTERVAL) > 0) {
+                this.m_flushTimer = new Timer((obj) => this.FlushWriter(), null, this.m_flushInterval, this.m_flushInterval);
+            }
+#endif
         }
+
+        public const int DEFAULT_FLUSH_INTERVAL = 60000;
 
         protected string m_filePath;
         protected StreamWriter m_writer;
         protected ILogInfoRenderer m_renderer;
+
+        protected int m_flushInterval;
+        protected Timer m_flushTimer;
+
         protected long m_count;
 
         protected void ThrowIfDisposed() {
             if(this.m_disposed) {
                 throw new ObjectDisposedException(this.GetType().Name + ": " + this.m_filePath);
+            }
+        }
+
+        protected void FlushWriter() {
+            try {
+                this.m_writer.Flush();
+            } catch {
             }
         }
 
@@ -1103,6 +1125,12 @@ namespace Xphter.Framework.Diagnostics {
                 return;
             }
             this.m_disposed = true;
+
+            if(this.m_flushTimer != null) {
+                using(this.m_flushTimer) {
+                    this.m_flushTimer.Change(Timeout.Infinite, Timeout.Infinite);
+                }
+            }
 
             if(this.m_writer != null) {
                 this.m_writer.Close();

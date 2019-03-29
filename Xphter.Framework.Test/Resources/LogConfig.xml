@@ -67,6 +67,7 @@
                 <argument type="System.String" value="single.log" />
                 <argument type="System.Boolean" value="False" />
                 <argument type="Xphter.Framework.Diagnostics.ILogInfoRenderer" />
+                <argument type="System.Int32?" value="5000" />
             </argument>
         </argument>
     </object>
