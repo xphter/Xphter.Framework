@@ -2314,6 +2314,14 @@ namespace Xphter.Framework.Data {
             return method.ToString();
         }
 
+        private string GetMethodNameByConstraint(string name, IDbConstraintEntity includeKey, IDbConstraintEntity excludeKey) {
+            StringBuilder method = new StringBuilder(this.GetMethodNameByConstraint(name, includeKey) + "Exclude");
+            foreach(IDbTableFieldEntity f in excludeKey.Fields) {
+                method.Append(f.Name);
+            }
+            return method.ToString();
+        }
+
         private string GetArgumentNameByConstraint(DbConstraintType type, IDbTableFieldEntity field) {
             if(type == DbConstraintType.None) {
                 throw new ArgumentException("The constraint type is undefined.", "type");
@@ -6575,7 +6583,7 @@ namespace Xphter.Framework.Data {
             CodeMemberMethod method = new CodeMemberMethod();
             method.Attributes = MemberAttributes.Public;
             method.ReturnType = new CodeTypeReference(typeof(int));
-            method.Name = this.GetMethodNameByConstraint(this.m_loadCountMethodName, constraint);
+            method.Name = this.GetMethodNameByConstraint(this.m_loadCountMethodName, constraint, constraint.Table.PrimaryKey);
 
             //create method comments
             method.Comments.Add(new CodeCommentStatement("<summary>", true));
@@ -6610,7 +6618,7 @@ namespace Xphter.Framework.Data {
             CodeMemberMethod method = new CodeMemberMethod();
             method.Attributes = MemberAttributes.Public;
             method.ReturnType = new CodeTypeReference(typeof(int));
-            method.Name = this.GetMethodNameByConstraint(this.m_loadCountMethodName, constraint);
+            method.Name = this.GetMethodNameByConstraint(this.m_loadCountMethodName, constraint, constraint.Table.PrimaryKey);
 
             //create method comments
             method.Comments.Add(new CodeCommentStatement("<summary>", true));
@@ -6641,7 +6649,7 @@ namespace Xphter.Framework.Data {
             CodeMemberMethod method = new CodeMemberMethod();
             method.Attributes = MemberAttributes.Public;
             method.ReturnType = new CodeTypeReference(typeof(int));
-            method.Name = this.GetMethodNameByConstraint(this.m_loadCountMethodName, constraint);
+            method.Name = this.GetMethodNameByConstraint(this.m_loadCountMethodName, constraint, constraint.Table.PrimaryKey);
 
             //create method comments
             method.Comments.Add(new CodeCommentStatement("<summary>", true));
@@ -6675,7 +6683,7 @@ namespace Xphter.Framework.Data {
             CodeMemberMethod method = new CodeMemberMethod();
             method.Attributes = MemberAttributes.Public;
             method.ReturnType = new CodeTypeReference(typeof(int));
-            method.Name = this.GetMethodNameByConstraint(this.m_loadCountMethodName, constraint);
+            method.Name = this.GetMethodNameByConstraint(this.m_loadCountMethodName, constraint, constraint.Table.PrimaryKey);
 
             //create method comments
             method.Comments.Add(new CodeCommentStatement("<summary>", true));
@@ -7043,7 +7051,7 @@ namespace Xphter.Framework.Data {
             CodeMemberMethod method = new CodeMemberMethod();
             method.Attributes = MemberAttributes.Public;
             method.ReturnType = new CodeTypeReference(typeof(bool));
-            method.Name = this.GetMethodNameByConstraint(this.m_isExistsMethodName, constraint);
+            method.Name = this.GetMethodNameByConstraint(this.m_isExistsMethodName, constraint, constraint.Table.PrimaryKey);
 
             //create method comments
             method.Comments.Add(new CodeCommentStatement("<summary>", true));
@@ -7078,7 +7086,7 @@ namespace Xphter.Framework.Data {
             CodeMemberMethod method = new CodeMemberMethod();
             method.Attributes = MemberAttributes.Public;
             method.ReturnType = new CodeTypeReference(typeof(bool));
-            method.Name = this.GetMethodNameByConstraint(this.m_isExistsMethodName, constraint);
+            method.Name = this.GetMethodNameByConstraint(this.m_isExistsMethodName, constraint, constraint.Table.PrimaryKey);
 
             //create method comments
             method.Comments.Add(new CodeCommentStatement("<summary>", true));
@@ -7109,7 +7117,7 @@ namespace Xphter.Framework.Data {
             CodeMemberMethod method = new CodeMemberMethod();
             method.Attributes = MemberAttributes.Public;
             method.ReturnType = new CodeTypeReference(typeof(bool));
-            method.Name = this.GetMethodNameByConstraint(this.m_isExistsMethodName, constraint);
+            method.Name = this.GetMethodNameByConstraint(this.m_isExistsMethodName, constraint, constraint.Table.PrimaryKey);
 
             //create method comments
             method.Comments.Add(new CodeCommentStatement("<summary>", true));
@@ -7143,7 +7151,7 @@ namespace Xphter.Framework.Data {
             CodeMemberMethod method = new CodeMemberMethod();
             method.Attributes = MemberAttributes.Public;
             method.ReturnType = new CodeTypeReference(typeof(bool));
-            method.Name = this.GetMethodNameByConstraint(this.m_isExistsMethodName, constraint);
+            method.Name = this.GetMethodNameByConstraint(this.m_isExistsMethodName, constraint, constraint.Table.PrimaryKey);
 
             //create method comments
             method.Comments.Add(new CodeCommentStatement("<summary>", true));
