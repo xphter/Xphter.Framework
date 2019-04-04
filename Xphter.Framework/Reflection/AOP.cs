@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Transactions;
 
 namespace Xphter.Framework.Reflection {
     /// <summary>
@@ -283,6 +284,62 @@ namespace Xphter.Framework.Reflection {
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public class FilterIgnoreAttribute : Attribute {
+    }
+
+    /// <summary>
+    /// Wraps the specified method in a transaction scope.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    public class TransactionScopeAttribute : MethodFilterAttribute {
+        public TransactionScopeAttribute()
+            : this(false, IsolationLevel.ReadCommitted) {
+        }
+
+        public TransactionScopeAttribute(IsolationLevel isolationLevel)
+            : this(false, isolationLevel) {
+        }
+
+        public TransactionScopeAttribute(bool isRequreNewTransaction, IsolationLevel isolationLevel) {
+            this.IsRequreNewTransaction = isRequreNewTransaction;
+            this.IsolationLevel = isolationLevel;
+        }
+
+        private const string SCOPE_KEY = "TransactionScope";
+
+        public bool IsRequreNewTransaction {
+            get;
+            set;
+        }
+
+        public IsolationLevel IsolationLevel {
+            get;
+            set;
+        }
+
+        public override void OnPostExecuting(IPostMethodExecutingContext context) {
+            if(context.Exception != null) {
+                return;
+            }
+
+            TransactionScope scope = context.FilterBag.ContainsKey(SCOPE_KEY) ? (TransactionScope) context.FilterBag[SCOPE_KEY] : null;
+            if(scope == null) {
+                return;
+            }
+
+            using(scope) {
+                scope.Complete();
+            }
+        }
+
+        public override void OnPreExecuting(IPreMethodExecutingContext context) {
+            if(context.IsCancel) {
+                return;
+            }
+
+            context.FilterBag[SCOPE_KEY] = new TransactionScope(this.IsRequreNewTransaction ? TransactionScopeOption.RequiresNew : TransactionScopeOption.Required, new TransactionOptions {
+                IsolationLevel = this.IsolationLevel,
+            });
+        }
     }
 
     /// <summary>
