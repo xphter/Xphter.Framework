@@ -381,7 +381,7 @@
   <Class Name="Xphter.Framework.Xtml.DataSourcePropertyXtmlElementRenderer&lt;TSource&gt;">
     <Position X="23.5" Y="8.75" Width="4" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAABAAAAABQAAAAAEAAABKCAQAABAAAAAAAYA=</HashCode>
+      <HashCode>AAAACAAAABAAAAABQAAAAAFAAABKCAQAABAAAAAQAYA=</HashCode>
       <FileName>Xtml\Analyzer.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -439,7 +439,7 @@
   <Class Name="Xphter.Framework.Xtml.XtmlElementAggregationTag">
     <Position X="34" Y="27.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAAEACIIABEAAAAgEAAABAAAQgAAAAAAAAAAA=</HashCode>
+      <HashCode>AACACAAAAEACIIABEAAAAiEAAABAAAQgAAAAAAAAAAA=</HashCode>
       <FileName>Xtml\Analyzer.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -545,6 +545,13 @@
     <Position X="33.25" Y="25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAgAAAAEAAAAAQAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Xtml\Analyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Xphter.Framework.Xtml.XtmlElementRepeatTag">
+    <Position X="36.75" Y="24.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Xtml\Analyzer.cs</FileName>
     </TypeIdentifier>
   </Class>

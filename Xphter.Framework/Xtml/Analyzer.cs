@@ -2497,6 +2497,11 @@ namespace Xphter.Framework.Xtml {
         public const string PROPERTY_ATTRIBUTE_NAME = "Property";
 
         /// <summary>
+        /// The name of index name attribute.
+        /// </summary>
+        public const string INDEX_ATTRIBUTE_NAME = "Index";
+
+        /// <summary>
         /// The property dictionary.
         /// </summary>
         protected IDictionary<string, Element<PropertyInfo, bool>> m_propertiesCache = new Dictionary<string, Element<PropertyInfo, bool>>();
@@ -2615,6 +2620,21 @@ namespace Xphter.Framework.Xtml {
             return formatedValue;
         }
 
+        protected virtual int? GetIndexValue(IXtmlElement element, object dataSource, TSource source, IXtmlRenderingContext context) {
+            IXtmlAttribute attribute = element.GetAttributesByName(INDEX_ATTRIBUTE_NAME).FirstOrDefault();
+            if(attribute == null) {
+                return null;
+            }
+
+            int index = 0;
+            string attributeValue = attribute.GetValue(source, context);
+            if(int.TryParse(attributeValue, out index)) {
+                return index;
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Renders the property value to a TextWriter.
         /// </summary>
@@ -2629,6 +2649,11 @@ namespace Xphter.Framework.Xtml {
             }
 
             if(isMultiple && propertyValue is IEnumerable<object>) {
+                int? index = this.GetIndexValue(element, dataSource, source, context);
+                if(index.HasValue) {
+                    propertyValue = ((IEnumerable<object>) propertyValue).Where((item, i) => i == index.Value).ToArray();
+                }
+
                 new XtmlElementIterationRenderer<object>().Render(element, writer, propertyValue, context);
             } else {
                 writer.Write(propertyValue);
@@ -3418,38 +3443,46 @@ namespace Xphter.Framework.Xtml {
                 IXtmlElement template = null;
 
                 lock(this.m_lock) {
-                    foreach(T item in dataSource) {
-                        // render separator if not first item
-                        if(index > 0 && separatorTemplate != null) {
-                            foreach(IXtmlNode child in separatorTemplate.ChildNodes) {
+                    try {
+                        foreach(T item in dataSource) {
+                            // render separator if not first item
+                            if(index > 0 && separatorTemplate != null) {
+                                foreach(IXtmlNode child in separatorTemplate.ChildNodes) {
+                                    child.Render(writer, item, context);
+                                }
+                            }
+
+                            // render current item
+                            if(templatesMap.ContainsKey(index)) {
+                                template = templatesMap[index];
+                            } else if(index % 2 == 1 && alternatingTemplate != null) {
+                                template = alternatingTemplate;
+                            } else {
+                                template = itemTemplate;
+                            }
+
+                            element.AttachedObject = index++;
+                            foreach(IXtmlNode child in template.ChildNodes) {
                                 child.Render(writer, item, context);
                             }
                         }
-
-                        // render current item
-                        if(templatesMap.ContainsKey(index)) {
-                            template = templatesMap[index];
-                        } else if(index % 2 == 1 && alternatingTemplate != null) {
-                            template = alternatingTemplate;
-                        } else {
-                            template = itemTemplate;
-                        }
-
-                        element.AttachedObject = index++;
-                        foreach(IXtmlNode child in template.ChildNodes) {
-                            child.Render(writer, item, context);
-                        }
+                    } finally {
+                        element.AttachedObject = null;
                     }
                 }
             } else {
                 int index = 0;
 
                 lock(this.m_lock) {
-                    foreach(T item in dataSource) {
-                        element.AttachedObject = index++;
-                        foreach(IXtmlNode child in childNodes) {
-                            child.Render(writer, item, context);
+                    try {
+                        foreach(T item in dataSource) {
+                            element.AttachedObject = index++;
+                            foreach(IXtmlNode child in childNodes) {
+                                child.Render(writer, item, context);
+                            }
                         }
+                    } finally {
+                        element.AttachedObject = null;
                     }
                 }
             }
@@ -3474,19 +3507,23 @@ namespace Xphter.Framework.Xtml {
             dataIndex = 0;
 
             lock(this.m_lock) {
-                while(nodes.MoveNext()) {
-                    if(nodes.Current.NodeType == XtmlNodeType.Element) {
-                        if(++elementIndex > dataIndex) {
-                            if(source.MoveNext()) {
-                                ++dataIndex;
-                            } else {
-                                break;
+                try {
+                    while(nodes.MoveNext()) {
+                        if(nodes.Current.NodeType == XtmlNodeType.Element) {
+                            if(++elementIndex > dataIndex) {
+                                if(source.MoveNext()) {
+                                    ++dataIndex;
+                                } else {
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    element.AttachedObject = dataIndex;
-                    nodes.Current.Render(writer, source.Current, context);
+                        element.AttachedObject = dataIndex;
+                        nodes.Current.Render(writer, source.Current, context);
+                    }
+                } finally {
+                    element.AttachedObject = null;
                 }
             }
         }
@@ -3787,38 +3824,46 @@ namespace Xphter.Framework.Xtml {
                 IXtmlElement template = null;
 
                 lock(this.m_lock) {
-                    foreach(T item in dataSource) {
-                        // render separator if not first item
-                        if(index > 0 && separatorTemplate != null) {
-                            foreach(IXtmlNode child in separatorTemplate.ChildNodes) {
+                    try {
+                        foreach(T item in dataSource) {
+                            // render separator if not first item
+                            if(index > 0 && separatorTemplate != null) {
+                                foreach(IXtmlNode child in separatorTemplate.ChildNodes) {
+                                    child.Render(writer, item, context);
+                                }
+                            }
+
+                            // render current item
+                            if(templatesMap.ContainsKey(index)) {
+                                template = templatesMap[index];
+                            } else if(index % 2 == 1 && alternatingTemplate != null) {
+                                template = alternatingTemplate;
+                            } else {
+                                template = itemTemplate;
+                            }
+
+                            element.AttachedObject = index++;
+                            foreach(IXtmlNode child in template.ChildNodes) {
                                 child.Render(writer, item, context);
                             }
                         }
-
-                        // render current item
-                        if(templatesMap.ContainsKey(index)) {
-                            template = templatesMap[index];
-                        } else if(index % 2 == 1 && alternatingTemplate != null) {
-                            template = alternatingTemplate;
-                        } else {
-                            template = itemTemplate;
-                        }
-
-                        element.AttachedObject = index++;
-                        foreach(IXtmlNode child in template.ChildNodes) {
-                            child.Render(writer, item, context);
-                        }
+                    } finally {
+                        element.AttachedObject = null;
                     }
                 }
             } else {
                 int index = 0;
 
                 lock(this.m_lock) {
-                    foreach(T item in dataSource) {
-                        element.AttachedObject = index++;
-                        foreach(IXtmlNode child in childNodes) {
-                            child.Render(writer, item, context);
+                    try {
+                        foreach(T item in dataSource) {
+                            element.AttachedObject = index++;
+                            foreach(IXtmlNode child in childNodes) {
+                                child.Render(writer, item, context);
+                            }
                         }
+                    } finally {
+                        element.AttachedObject = null;
                     }
                 }
             }
@@ -3844,20 +3889,24 @@ namespace Xphter.Framework.Xtml {
             dataIndex = 0;
 
             lock(this.m_lock) {
-                while(nodes.MoveNext()) {
-                    currentNode = nodes.Current;
-                    if(currentNode.NodeType == XtmlNodeType.Element) {
-                        if(++elementIndex > dataIndex) {
-                            if(source.MoveNext()) {
-                                ++dataIndex;
-                            } else {
-                                break;
+                try {
+                    while(nodes.MoveNext()) {
+                        currentNode = nodes.Current;
+                        if(currentNode.NodeType == XtmlNodeType.Element) {
+                            if(++elementIndex > dataIndex) {
+                                if(source.MoveNext()) {
+                                    ++dataIndex;
+                                } else {
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    element.AttachedObject = dataIndex;
-                    currentNode.Render(writer, source.Current, context);
+                        element.AttachedObject = dataIndex;
+                        currentNode.Render(writer, source.Current, context);
+                    }
+                } finally {
+                    element.AttachedObject = null;
                 }
             }
         }
@@ -4883,6 +4932,8 @@ namespace Xphter.Framework.Xtml {
             });
         }
 
+        public static readonly string IList_Add = ((MethodCallExpression) (((Expression<Action<IList<object>>>) ((obj) => obj.Add(null))).Body)).Method.Name;
+
         public const string PROPERTY_ATTRIBUTE_NAME = "Property";
         public const string FUNCTION_ATTRIBUTE_NAME = "Function";
         public const string FORMAT_ATTRIBUTE_NAME = "Format";
@@ -4994,6 +5045,17 @@ namespace Xphter.Framework.Xtml {
                 formatedValue = this.m_formater(element, dataSource, context, aggregateValue);
             }
             return formatedValue;
+        }
+
+        /// <inheritdoc />
+        protected override IEnumerable<object> GetDataSource(IXtmlElement element, object dataSource, IXtmlRenderingContext context) {
+            if(dataSource is IEnumerable<object>) {
+                return (IEnumerable<object>) dataSource;
+            }
+
+            object source = Activator.CreateInstance(typeof(List<>).MakeGenericType(dataSource.GetType()));
+            source.GetType().GetMethod(IList_Add, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly).Invoke(source, new object[] { dataSource });
+            return (IEnumerable<object>) source;
         }
 
         /// <inheritdoc />
@@ -5732,6 +5794,64 @@ namespace Xphter.Framework.Xtml {
         /// <inheritdoc />
         public override string GetPattern(XtmlMarkupContext context) {
             return context.GetOpenTag(this.TagName) + "\r\n" + context.GetCloseTag(this.TagName);
+        }
+    }
+
+    /// <summary>
+    /// Provides a tag to repeat data source.
+    /// </summary>
+    public abstract class XtmlElementRepeatTag : XtmlElementIterationTag<object> {
+        public const string COUNT_INDEX_ATTRIBUTE_NAME = "Count";
+        public const string MIN_INDEX_ATTRIBUTE_NAME = "Min";
+
+        protected override IEnumerable<object> GetDataSource(IXtmlElement element, object dataSource, IXtmlRenderingContext context) {
+            IXtmlAttribute countAttribute = element.GetAttributesByName(COUNT_INDEX_ATTRIBUTE_NAME).FirstOrDefault();
+            if(countAttribute == null) {
+                throw new XtmlException(string.Format("The {0} tag is not specified {1} attribute.", this.TagName, COUNT_INDEX_ATTRIBUTE_NAME));
+            }
+
+            int count = 0;
+            try {
+                count = Convert.ToInt32(MathUtility.ComputeExpression(countAttribute.GetValue(dataSource, context)));
+            } catch(Exception ex) {
+                throw new XtmlException(string.Format("The value of {1} attribute in {0} tag is not a integer.", this.TagName, COUNT_INDEX_ATTRIBUTE_NAME), ex);
+            }
+
+            int minCount = 0;
+            IXtmlAttribute minAttribute = element.GetAttributesByName(MIN_INDEX_ATTRIBUTE_NAME).FirstOrDefault();
+            if(minAttribute != null && int.TryParse(minAttribute.GetValue(dataSource, context), out minCount)) {
+                count = Math.Max(minCount, count);
+            }
+
+            return Enumerable.Repeat<object>(dataSource, Math.Max(0, count)).ToArray();
+        }
+
+        public override string Name {
+            get {
+                return "重复列表";
+            }
+        }
+
+        /// <inheritdoc />
+        public override string Description {
+            get {
+                return string.Format("显示{0}，数据源重复{1}参数指定的次数\r\n\r\n必选参数{2}\r\n\r\n可选参数{3}\r\n\r\n{4}",
+                    this.Name,
+                    COUNT_INDEX_ATTRIBUTE_NAME,
+                    string.Format("\r\n{0}：数据源重复的次数", COUNT_INDEX_ATTRIBUTE_NAME),
+                    string.Format("\r\n{0}：数据源重复的最小次数", MIN_INDEX_ATTRIBUTE_NAME),
+                    base.Description);
+            }
+        }
+
+        /// <inheritdoc />
+        public override string GetShorthand(XtmlMarkupContext context) {
+            return context.GetOpenTag(this.TagName);
+        }
+
+        /// <inheritdoc />
+        public override string GetPattern(XtmlMarkupContext context) {
+            return context.GetOpenTag(this.TagName, COUNT_INDEX_ATTRIBUTE_NAME) + "\r\n" + context.GetCloseTag(this.TagName);
         }
     }
 }
