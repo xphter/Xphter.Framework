@@ -91,6 +91,29 @@ namespace Xphter.Framework {
             return expressionString;
         }
 
+        private object GetSingleValue(IOperationExpressionContext context, string operand) {
+            if(context.IsString(operand)) {
+                return operand.Substring(1, operand.Length - 2);
+            }
+
+            bool bvalue = false;
+            if(bool.TryParse(operand, out bvalue)) {
+                return bvalue;
+            }
+
+            long ivalue = 0L;
+            if(long.TryParse(operand, out ivalue)) {
+                return ivalue;
+            }
+
+            decimal fvalue = 0M;
+            if(decimal.TryParse(operand, out fvalue)) {
+                return fvalue;
+            }
+
+            return operand;
+        }
+
         /// <summary>
         /// Gets a value to indicate whether <paramref name="expressionString"/> is valid.
         /// </summary>
@@ -198,7 +221,13 @@ namespace Xphter.Framework {
             if(operandsStack.Count > 1) {
                 throw new Exception("Logic error: more than one operand is left finally.");
             }
-            return operandsStack.Pop();
+
+            object result = operandsStack.Pop();
+            if(result is string) {
+                result = this.GetSingleValue(context, (string) result);
+            }
+
+            return result;
         }
 
         private class OperationExpressionContext : IOperationExpressionContext {

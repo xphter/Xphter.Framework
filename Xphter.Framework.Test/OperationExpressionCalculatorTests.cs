@@ -16,7 +16,13 @@ namespace Xphter.Framework.Tests {
         [TestMethod()]
         public void ComputeTest() {
             OperationExpressionCalculator target = new OperationExpressionCalculator(ObjectManager<IOperationRule>.Instance.Objects);
+            
             Assert.AreEqual(false, target.Compute("!true"));
+
+            Assert.AreEqual(2L, target.Compute("2"));
+            Assert.AreEqual(2.1M, target.Compute("2.1"));
+            Assert.AreEqual("a", target.Compute("\"a\""));
+            Assert.AreEqual(true, target.Compute("true"));
 
             Assert.AreEqual(2L, target.Compute("+2"));
             Assert.AreEqual(2.1M, target.Compute("+2.1"));
@@ -25,7 +31,9 @@ namespace Xphter.Framework.Tests {
             Assert.AreEqual(-2.1M, target.Compute("-2.1"));
 
             Assert.AreEqual(3L, target.Compute("1 + 2"));
+            Assert.AreEqual(6L, target.Compute("1 + 2 + 3"));
             Assert.AreEqual(3.3M, target.Compute("1.1 + 2.2"));
+            Assert.AreEqual(6.6M, target.Compute("1.1 + 2.2 + 3.3"));
 
             Assert.AreEqual(-1L, target.Compute("1 - 2"));
             Assert.AreEqual(-1.1M, target.Compute("1.1 - 2.2"));
